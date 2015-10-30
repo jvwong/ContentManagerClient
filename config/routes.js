@@ -31,10 +31,11 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
+  /* root */
+  'get /': 'HomeController.index',
 
-  '/': {
-    view: 'homepage'
-  }
+  /* auth */
+  'post /auth/local': 'AuthController.callback'
 
   /***************************************************************************
   *                                                                          *

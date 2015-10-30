@@ -134,53 +134,55 @@ exports.connect = function (req, res, next) {
  * @param {Function} next
  */
 exports.login = function (req, identifier, password, next) {
-  var isEmail = validator.isEmail(identifier)
-    , query   = {};
+    var
+    isEmail = validator.isEmail(identifier),
+    query   = {};
 
-  if (isEmail) {
-    query.email = identifier;
-  }
-  else {
-    query.username = identifier;
-  }
+    if (isEmail) {
+        query.email = identifier;
 
-  User.findOne(query, function (err, user) {
-    if (err) {
-      return next(err);
+    } else {
+        query.username = identifier;
     }
 
-    if (!user) {
-      if (isEmail) {
-        req.flash('error', 'Error.Passport.Email.NotFound');
-      } else {
-        req.flash('error', 'Error.Passport.Username.NotFound');
-      }
-
-      return next(null, false);
-    }
-
-    Passport.findOne({
-      protocol : 'local'
-    , user     : user.id
-    }, function (err, passport) {
-      if (passport) {
-        passport.validatePassword(password, function (err, res) {
-          if (err) {
+    User.findOne(query, function (err, user) {
+        if (err) {
             return next(err);
-          }
+        }
 
-          if (!res) {
-            req.flash('error', 'Error.Passport.Password.Wrong');
+        if (!user) {
+            if (isEmail) {
+                req.flash('error', 'Error.Passport.Email.NotFound');
+            } else {
+                req.flash('error', 'Error.Passport.Username.NotFound');
+            }
+
             return next(null, false);
-          } else {
-            return next(null, user);
-          }
-        });
-      }
-      else {
-        req.flash('error', 'Error.Passport.Password.NotSet');
-        return next(null, false);
-      }
+        }
+
+        Passport.findOne({
+                protocol : 'local',
+                user     : user.id
+            },
+            function (err, passport) {
+                if (passport) {
+                    passport.validatePassword(password, function (err, res) {
+                        if (err) {
+                            return next(err);
+                        }
+
+                        if (!res) {
+                            req.flash('error', 'Error.Passport.Password.Wrong');
+                            return next(null, false);
+                        } else {
+                            return next(null, user);
+                        }
+                    });
+                } else {
+                    req.flash('error', 'Error.Passport.Password.NotSet');
+                    return next(null, false);
+                }
+            }
+        );
     });
-  });
 };

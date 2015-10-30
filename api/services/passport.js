@@ -189,25 +189,26 @@ passport.connect = function (req, query, profile, next) {
  * @param  {Object} res
  */
 passport.endpoint = function (req, res) {
-  var strategies = sails.config.passport
-    , provider   = req.param('provider')
-    , options    = {};
+    var
+    strategies = sails.config.passport,
+    provider   = req.param('provider'),
+    options    = {};
 
-  // If a provider doesn't exist for this endpoint, send the user back to the
-  // login page
-  if (!strategies.hasOwnProperty(provider)) {
-    return res.redirect('/login');
-  }
+    // If a provider doesn't exist for this endpoint, send the user back to the
+    // login page
+    if (!strategies.hasOwnProperty(provider)) {
+        return res.redirect('/login');
+    }
 
-  // Attach scope if it has been set in the config
-  if (strategies[provider].hasOwnProperty('scope')) {
-    options.scope = strategies[provider].scope;
-  }
+    // Attach scope if it has been set in the config
+    if (strategies[provider].hasOwnProperty('scope')) {
+        options.scope = strategies[provider].scope;
+    }
 
-  // Redirect the user to the provider for authentication. When complete,
-  // the provider will redirect the user back to the application at
-  //     /auth/:provider/callback
-  this.authenticate(provider, options)(req, res, req.next);
+    // Redirect the user to the provider for authentication. When complete,
+    // the provider will redirect the user back to the application at
+    //     /auth/:provider/callback
+    this.authenticate(provider, options)(req, res, req.next);
 };
 
 /**
@@ -221,35 +222,39 @@ passport.endpoint = function (req, res) {
  * @param {Function} next
  */
 passport.callback = function (req, res, next) {
-  var provider = req.param('provider', 'local')
-    , action   = req.param('action');
+    var
+    provider = req.param('provider', 'local'),
+    action   = req.param('action');
 
-  // Passport.js wasn't really built for local user registration, but it's nice
-  // having it tied into everything else.
-  if (provider === 'local' && action !== undefined) {
-    if (action === 'register' && !req.user) {
-      this.protocols.local.register(req, res, next);
-    }
-    else if (action === 'connect' && req.user) {
-      this.protocols.local.connect(req, res, next);
-    }
-    else if (action === 'disconnect' && req.user) {
-      this.disconnect(req, res, next);
-    }
-    else {
-      next(new Error('Invalid action'));
-    }
-  } else {
-    if (action === 'disconnect' && req.user) {
-      this.disconnect(req, res, next) ;
+    // Passport.js wasn't really built for local user registration, but it's nice
+    // having it tied into everything else.
+    if (provider === 'local' && action !== undefined) {
+
+        if (action === 'register' && !req.user) {
+            this.protocols.local.register(req, res, next);
+
+        } else if (action === 'connect' && req.user) {
+            this.protocols.local.connect(req, res, next);
+
+        } else if (action === 'disconnect' && req.user) {
+            this.disconnect(req, res, next);
+
+        } else {
+            next(new Error('Invalid action'));
+        }
+
     } else {
-      // The provider will redirect the user to this URL after approval. Finish
-      // the authentication process by attempting to obtain an access token. If
-      // access was granted, the user will be logged in. Otherwise, authentication
-      // has failed.
-      this.authenticate(provider, next)(req, res, req.next);
+
+        if (action === 'disconnect' && req.user) {
+            this.disconnect(req, res, next) ;
+        } else {
+            // The provider will redirect the user to this URL after approval. Finish
+            // the authentication process by attempting to obtain an access token. If
+            // access was granted, the user will be logged in. Otherwise, authentication
+            // has failed.            
+            this.authenticate(provider, next)(req, res, req.next);
+        }
     }
-  }
 };
 
 /**
@@ -275,66 +280,73 @@ passport.callback = function (req, res, next) {
  *
  */
 passport.loadStrategies = function () {
-  var self       = this
-    , strategies = sails.config.passport;
+    var
+    self       = this,
+    strategies = sails.config.passport;
 
-  Object.keys(strategies).forEach(function (key) {
-    var options = { passReqToCallback: true }, Strategy;
+    Object.keys(strategies).forEach(function (key) {
+        var
+        options = {
+            passReqToCallback: true
+        },
+        Strategy;
 
-    if (key === 'local') {
-      // Since we need to allow users to login using both usernames as well as
-      // emails, we'll set the username field to something more generic.
-      _.extend(options, { usernameField: 'identifier' });
+        if (key === 'local') {
+            // Since we need to allow users to login using both usernames as well as
+            // emails, we'll set the username field to something more generic.
+            _.extend(options, { usernameField: 'identifier' });
 
-      //Let users override the username and passwordField from the options
-      _.extend(options, strategies[key].options || {});
+            //Let users override the username and passwordField from the options
+            _.extend(options, strategies[key].options || {});
 
-      // Only load the local strategy if it's enabled in the config
-      if (strategies.local) {
-        Strategy = strategies[key].strategy;
+            // Only load the local strategy if it's enabled in the config
+            if (strategies.local) {
+                Strategy = strategies[key].strategy;
 
-        self.use(new Strategy(options, self.protocols.local.login));
-      }
-    } else if (key === 'bearer') {
+                self.use(new Strategy(options, self.protocols.local.login));
+            }
 
-      if (strategies.bearer) {
-        Strategy = strategies[key].strategy;
-        self.use(new Strategy(self.protocols.bearer.authorize));
-      }
+        } else if (key === 'bearer') {
 
-    } else {
-      var protocol = strategies[key].protocol
-        , callback = strategies[key].callback;
+            if (strategies.bearer) {
+                Strategy = strategies[key].strategy;
+                self.use(new Strategy(self.protocols.bearer.authorize));
+            }
 
-      if (!callback) {
-        callback = 'auth/' + key + '/callback';
-      }
+        } else {
+            var
+            protocol = strategies[key].protocol,
+            callback = strategies[key].callback;
 
-      Strategy = strategies[key].strategy;
+            if (!callback) {
+                callback = 'auth/' + key + '/callback';
+            }
 
-      var baseUrl = sails.getBaseurl();
+            Strategy = strategies[key].strategy;
 
-      switch (protocol) {
-        case 'oauth':
-        case 'oauth2':
-          options.callbackURL = url.resolve(baseUrl, callback);
-          break;
+            var baseUrl = sails.getBaseurl();
 
-        case 'openid':
-          options.returnURL = url.resolve(baseUrl, callback);
-          options.realm     = baseUrl;
-          options.profile   = true;
-          break;
-      }
+            switch (protocol) {
+                case 'oauth':
+                case 'oauth2':
+                    options.callbackURL = url.resolve(baseUrl, callback);
+                    break;
 
-      // Merge the default options with any options defined in the config. All
-      // defaults can be overriden, but I don't see a reason why you'd want to
-      // do that.
-      _.extend(options, strategies[key].options);
+                case 'openid':
+                    options.returnURL = url.resolve(baseUrl, callback);
+                    options.realm     = baseUrl;
+                    options.profile   = true;
+                    break;
+            }
 
-      self.use(new Strategy(options, self.protocols[protocol]));
-    }
-  });
+            // Merge the default options with any options defined in the config. All
+            // defaults can be overriden, but I don't see a reason why you'd want to
+            // do that.
+            _.extend(options, strategies[key].options);
+
+            self.use(new Strategy(options, self.protocols[protocol]));
+        }
+    });
 };
 
 /**
@@ -344,34 +356,35 @@ passport.loadStrategies = function () {
  * @param  {Object} res
  */
 passport.disconnect = function (req, res, next) {
-  var user     = req.user
-    , provider = req.param('provider', 'local')
-    , query    = {};
+    var
+    user     = req.user,
+    provider = req.param('provider', 'local'),
+    query    = {};
 
-  query.user = user.id;
-  query[provider === 'local' ? 'protocol' : 'provider'] = provider;
+    query.user = user.id;
+    query[provider === 'local' ? 'protocol' : 'provider'] = provider;
 
-  Passport.findOne(query, function (err, passport) {
-    if (err) {
-      return next(err);
-    }
+    Passport.findOne(query, function (err, passport) {
+        if (err) {
+            return next(err);
+        }
 
-    Passport.destroy(passport.id, function (error) {
-      if (err) {
-          return next(err);
-      }
+        Passport.destroy(passport.id, function (error) {
+            if (err) {
+                return next(err);
+            }
 
-      next(null, user);
+            next(null, user);
+        });
     });
-  });
 };
 
 passport.serializeUser(function (user, next) {
-  next(null, user.id);
+    next(null, user.id);
 });
 
 passport.deserializeUser(function (id, next) {
-  User.findOne(id, next);
+    User.findOne(id, next);
 });
 
 module.exports = passport;
