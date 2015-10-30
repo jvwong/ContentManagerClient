@@ -1,12 +1,46 @@
-<% if (errors) {%>
-  <% errors.forEach(function (error) { %>
-    <%= __(error) %>
-  <% }) %>
-<% } %>
-
-<form role="form" action="/auth/local/register" method="post">
-  <input type="text" name="username" placeholder="Username">
-  <input type="text" name="email" placeholder="Email">
-  <input type="password" name="password" placeholder="Password">
-  <button type="submit">Sign up</button>
-</form>
+<div class="container-fluid">
+    <!-- START row -->
+    <div class="row">
+        <!-- START auth-recover -->
+        <div class="auth-register">
+            <!-- START auth-register-header -->
+            <div class="auth-header auth-register-header col-xs-12 col-sm-6">
+                <p class="auth-register-links">
+                    <a href="/auth/login">Log In</a>
+                </p>
+                <h3 class="">Registration</h3>
+            </div>
+            <!-- END auth-register-header -->
+            <!-- START form-auth -->
+            <form class="form-auth col-xs-12 col-sm-6" role="form" action="/auth/local/register" method="post">
+                <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+                <div class="form-group">
+                    <!--<label for="username">Username</label>-->
+                    <input autocapitalize="off" type="text" class="form-control" name="username" id="username" placeholder="Enter username" required>
+                </div>
+                <div class="form-group">
+                    <!--<label for="email">Email address</label>-->
+                    <input autocapitalize="off" type="email" class="form-control" name="email"  id="email" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                    <!--<label for="password">Password</label>-->
+                    <input autocapitalize="off" type="password" class="form-control" name="password" id="password" placeholder="Password (min. 8 characters)" required>
+                </div>
+                <div class="form-group">
+                    <!--<label for="password">Password</label>-->
+                    <input autocapitalize="off" type="password" class="form-control" name="password2" id="password2" placeholder="Confirm Password" required>
+                </div>
+                <button id="submit" type="submit" class="btn btn-default">Submit</button>
+                <br/><br/>
+                <% errors.forEach(function (error) { %>
+                    <span class="help-inline">
+                        <%= __(error) %>
+                    </span>
+                <% }) %>
+            </form>
+            <!-- END form-auth -->
+        </div>
+        <!-- END auth-register -->
+    </div>
+    <!-- END row -->
+</div> <!-- END container -->

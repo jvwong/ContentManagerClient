@@ -1,70 +1,41 @@
 <div class="container-fluid">
+    <!-- START row -->
+    <div class="row">
+        <!-- START auth-recover -->
+        <div class="auth-register">
+            <!-- START auth-register-header -->
+            <div class="auth-header auth-login-header col-xs-12 col-sm-6">
+                <p class="auth-login-links">
+                    <a href="/auth/register">Register</a>
+                </p>
+                <h3 class="">Login</h3>
+            </div>
+            <!-- END auth-register-header -->
 
-    <!-- START auth-login -->
-    <div class="auth-login">
-
-        <!-- START row HEADER -->
-        <div class="row">
-            <!-- START header-row-container -->
-            <div class="header-row-container">
-                <!-- START branding-panel -->
-                <div class="header-branding-panel col-xs-12 col-sm-4">
-                    <div class="header-branding-title">Login</div>
-                </div> <!-- START branding-panel -->
-                <!-- START links-panel -->
-                <div class="header-links-panel col-xs-12 col-sm-8">
-                    <ul class="list-inline center-block text-center">
-                        <li>
-							<a href="#" target="_blank">Info</a>
-                        </li>
-                        &middot;
-                        <li>
-							<a href="http://www.jeffreyvwong.ca/" target="_blank">Home</a>
-                        </li>
-                    </ul>
-                </div> <!-- START links-panel -->
-            </div>  <!-- END header-row-container -->
-        </div><!-- END row HEADER -->
-
-        <!-- START row LOGIN -->
-        <div class="row">
-            <!-- START login-row-container -->
-            <div class="login-row-container">
-                <!-- START login-panel -->
-                <div class="login-panel col-xs-12 col-sm-4">
-                    <!-- START form-auth -->
-                    <form class="form-auth" role="form" action="/auth/local" method="post">
-                        <div class="form-group">
-                            <input autocapitalize="off" type="text" class="form-control" name="identifier" id="identifier" placeholder="Username" required>
-                        </div>
-                        <div class="form-group">
-                            <input autocapitalize="off" type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" id="rememberme" name="rememberme" />Remember me
-                            </label>
-                        </div>
-                        <input type="hidden" name="_csrf" value="<%= _csrf %>" />
-                        <button id="submit" type="submit" class="btn btn-default">Submit</button>
-                        <div class="form-links">
-                            <ul class="list-inline">
-                                <li><a id="forgot-link" href="/recover">Forgot Password?</a></li>
-                                &middot;
-                                <li><a id="register-link" href="/register">Register</a></li>
-                            </ul>
-                        </div>
-                        <!-- START form-auth errors -->
-                        <% errors.forEach(function (error) { %>
-                            <span class="help-inline">
-                            <%= __(error) %>
-                            </span>
-                        <% }) %><!-- END form-auth errors -->
-                    </form><!-- END form-auth -->
-                </div><!-- END login-panel -->
-            </div><!-- END login-row-container -->
-        </div><!-- END row LOGIN -->
-
-    </div><!-- END auth-login -->
-</div>
-<!-- END container -->
+            <!-- START form-auth -->
+            <form class="form-auth col-xs-12 col-sm-6" role="form" action="/auth/local" method="post">
+                <div class="form-group">
+                    <input autocapitalize="off" type="text" class="form-control" name="identifier" id="identifier" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <input autocapitalize="off" type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="rememberme" name="rememberme" />Remember me
+                    </label>
+                </div>
+                <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+                <button id="submit" type="submit" class="btn btn-default">Submit</button>                
+                <!-- START form-auth errors -->
+                <% errors.forEach(function (error) { %>
+                <span class="help-inline">
+                    <%= __(error) %>
+                </span>
+                <% }) %><!-- END form-auth errors -->
+            </form><!-- END form-auth -->
+        </div>
+        <!-- END auth-register -->
+    </div>
+    <!-- END row -->
+</div> <!-- END container -->

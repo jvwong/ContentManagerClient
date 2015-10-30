@@ -20,7 +20,10 @@ module.exports.passport = {
     },
 
     token: {
-        strategy: require('../api/services/passport-token').Strategy
+        name: 'Token',
+        protocol: 'token',
+        strategy: require('../api/services/passport-token').Strategy,
+        options: {}
     }
     // bearer: {
     //   strategy: require('passport-http-bearer').Strategy

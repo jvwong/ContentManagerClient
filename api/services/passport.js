@@ -251,7 +251,7 @@ passport.callback = function (req, res, next) {
             // The provider will redirect the user to this URL after approval. Finish
             // the authentication process by attempting to obtain an access token. If
             // access was granted, the user will be logged in. Otherwise, authentication
-            // has failed.            
+            // has failed.
             this.authenticate(provider, next)(req, res, req.next);
         }
     }
@@ -336,6 +336,9 @@ passport.loadStrategies = function () {
                     options.returnURL = url.resolve(baseUrl, callback);
                     options.realm     = baseUrl;
                     options.profile   = true;
+                    break;
+                case 'token':
+                    options.callbackURL = url.resolve(baseUrl, callback);
                     break;
             }
 

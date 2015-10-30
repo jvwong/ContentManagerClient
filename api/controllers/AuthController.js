@@ -51,7 +51,8 @@ var AuthController = {
     */
     register: function (req, res) {
         res.view({
-            errors: req.flash('error')
+            layout  : 'layouts/auth',
+            errors  : req.flash('error')
         });
     },
 
