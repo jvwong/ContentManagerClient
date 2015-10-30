@@ -17,6 +17,10 @@
 module.exports.passport = {
     local: {
         strategy: require('passport-local').Strategy
+    },
+
+    token: {
+        strategy: require('../api/services/passport-token').Strategy
     }
     // bearer: {
     //   strategy: require('passport-http-bearer').Strategy
