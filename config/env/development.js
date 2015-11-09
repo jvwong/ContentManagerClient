@@ -23,21 +23,12 @@ module.exports = {
     },
 
     policies: {
-        '*': [
-            'passport',
-            'sessionAuth'
-        ],
-
-        'AuthController': {
-            '*': [
-                'passport'
-            ]
-        }
+        '*': true
     },
 
     log: {
         level: "info"
     },
-    
+
     port: 1337
 };

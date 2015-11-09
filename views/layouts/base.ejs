@@ -3,9 +3,12 @@
   <head>
     <title>Content Management</title>
 
-    <!-- Viewport mobile tag for sensible mobile support -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title ng-bind="title + ' | CM'">CM</title>
 
     <!--
         Stylesheets and Preprocessors
@@ -29,15 +32,29 @@
     -->
 
     <!--STYLES-->
-    <link rel="stylesheet" href="/auth/styles/base.css">
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!--STYLES END-->
   </head>
 
   <body>
-    <%- body %>
+      <!-- nav -->
+      <div class="cm-nav">
+          <!-- START nav -->
+          <!-- <div ng-include="'../growthrater/templates/nav/master.html'"></div> -->
+          <!-- END nav -->
+      </div>
 
+      <!-- sidebar -->
+      <div class="cm-sidebar">
+          <!-- START sidebar -->
+          <!-- <div ng-include="'../growthrater/templates/sidebar/master.html'"></div> -->
+          <!-- END sidebar -->
+      </div>
 
+      <!-- body -->
+      <div class="container cm-body">
+          <div ng-view></div>
+      </div>
 
     <!--
         Client-side Templates
@@ -61,7 +78,7 @@
     -->
 
     <!--TEMPLATES-->
-    
+
     <!--TEMPLATES END-->
 
 
