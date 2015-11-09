@@ -15,7 +15,7 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-  'auth/styles/**/*.css',
+  'cm/styles/**/*.css',
   'bower_components/bootstrap/dist/css/bootstrap.min.css'
 ];
 
@@ -24,19 +24,19 @@ var cssFilesToInject = [
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
 
-  // Load sails.io before everything else
-  // 'js/dependencies/sails.io.js',
-
-  // Dependencies like jQuery, or Angular are brought in here
-  // 'js/dependencies/**/*.js',
-
-  // All of the rest of your client-side js files
-  // will be injected here in no particular order.
-  // 'js/**/*.js'
+  //Angular
+  'bower_components/angular/angular.min.js',
 
   //Bootstrap
   'bower_components/jquery/dist/jquery.min.js',
-  'bower_components/bootstrap/dist/js/bootstrap.min.js'
+  'bower_components/bootstrap/dist/js/bootstrap.min.js',
+
+  // All of the rest of your client-side js files
+  // will be injected here in no particular order.
+  'cm/js/main.js',
+  'cm/js/app.js',
+
+  'cm/js/controller/*.js'
 ];
 
 
@@ -50,7 +50,7 @@ var jsFilesToInject = [
 // templates get spit out to the same file.  Be sure and check out `tasks/README.md`
 // for information on customizing and installing new tasks.
 var templateFilesToInject = [
-  'templates/**/*.html'
+  //'templates/**/*.html'
 ];
 
 
