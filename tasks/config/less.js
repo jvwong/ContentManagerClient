@@ -17,9 +17,12 @@ module.exports = function(grunt) {
 			files: [
 				{
 					expand: true,
-					cwd: './assets/auth/styles/',
-					src: ['base.less'],
-					dest: '.tmp/public/auth/styles/',
+					cwd: './assets/cm/styles/',
+					src: [
+						'base.less',
+						'auth.less'
+					],
+					dest: '.tmp/public/cm/styles/',
 					ext: '.css'
 				}
 			]

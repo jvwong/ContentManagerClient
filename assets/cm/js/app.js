@@ -5,10 +5,10 @@
  */
 (function() {
     var app = angular.module('cmApp', [
-    //   'ngRoute',
-    //   'routeStyles',
-    //   'angular-loading-bar',
-    //   'toastr'
+       'ngRoute',
+       'routeStyles',
+       'angular-loading-bar',
+       'toastr'
     ]);
 
     fetchData().then(bootstrapApplication);
@@ -36,15 +36,14 @@
 
         var $q = initInjector.get("$q");
 
-        var fakeUser = {
-            "username": "jvwong"
-        }
 
         return $q(function(resolve, reject) {
             setTimeout(function() {
-                app.constant("user", fakeUser);
+                app.constant("user", {
+                    "username": "jvwong"
+                });
                 resolve('Hello!');
-            }, 1000);
+            }, 1);
         });
     }
 

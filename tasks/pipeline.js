@@ -23,20 +23,22 @@ var cssFilesToInject = [
 // Client-side javascript files to inject in order
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
+    //Bootstrap
+    'bower_components/jquery/dist/jquery.min.js',
+    'bower_components/bootstrap/dist/js/bootstrap.min.js',
 
-  //Angular
-  'bower_components/angular/angular.min.js',
+    //Angular
+    'bower_components/angular/angular.min.js',
+    'bower_components/angular-route/angular-route.min.js',
+    'bower_components/angular-route-styles/route-styles.js',
+    'bower_components/angular-toastr/dist/angular-toastr.min.js',
+    'bower_components/angular-loading-bar/build/loading-bar.min.js',
 
-  //Bootstrap
-  'bower_components/jquery/dist/jquery.min.js',
-  'bower_components/bootstrap/dist/js/bootstrap.min.js',
+    // CM
+    'cm/js/app.js',
+    'cm/js/routeProvider.js',
 
-  // All of the rest of your client-side js files
-  // will be injected here in no particular order.
-  'cm/js/main.js',
-  'cm/js/app.js',
-
-  'cm/js/controller/*.js'
+    'cm/js/controller/*.js'
 ];
 
 

@@ -14,12 +14,12 @@ angular.module('cmApp')
       function($scope, $sce, $location, user) {
 
         var
-          self,
+          self
 //           pageContext =  {
 //             tabname: undefined
 //           },
-          path,
-          url
+        //   path,
+        //   url,
 //           /* functions */
 //             loadData
           ;
