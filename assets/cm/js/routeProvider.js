@@ -15,6 +15,13 @@ angular.module('cmApp')
         'cm/styles/auth.css'
       ]
     })
+    .when('/register', {
+      title: 'Register',
+      templateUrl: 'cm/templates/auth/register.html',
+      css: [
+        'cm/styles/auth.css'
+      ]
+    })
     .otherwise({
       redirectTo: '/'
     });

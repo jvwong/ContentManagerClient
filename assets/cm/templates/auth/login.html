@@ -1,4 +1,41 @@
 <!-- body -->
-<div class="cm-login">
-    <h3>Login</h3>  
+<div class="cm-auth cm-login">
+    <div class="container-fluid">
+        <!-- START row -->
+        <div class="row">
+            <!-- START auth-recover -->
+            <div class="auth-register">
+                <!-- START auth-register-header -->
+                <div class="auth-header auth-login-header col-xs-12 col-sm-6">
+                    <p class="auth-login-links">
+                        <a href="#/register">Register</a>
+                    </p>
+                    <h3 class="">Login</h3>
+                </div>
+                <!-- END auth-register-header -->
+
+                <!-- START form-auth -->
+                <form class="form-auth col-xs-12 col-sm-6" role="form" action="/auth/local" method="post">
+                    <div class="form-group">
+                        <input autocapitalize="off" type="text" class="form-control" name="identifier" id="identifier" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <input autocapitalize="off" type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="rememberme" name="rememberme" />Remember me
+                        </label>
+                    </div>
+                    <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+                    <button id="submit" type="submit" class="btn btn-default">Submit</button>
+                    <!-- START form-auth errors -->
+                    <!-- END form-auth errors -->
+
+                </form><!-- END form-auth -->
+            </div>
+            <!-- END auth-register -->
+        </div>
+        <!-- END row -->
+    </div> <!-- END container -->
 </div>
