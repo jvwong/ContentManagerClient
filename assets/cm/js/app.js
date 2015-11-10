@@ -35,8 +35,6 @@
         // });
 
         var $q = initInjector.get("$q");
-
-
         return $q(function(resolve, reject) {
             setTimeout(function() {
                 app.constant("user", {
