@@ -52,8 +52,7 @@ describe('token-storage-service', function () {
     var
       setted,
       fetched,
-      valid = "sometoken",
-      invalid = 28;
+      valid = "sometoken";
 
     beforeEach(inject(function(){
       spyOn(tokenStorageService, 'retrieve').and.callThrough();
@@ -79,8 +78,7 @@ describe('token-storage-service', function () {
       setted,
       fetched,
       fetchedPostClear,
-      valid = "sometoken",
-      invalid = 28;
+      valid = "sometoken";
 
     beforeEach(inject(function(){
       spyOn(tokenStorageService, 'clear').and.callThrough();

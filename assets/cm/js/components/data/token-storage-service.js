@@ -10,16 +10,7 @@
  * This is essential as it completely prevents any form of CSRF attacks.
  * @constructor
  */
-function TokenStorageService(){
-
-  var tokenKey = "authtoken";
-
-  /**
-   * Set the tokenKey
-   */
-  this.setTokenKey = function(keyName){
-    tokenKey = keyName;
-  };
+function TokenStorageService(tokenKey){
 
   /**
    * Store a token to localstorage
@@ -50,11 +41,21 @@ function TokenStorageService(){
 }
 
 angular.module('cmApp')
-  .provider('TokenStorageService', function() {
+  .provider('TokenStorageService', function(){
 
-    // Return a rlService instance
+    // default value
+    var tokenKey = "auth-token";
+
+    /**
+     * Set the tokenKey
+     */
+    this.setTokenKey = function(keyName){
+      tokenKey = keyName;
+    };
+
+    // Return a TokenStorageService instance
     this.$get = [function() {
-      return new TokenStorageService();
+      return new TokenStorageService(tokenKey);
     }];
   })
 ;
