@@ -10,7 +10,7 @@
 function UrlService(ep) {
   var endpoint;
 
-  //Should validate this endpoit
+  //Should validate this endpoint
   endpoint = ep;
 
   /**
@@ -46,7 +46,7 @@ angular.module('cmApp')
  */
   .provider('UrlService', function() {
 
-    var endpoint = 'http://firsthand.im/dev';
+    var endpoint = 'http://127.0.0.1:8080/cm-web-0.1-SNAPSHOT/services/rest/';
 
     //config method
     this.setEndpoint = function(ep) {
