@@ -1,7 +1,7 @@
 module.exports = function(config) {
     config.set({
         // base path, that will be used to resolve files and exclude
-        basePath: '../../../../../../',
+        basePath: '../../../../',
 
         // testing framework to use (jasmine/mocha/qunit/...)
         frameworks: ['jasmine'],
@@ -16,12 +16,11 @@ module.exports = function(config) {
             'assets/bower_components/angular-route-styles/route-styles.js',
             'assets/bower_components/angular-loading-bar/build/loading-bar.min.js',
             'assets/bower_components/angular-toastr/dist/angular-toastr.min.js',
-
             'assets/cm/js/app.js',
-            'assets/cm/js/controller/main-controller.js',
-            'assets/cm/js/controller/test-controller.js',
-
-            'test/angular/cm/unit/components/controllers/main-controller_Spec.js'
+            'assets/cm/js/config.js',
+            'assets/cm/js/controller/**/*.js',
+            'assets/cm/js/components/data/**/*.js',
+            'test/**/*_Spec.js'
         ],
 
         // list of files / patterns to exclude
@@ -50,18 +49,12 @@ module.exports = function(config) {
         // - IE (only Windows)
         browsers: [
             'PhantomJS'
-            // 'Chrome'
+             //'Chrome'
             // ,'Firefox'
         ],
 
-
         // Continuous Integration mode
         // if true, it capture browsers, run tests and exit
-        singleRun: false,
-
-        // // browserify configuration
-        // browserify: {
-        //     debug: true
-        // }
+        singleRun: false
     });
 };
