@@ -25,7 +25,14 @@ angular.module('cmApp')
          * @method getData
          * @param {String} url relative url
          * @param {object} transformResp transform response function
-         * @return {object} promise
+         * @return {object}
+         *
+         * The response object has these properties:
+         *  data – {string|Object} – The response body transformed with the transform functions.
+         *  status – {number} – HTTP status code of the response.
+         *  headers – {function([headerName])} – Header getter function.
+         *  config – {Object} – The configuration object that was used to generate the request.
+         *  statusText – {string} – HTTP status text of the response.
          */
         getData: function(url, transformResp){
           var promise = $http({
@@ -56,6 +63,13 @@ angular.module('cmApp')
          * response. Gets data and header object as parameters. Should return
          * as required
          * @return {object} promise
+         *
+         * The response object has these properties:
+         *  data – {string|Object} – The response body transformed with the transform functions.
+         *  status – {number} – HTTP status code of the response.
+         *  headers – {function([headerName])} – Header getter function.
+         *  config – {Object} – The configuration object that was used to generate the request.
+         *  statusText – {string} – HTTP status text of the response.
          */
         postData: function(url, object, transformResp){
           var

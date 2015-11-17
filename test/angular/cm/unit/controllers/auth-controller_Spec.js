@@ -14,7 +14,7 @@ describe('auth-controller', function () {
       'Accept': MIME_TYPE_JSON
     },
     endpoint = 'http://127.0.0.1:8080/cm-web-0.1-SNAPSHOT/services/rest/',
-    authUrl = 'auth',
+    authUrl = 'auth/',
     ctrl,
     mockBackend;
 
@@ -40,8 +40,8 @@ describe('auth-controller', function () {
     beforeEach(inject(function($controller, $httpBackend){
       ctrl = $controller('cmAuthCtrl');
       mockBackend = $httpBackend;
-      //instruct the mock server response
-      mockBackend.expectPOST(targetUrl, postData, headers).respond(returnData);
+      mockBackend.expectPOST(targetUrl, postData, headers)
+        .respond(returnData);
     }));
 
     it('should have data after server call', function(){
@@ -50,6 +50,7 @@ describe('auth-controller', function () {
       ctrl.login();
       mockBackend.flush();
       expect(ctrl.data).toEqual(returnData);
+      expect(ctrl.authenticated).toEqual(true);
     });
 
     afterEach(function(){
@@ -57,6 +58,7 @@ describe('auth-controller', function () {
       mockBackend.verifyNoOutstandingRequest(); //flush calls
     });
 
-  });
+  }); /* END login */
+
 }); /* END auth-controller */
 /* END TESTS */

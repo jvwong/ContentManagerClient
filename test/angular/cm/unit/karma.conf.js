@@ -20,7 +20,7 @@ module.exports = function(config) {
             'assets/cm/js/config.js',
 
             'assets/cm/js/utils/utils.js',
-            'assets/cm/js/controller/**/*.js',
+            'assets/cm/js/controller/*.js',
             'assets/cm/js/components/data/**/*.js',
             'test/**/*_Spec.js'
         ],

@@ -36,9 +36,12 @@ var jsFilesToInject = [
 
     // CM
     'cm/js/app.js',
+    'cm/js/config.js',
     'cm/js/routeProvider.js',
 
-    'cm/js/controller/*.js'
+    'cm/js/utils/**/*.js',
+    'cm/js/components/**/*.js',
+    'cm/js/controller/**/*.js'
 ];
 
 

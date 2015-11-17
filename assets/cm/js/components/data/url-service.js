@@ -29,7 +29,7 @@ function UrlService(ep) {
     }
 
     //filter out forward slashes
-    path_clean = path.trim().replace(/^\/|\/$/g, '');
+    path_clean = path.trim().replace(/^\//g, '');
     endpoint_clean = endpoint.trim().replace(/^\/|\/$/g, '');
 
     //construct the url

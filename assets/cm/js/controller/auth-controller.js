@@ -6,7 +6,9 @@ angular.module('cmApp')
     'DataLoaderPromise',
     'TokenStorageService',
     'UrlService',
-    function(DataLoaderPromise, TokenStorageService, UrlService) {
+    function(DataLoaderPromise,
+             TokenStorageService,
+             UrlService) {
 
       var self;
       self = this;
@@ -16,30 +18,46 @@ angular.module('cmApp')
       self.data = [];
       self.authenticated = false;
 
-      self.login = function () {
+      /**
+       * Retrieve the user information based on credentials
+       *
+       * You could also decode the token itself and check the expiration time,
+       * trusting the local client time to be accurate enough.
+       */
+      self.login = function() {
         var credentials = {
             username: self.username,
             password: self.password
           },
 
-          path = 'auth/',
-          url = UrlService.apiUrl(path);
+          auth_path = 'auth/',
+          user_path = 'users/',
+
+          auth_url = UrlService.apiUrl(auth_path),
+          user_url = UrlService.apiUrl(user_path);
 
         /**
-         * loadData is a wrapper around the DataLoaderPromise
-         * Needs the stockContext and selectedDate data
+         * The response object has these properties:
+         *  data – {string|Object} – The response body transformed with the transform functions.
+         *  status – {number} – HTTP status code of the response.
+         *  headers – {function([headerName])} – Header getter function.
+         *  config – {Object} – The configuration object that was used to generate the request.
+         *  statusText – {string} – HTTP status text of the response.
          */
-          DataLoaderPromise.postData(url, credentials).then(
+          DataLoaderPromise.postData(auth_url, credentials).then(
             function(response) {
-              self.data = response.data;
-              self.authenticated = true;
-              //TokenStorageService.store(headers('X-AUTH-TOKEN'));
+              console.log(response);
+              if(response.status === 200){
+                self.data = response.data;
+                self.authenticated = true;
+                TokenStorageService.store(response.headers('X-AUTH-TOKEN'));
+              }
             },
             function(errResponse) {
-              self.errorMessage = errResponse.data.msg;
+              self.errorMessage = errResponse;
             }
           );
-      };
+      }; /* END login */
 
     //self.logout = function () {
     //  // Just clear the local storage
