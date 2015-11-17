@@ -76,7 +76,7 @@ describe('DataLoaderPromise', function () {
               self.data = response.data;
             },
             function(errResponse) {
-              self.errorMessage = errResponse.data.msg;
+              //self.errorMessage = errResponse.data.msg;
             }
           );
         }]);
@@ -121,8 +121,7 @@ describe('DataLoaderPromise', function () {
       it('should have no data initially', function(){
         expect(ctrl.data).toEqual([]);
         mockBackend.flush();
-        expect(ctrl.data).toEqual([]);
-        expect(ctrl.errorMessage).toEqual(error.msg);
+        expect(ctrl.data).toEqual(error);
       });
 
       afterEach(function(){
@@ -200,8 +199,7 @@ describe('DataLoaderPromise', function () {
       it('should have no data initially', function(){
         expect(ctrl.data).toEqual([]);
         mockBackend.flush();
-        expect(ctrl.data).toEqual([]);
-        expect(ctrl.errorMessage).toEqual(error.msg);
+        expect(ctrl.data).toEqual(error);
       });
 
       afterEach(function(){

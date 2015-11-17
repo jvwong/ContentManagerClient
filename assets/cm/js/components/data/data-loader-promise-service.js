@@ -4,7 +4,7 @@
  * @module data-loader-promise-service
  */
 
-module.exports = angular.module('cmApp')
+angular.module('cmApp')
 /**
  * DataLoaderPromise service
  * @class DataLoaderPromise
@@ -34,12 +34,15 @@ module.exports = angular.module('cmApp')
             transformResponse: transformResp,
             cache: true
           })
-            .success(function(data, status, headers, config){
-              return data;
-            })
-            .error(function(data, status, headers, config){
+          .then(
+            function(response){
+              return response;
+            },
+            function(errResponse){
+              return errResponse;
               //console.warn("getData error: %s", status);
-            });
+            }
+          );
 
           return promise;
         },
@@ -60,7 +63,6 @@ module.exports = angular.module('cmApp')
             deferred,
             cacheResult;
 
-
           //hit the cache first
           cacheResult = DataLoaderCacheService.get(url, object);
 
@@ -77,19 +79,19 @@ module.exports = angular.module('cmApp')
           promise = $http({
             method: 'POST',
             url: url,
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            },
-            data: $.param(object),
+            data: object,
             transformResponse: transformResp
           })
-            .success(function(data, status, headers, config){
-              DataLoaderCacheService.put(url, object, angular.copy(data));
-              return data;
-            })
-            .error(function(data, status, headers, config){
+          .then(
+            function(response){
+              DataLoaderCacheService.put(url, object, angular.copy(response.data));
+              return response;
+            },
+            function(errResponse){
+              return errResponse;
               //console.warn("getData error: %s", status);
-            });
+            }
+          ); // END promise
 
           return promise;
         },
@@ -102,13 +104,13 @@ module.exports = angular.module('cmApp')
          */
         requestData: function(spec){
           var promise = $http(spec)
-
-            .success(function(data, status, headers, config){
-              return data;
-            })
-            .error(function(data, status, headers, config){
-              //console.warn("getData error: %s", status);
-            });
+          .then(function(reponse){
+              return reponse;
+            },
+            function(errReponse){
+              //console.warn("getData error: %s", errReponse.status);
+            }
+          );
 
           return promise;
         }

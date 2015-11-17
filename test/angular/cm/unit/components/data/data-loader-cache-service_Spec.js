@@ -128,11 +128,11 @@ describe('DataLoaderCache', function () {
         dataCache = DataLoaderCacheService;
 
         //instruct the mock server response
-        mockBackend.expectPOST(url1, $.param(postData1), function(data, headers){
+        mockBackend.expectPOST(url1, postData1, function(data, headers){
           return data;
         }).respond(data);
 
-        mockBackend.expectPOST(url1, $.param(postData1), function(data, headers){
+        mockBackend.expectPOST(url1, postData1, function(data, headers){
           return data;
         }).respond(data);
       }));
