@@ -13,6 +13,7 @@ describe('auth-controller', function () {
   fetched,
   security,
   location,
+  scope,
   ctrl,
   mockBackend,
 
@@ -54,14 +55,16 @@ describe('auth-controller', function () {
 
     describe('success', function(){
 
-      beforeEach(inject(function(SECURITY,
+      beforeEach(inject(function($rootScope,
+                                 SECURITY,
                                  $controller,
                                  $location,
                                  AuthenticationService,
                                  TokenStorageService,
                                  $httpBackend){
-        ctrl = $controller('cmAuthCtrl');
-        security = SECURITY,
+        scope = $rootScope.$new();
+        ctrl = $controller('cmAuthCtrl', {$scope:scope });
+        security = SECURITY;
         authenticationService = AuthenticationService;
         tokenStorageService = TokenStorageService;
         mockBackend = $httpBackend;
@@ -103,13 +106,15 @@ describe('auth-controller', function () {
 
     describe('failure', function(){
 
-      beforeEach(inject(function(SECURITY,
+      beforeEach(inject(function($rootScope,
+                                 SECURITY,
                                  $controller,
-                                 AuthenticationService,
                                  $location,
+                                 AuthenticationService,
                                  TokenStorageService,
                                  $httpBackend){
-        ctrl = $controller('cmAuthCtrl');
+        scope = $rootScope.$new();
+        ctrl = $controller('cmAuthCtrl', {$scope:scope });
         security = SECURITY;
         authenticationService = AuthenticationService;
         tokenStorageService = TokenStorageService;
@@ -139,7 +144,7 @@ describe('auth-controller', function () {
       it('should not set the user object and authentication state', function(){
         ctrl.login(postData.username, postData.password);
         mockBackend.flush();
-        expect(ctrl.user.username).toBeUndefined();
+        expect(ctrl.user).toBeUndefined();
         expect(ctrl.authenticated).toBeFalsy();
       });
 
@@ -148,50 +153,52 @@ describe('auth-controller', function () {
         mockBackend.verifyNoOutstandingRequest(); //flush calls
       });
 
-    }); /* END success */
+    }); /* END failure */
 
   }); /* END login */
 
-  describe('login', function(){
+  describe('logout', function(){
 
-      beforeEach(inject(function(SECURITY,
-                                 $controller,
-                                 $location,
-                                 AuthenticationService,
-                                 TokenStorageService,
-                                 $httpBackend){
-        ctrl = $controller('cmAuthCtrl');
-        security = SECURITY;
-        authenticationService = AuthenticationService;
-        tokenStorageService = TokenStorageService;
-        mockBackend = $httpBackend;
-        location = $location;
+    beforeEach(inject(function($rootScope,
+                               SECURITY,
+                               $controller,
+                               $location,
+                               AuthenticationService,
+                               TokenStorageService,
+                               $httpBackend){
+      scope = $rootScope.$new();
+      ctrl = $controller('cmAuthCtrl', {$scope:scope });
+      security = SECURITY;
+      authenticationService = AuthenticationService;
+      tokenStorageService = TokenStorageService;
+      mockBackend = $httpBackend;
+      location = $location;
 
-        spyOn(ctrl, 'logout').and.callThrough();
-        spyOn(tokenStorageService, 'clear').and.stub();
+      spyOn(ctrl, 'logout').and.callThrough();
+      spyOn(tokenStorageService, 'clear').and.stub();
 
-        mockBackend.expectPOST(targetUrl, postData, headers)
-          .respond(returnData);
-        ctrl.login(postData.username, postData.password);
-        mockBackend.flush();
-      }));
+      mockBackend.expectPOST(targetUrl, postData, headers)
+        .respond(returnData);
+      ctrl.login(postData.username, postData.password);
+      mockBackend.flush();
+    }));
 
-      it('should call the logout function and set url to "#/', function(){
-        ctrl.logout();
-        expect(ctrl.logout).toHaveBeenCalled();
-        expect(location.url()).toEqual(security.routes.login);
-      });
+    it('should call the logout function and set url to "#/', function(){
+      ctrl.logout();
+      expect(ctrl.logout).toHaveBeenCalled();
+      expect(location.url()).toEqual(security.routes.login);
+    });
 
-      it('should attempt to clear the user token', function(){
-        ctrl.logout();
-        expect(tokenStorageService.clear).toHaveBeenCalled();
-      });
+    it('should attempt to clear the user token', function(){
+      ctrl.logout();
+      expect(tokenStorageService.clear).toHaveBeenCalled();
+    });
 
-      it('should have set the user object and authentication state', function(){
-        ctrl.logout();
-        expect(ctrl.user.username).toBeUndefined();
-        expect(ctrl.authenticated).toBeFalsy();
-      });
+    it('should have set the user object and authentication state', function(){
+      ctrl.logout();
+      expect(ctrl.user.username).toBeUndefined();
+      expect(ctrl.authenticated).toBeFalsy();
+    });
 
   }); /* END logout */
 

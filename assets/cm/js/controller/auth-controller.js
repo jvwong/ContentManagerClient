@@ -3,22 +3,19 @@
 
 angular.module('cmApp')
   .controller('cmAuthCtrl', [
+    '$scope',
     'SECURITY',
     '$location',
     'AuthenticationService',
-    function(SECURITY,
+    function($scope,
+             SECURITY,
              $location,
              AuthenticationService) {
 
       var self;
       self = this;
 
-      self.test = "jvwong";
-
-      self.user = {
-        username: undefined
-      };
-
+      self.user;
       self.authenticated = false;
       self.formErrors = [];
 
@@ -27,9 +24,8 @@ angular.module('cmApp')
        * retrieve the user information based on credentials
        *
        * Case I: status 200 OK
-       *
-       *
-       * Case II: error response
+       * Case II: status not 200 OK
+       * Case III: error
        *
        */
       self.login = function(username, password) {
@@ -38,13 +34,9 @@ angular.module('cmApp')
           .login(username, password)
           .then(function(response){
             if(response.status === 200){
-              self.user.username = response.data.username;
-
-              //console.log('setting user.username');
-              //console.log(typeof response.data);
-              //console.log(self.user.username);
-
+              self.user = response.data;
               self.authenticated = true;
+
               //change the location
               $location.url(SECURITY.routes.success);
             } else {
@@ -70,14 +62,28 @@ angular.module('cmApp')
         $location.url(SECURITY.routes.login);
       };
 
-      //self.init = function () {
+      //watch for the StockSelectService update
+      $scope.$watch(
+        AuthenticationService.getCurrentLoginUser,
+        function(newUser, oldUser){
+          if(newUser){
+            //console.log('new user!');
+            //console.log(newUser);
+            self.user = newUser;
+          }
+        },
+        true
+      );
+
+      self.init = function () {
+        console.log('init');
       //  $http.get('/api/users/current').success(function (user) {
       //    if(user.username !== 'anonymousUser'){
       //      $scope.authenticated = true;
       //      $scope.username = user.username;
       //    }
       //  });
-      //};
+      };
 
   }]);
 

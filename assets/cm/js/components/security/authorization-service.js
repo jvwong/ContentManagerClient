@@ -8,11 +8,9 @@
 
 angular.module('cmApp')
   .factory('AuthorizationService', [
-    //'authentication',
-    //function(authentication){
-    function(){
-      var authorize;
-      //var authorize = function(loginRequired, requiredPermissions, permissionCheckType) {
+    'AuthenticationService',
+    function(AuthenticationService){
+      var authorize = function(loginRequired, requiredPermissions, permissionCheckType) {
       //  var
       //    result = jcs.modules.auth.enums.authorised.authorised,
       //    user = authentication.getCurrentLoginUser(),
@@ -54,7 +52,7 @@ angular.module('cmApp')
       //    result = hasPermission ? jcs.modules.auth.enums.authorised.authorised : jcs.modules.auth.enums.authorised.notAuthorised;
       //  }
       //
-      //};
+      }; /* END authorize */
 
       return {
         authorize: authorize

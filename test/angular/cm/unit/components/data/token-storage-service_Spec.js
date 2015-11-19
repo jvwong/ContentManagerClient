@@ -40,6 +40,13 @@ describe('token-storage-service', function () {
       expect(setted).toBeTruthy();
     });
 
+    it('should not store invalid value', function() {
+      setted = tokenStorageService.store(invalid);
+      expect(tokenStorageService.store).toHaveBeenCalledWith(invalid);
+      expect(setted).toBeFalsy();
+    });
+
+
     it('should not store an invalid token type', function() {
       setted = tokenStorageService.store(invalid);
       expect(setted).toBeFalsy();

@@ -4,6 +4,7 @@
 angular.module('cmApp')
   .config(['TokenStorageServiceProvider', function(TokenStorageServiceProvider){
     //Configuration here
+    TokenStorageServiceProvider.setTokenKey('cm-auth-token');
   }])
   .config(['$httpProvider', function($httpProvider){
     // Set Configuration here

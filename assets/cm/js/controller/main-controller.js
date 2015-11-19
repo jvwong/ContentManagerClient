@@ -2,7 +2,8 @@
 'use strict';
 
 angular.module('cmApp')
-    .controller('cmMainCtrl', [function() {
+  .controller('cmMainCtrl', [
+    function() {
       var self;
       self = this;
-    }]);
+  }]);
