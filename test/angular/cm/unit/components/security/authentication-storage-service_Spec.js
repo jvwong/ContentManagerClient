@@ -22,8 +22,8 @@ describe('auth-storage-service', function () {
     },
     invalid = 28;
 
-  beforeEach(inject(function(AuthStorageService){
-    authStorageService = AuthStorageService;
+  beforeEach(inject(function(AuthenticationStorageService){
+    authStorageService = AuthenticationStorageService;
   }));
 
   it('should be defined on load', function() {

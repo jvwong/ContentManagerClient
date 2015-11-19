@@ -2,10 +2,11 @@
 'use strict';
 
 /**
- * The AuthStorage is just a wrapper service over localStorage
+ * The AuthenticationStorageService is just a wrapper service
+ * over localStorage
  * @constructor
  */
-function AuthStorageService(authKey){
+function AuthenticationStorageService(authKey){
 
   /**
    * Store a user object to localstorage
@@ -37,7 +38,7 @@ function AuthStorageService(authKey){
 }
 
 angular.module('cmApp')
-  .provider('AuthStorageService', function(){
+  .provider('AuthenticationStorageService', function(){
 
     // default value
     var authKey = "user";
@@ -51,7 +52,7 @@ angular.module('cmApp')
 
     // Return a TokenStorageService instance
     this.$get = [function() {
-      return new AuthStorageService(authKey);
+      return new AuthenticationStorageService(authKey);
     }];
   })
 ;

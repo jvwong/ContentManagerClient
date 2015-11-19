@@ -10,6 +10,7 @@ describe('auth-controller', function () {
   var
   authenticationService,
   tokenStorageService,
+  authenticationStorageService,
   fetched,
   security,
   location,
@@ -59,6 +60,7 @@ describe('auth-controller', function () {
                                  SECURITY,
                                  $controller,
                                  $location,
+                                 AuthenticationStorageService,
                                  AuthenticationService,
                                  TokenStorageService,
                                  $httpBackend){
@@ -66,12 +68,14 @@ describe('auth-controller', function () {
         ctrl = $controller('cmAuthCtrl', {$scope:scope });
         security = SECURITY;
         authenticationService = AuthenticationService;
+        authenticationStorageService = AuthenticationStorageService;
         tokenStorageService = TokenStorageService;
         mockBackend = $httpBackend;
         location = $location;
 
         spyOn(ctrl, 'login').and.callThrough();
         spyOn(tokenStorageService, 'store').and.stub();
+        spyOn(authenticationStorageService, 'store').and.stub();
 
         mockBackend.expectPOST(targetUrl, postData, headers)
           .respond(JSON.stringify(returnData));
@@ -88,6 +92,7 @@ describe('auth-controller', function () {
         ctrl.login(postData.username, postData.password);
         mockBackend.flush();
         expect(tokenStorageService.store).toHaveBeenCalled();
+        expect(authenticationStorageService.store).toHaveBeenCalled();
       });
 
       it('should have set the user object and authentication state', function(){
@@ -110,12 +115,14 @@ describe('auth-controller', function () {
                                  SECURITY,
                                  $controller,
                                  $location,
+                                 AuthenticationStorageService,
                                  AuthenticationService,
                                  TokenStorageService,
                                  $httpBackend){
         scope = $rootScope.$new();
         ctrl = $controller('cmAuthCtrl', {$scope:scope });
         security = SECURITY;
+        authenticationStorageService = AuthenticationStorageService;
         authenticationService = AuthenticationService;
         tokenStorageService = TokenStorageService;
         mockBackend = $httpBackend;
@@ -123,6 +130,7 @@ describe('auth-controller', function () {
 
         spyOn(ctrl, 'login').and.callThrough();
         spyOn(tokenStorageService, 'store').and.stub();
+        spyOn(authenticationStorageService, 'store').and.stub();
 
         mockBackend.expectPOST(targetUrl, postData, headers)
           .respond(500, 'Server error');
@@ -139,6 +147,7 @@ describe('auth-controller', function () {
         ctrl.login(postData.username, postData.password);
         mockBackend.flush();
         expect(tokenStorageService.store).not.toHaveBeenCalled();
+        expect(authenticationStorageService.store).not.toHaveBeenCalled();
       });
 
       it('should not set the user object and authentication state', function(){
@@ -164,11 +173,13 @@ describe('auth-controller', function () {
                                $controller,
                                $location,
                                AuthenticationService,
+                               AuthenticationStorageService,
                                TokenStorageService,
                                $httpBackend){
       scope = $rootScope.$new();
       ctrl = $controller('cmAuthCtrl', {$scope:scope });
       security = SECURITY;
+      authenticationStorageService = AuthenticationStorageService;
       authenticationService = AuthenticationService;
       tokenStorageService = TokenStorageService;
       mockBackend = $httpBackend;
@@ -176,6 +187,7 @@ describe('auth-controller', function () {
 
       spyOn(ctrl, 'logout').and.callThrough();
       spyOn(tokenStorageService, 'clear').and.stub();
+      spyOn(authenticationStorageService, 'clear').and.stub();
 
       mockBackend.expectPOST(targetUrl, postData, headers)
         .respond(returnData);
@@ -192,6 +204,7 @@ describe('auth-controller', function () {
     it('should attempt to clear the user token', function(){
       ctrl.logout();
       expect(tokenStorageService.clear).toHaveBeenCalled();
+      expect(authenticationStorageService.clear).toHaveBeenCalled();
     });
 
     it('should have set the user object and authentication state', function(){

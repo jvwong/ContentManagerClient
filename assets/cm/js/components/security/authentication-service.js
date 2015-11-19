@@ -4,12 +4,14 @@ angular.module('cmApp')
     'DataLoaderPromise',
     'UrlService',
     'TokenStorageService',
+    'AuthenticationStorageService',
     '$rootScope',
 
   function (SECURITY,
             DataLoaderPromise,
             UrlService,
             TokenStorageService,
+            AuthenticationStorageService,
             $rootScope) {
     var
       currentUser,
@@ -61,7 +63,7 @@ angular.module('cmApp')
             if(response.status === 200){
               TokenStorageService.store(response.headers('X-AUTH-TOKEN'));
               currentUser = createUser(response.data);
-              //console.log(response.data);
+              AuthenticationStorageService.store(currentUser);
               return response;
 
             } else {
@@ -84,6 +86,7 @@ angular.module('cmApp')
     //  // do here as we are mixing responsibilities if we do.
       currentUser = undefined;
       TokenStorageService.clear();
+      AuthenticationStorageService.clear();
     };
 
     getCurrentLoginUser = function (){

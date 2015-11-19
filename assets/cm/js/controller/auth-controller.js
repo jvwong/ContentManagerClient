@@ -6,10 +6,12 @@ angular.module('cmApp')
     '$scope',
     'SECURITY',
     '$location',
+    'AuthenticationStorageService',
     'AuthenticationService',
     function($scope,
              SECURITY,
              $location,
+             AuthenticationStorageService,
              AuthenticationService) {
 
       var self;
