@@ -8,11 +8,13 @@ angular.module('cmApp')
     '$rootScope',
     '$templateRequest',
     '$location',
+    'SECURITY',
     'AuthorizationService',
     function (
       $rootScope,
       $templateRequest,
       $location,
+      SECURITY,
       AuthorizationService) {
 
       /* pages */
@@ -21,22 +23,19 @@ angular.module('cmApp')
 
       /* START */
       $rootScope.$on('$routeChangeStart', function (event, next, current) {
-        //console.info('current');console.info(current);
-        //console.info('next');console.info(next);
-
         var authorised;
 
         if (next.access !== undefined) {
-          //authorised = authorization.authorize(
-          //  next.access.loginRequired,
-          //  next.access.permissions,
-          //  next.access.permissionCheckType);
-          //
-          //if (authorised === jcs.modules.auth.enums.authorised.loginRequired) {
-          //  $location.path(jcs.modules.auth.routes.login);
-          //} else if (authorised === jcs.modules.auth.enums.authorised.notAuthorised) {
-          //  $location.path(jcs.modules.auth.routes.notAuthorised).replace();
-          //}
+          authorised = AuthorizationService.authorize(
+            next.access.requiresLogin,
+            next.access.permissions,
+            next.access.permissionCheckType);
+
+          if (authorised === SECURITY.enums.authorised.loginRequired) {
+            $location.path(SECURITY.routes.login);
+          } else if (authorised === SECURITY.enums.authorised.notAuthorised) {
+            $location.path(SECURITY.routes.notAuthorised).replace();
+          }
         }
       });
       $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {

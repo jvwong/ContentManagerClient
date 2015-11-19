@@ -14,8 +14,7 @@ angular.module('cmApp')
             AuthenticationStorageService,
             $rootScope) {
     var
-      currentUser,
-      createUser,
+      currentUser = undefined,
       login,
       logout,
       getCurrentLoginUser

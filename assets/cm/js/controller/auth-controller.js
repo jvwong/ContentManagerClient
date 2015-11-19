@@ -17,7 +17,7 @@ angular.module('cmApp')
       var self;
       self = this;
 
-      self.user;
+      self.user = AuthenticationStorageService.retrieve();
       self.authenticated = false;
       self.formErrors = [];
 

@@ -153,7 +153,7 @@ describe('auth-controller', function () {
       it('should not set the user object and authentication state', function(){
         ctrl.login(postData.username, postData.password);
         mockBackend.flush();
-        expect(ctrl.user).toBeUndefined();
+        expect(ctrl.user).toBe(null);
         expect(ctrl.authenticated).toBeFalsy();
       });
 

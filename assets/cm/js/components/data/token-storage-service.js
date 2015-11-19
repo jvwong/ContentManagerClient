@@ -44,18 +44,18 @@ angular.module('cmApp')
   .provider('TokenStorageService', function(){
 
     // default value
-    var tokenKey = "auth-token";
+    var key = "auth-token";
 
     /**
      * Set the tokenKey
      */
-    this.setTokenKey = function(keyName){
-      tokenKey = keyName;
+    this.setKey = function(keyName){
+      key = keyName;
     };
 
     // Return a TokenStorageService instance
     this.$get = [function() {
-      return new TokenStorageService(tokenKey);
+      return new TokenStorageService(key);
     }];
   })
 ;
