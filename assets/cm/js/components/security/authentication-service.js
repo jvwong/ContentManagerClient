@@ -26,23 +26,22 @@ angular.module('cmApp')
      */
     function createUser(config) {
 
-      if(!Array.isArray(config) || config.length === 0){
+      if(!config){
         return null;
       }
 
       return {
-        id: config[0].id,
-        username: config[0].username,
-        fullName: config[0].fullName,
-        createdDate: config[0].createdDate,
-        permissions: config[0].role
+        id: config.id,
+        username: config.username,
+        fullName: config.fullName,
+        createdDate: config.createdDate,
+        permissions: config.role
       };
     } /* END createUser */
 
     login = function (username, password) {
       var
-        auth_url = UrlService.apiUrl(SECURITY.paths.authentication);
-
+      auth_url = UrlService.apiUrl(SECURITY.paths.authentication);
       /**
        * The response object has these properties:
        *  data – {string|Object} – The response body transformed with the transform functions.
@@ -55,13 +54,14 @@ angular.module('cmApp')
         .postData(auth_url, {
           username: username,
           password: password
-        })
+        }, utils.transformRes)
         .then(
           // The server success callback
           function(response) {
             if(response.status === 200){
               TokenStorageService.store(response.headers('X-AUTH-TOKEN'));
               currentUser = createUser(response.data);
+              //console.log(response.data);
               return response;
 
             } else {

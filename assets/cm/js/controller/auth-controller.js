@@ -3,13 +3,17 @@
 
 angular.module('cmApp')
   .controller('cmAuthCtrl', [
+    'SECURITY',
     '$location',
     'AuthenticationService',
-    function($location,
+    function(SECURITY,
+             $location,
              AuthenticationService) {
 
       var self;
       self = this;
+
+      self.test = "jvwong";
 
       self.user = {
         username: undefined
@@ -29,40 +33,51 @@ angular.module('cmApp')
        *
        */
       self.login = function(username, password) {
+
         AuthenticationService
           .login(username, password)
           .then(function(response){
             if(response.status === 200){
-              self.user.username = response.data[0].username;
+              self.user.username = response.data.username;
+
+              //console.log('setting user.username');
+              //console.log(typeof response.data);
+              //console.log(self.user.username);
+
               self.authenticated = true;
               //change the location
-              $location.url('/');
+              $location.url(SECURITY.routes.success);
             } else {
               //go back to login
-              $location.url('/login');
+              self.formErrors = ['Login failed'];
+              $location.url(SECURITY.routes.fail);
             }
           },
           function(errResponse){
             //go back to login
-            $location.url('/login');
+            $location.url(SECURITY.routes.fail);
+            self.formErrors = ['Login failed'];
             console.error('AuthController login error');
           });
+
       }; /* END login */
 
-    //self.logout = function () {
-    //  // Just clear the local storage
-    //  TokenStorage.clear();
-    //  $scope.authenticated = false;
-    //};
+      self.logout = function () {
+        // Just clear the local storage
+        AuthenticationService.logout();
+        self.authenticated = false;
+        self.user.username = undefined;
+        $location.url(SECURITY.routes.login);
+      };
 
-    //self.init = function () {
-    //  $http.get('/api/users/current').success(function (user) {
-    //    if(user.username !== 'anonymousUser'){
-    //      $scope.authenticated = true;
-    //      $scope.username = user.username;
-    //    }
-    //  });
-    //};
+      //self.init = function () {
+      //  $http.get('/api/users/current').success(function (user) {
+      //    if(user.username !== 'anonymousUser'){
+      //      $scope.authenticated = true;
+      //      $scope.username = user.username;
+      //    }
+      //  });
+      //};
 
   }]);
 

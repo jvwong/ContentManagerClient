@@ -18,7 +18,7 @@ var utils = (function(){
     try{
       out = JSON.parse(data);
     } catch(e){
-      console.warn('JSON parsing error utils.js @ transformRes %s', e);
+      //console.warn('JSON parsing error utils.js @ transformRes %s', e);
     }
     return out;
   }

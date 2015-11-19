@@ -25,6 +25,8 @@ angular.module('cmApp')
     },
     routes: {
       login: '/login',
+      fail: '/login',
+      success: '/',
       notAuthorised: '/not-authorised'
     },
     paths: {

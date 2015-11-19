@@ -24,7 +24,7 @@ describe('authentication-service', function () {
       password: 'asdasdasd'
     },
 
-    returnData = [{
+    returnData = {
       "id": "10929DF8-15C5-472B-9398-7158AB89A0A6",
       "version": 0,
       "createdDate": "2015-01-12T02:32:29Z",
@@ -32,14 +32,14 @@ describe('authentication-service', function () {
       "fullName": "fullnameAdmin",
       "username": "adminUser",
       "role": "ROLE_ADMIN"
-    }],
+    },
 
     userData = {
-        id: returnData[0].id,
-        username: returnData[0].username,
-        fullName: returnData[0].fullName,
-        createdDate: returnData[0].createdDate,
-        permissions: returnData[0].role
+        id: returnData.id,
+        username: returnData.username,
+        fullName: returnData.fullName,
+        createdDate: returnData.createdDate,
+        permissions: returnData.role
     },
     mockBackend
     ;
@@ -50,7 +50,7 @@ describe('authentication-service', function () {
     authenticationService = AuthenticationService;
     mockBackend = $httpBackend;
     mockBackend.expectPOST(targetUrl, postData, headers)
-      .respond(returnData);
+      .respond(JSON.stringify(returnData));
   }));
 
   describe('login', function(){
@@ -69,6 +69,7 @@ describe('authentication-service', function () {
         .toHaveBeenCalledWith(postData.username, postData.password);
       mockBackend.flush();
       expect(fetched).toBeDefined();
+      expect(fetched.id).toBeDefined();
     });
 
     afterEach(function(){
@@ -95,7 +96,7 @@ describe('authentication-service', function () {
       mockBackend.flush();
       fetched = authenticationService.getCurrentLoginUser();
       expect(fetched).toBeDefined();
-      expect(fetched.id).toEqual(returnData[0].id);
+      expect(fetched.id).toEqual(returnData.id);
     });
 
     afterEach(function(){

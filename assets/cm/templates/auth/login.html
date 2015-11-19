@@ -1,5 +1,5 @@
 <!-- body -->
-<div class="cm-auth-login">
+<div class="cm-auth cm-auth-login">
     <div class="container-fluid">
         <!-- START row -->
         <div class="row">
@@ -17,10 +17,12 @@
                 <!-- START form-auth -->
                 <form class="form-auth col-xs-12 col-sm-6"
                       name="loginForm"
-                      ng-submit="authCtrl.login()">
+                      ng-submit="authCtrl.login(
+                        loginForm.username.$modelValue,
+                        loginForm.password.$modelValue)">
                     <div class="form-group">
                         <input autocapitalize="off"
-                               ng-model="authCtrl.user.username"
+                               ng-model="authCtrl.username"
                                ng-minlength="6"
                                type="text"
                                class="form-control"
@@ -30,7 +32,7 @@
                     </div>
                     <div class="form-group">
                         <input autocapitalize="off"
-                               ng-model="authCtrl.user.password"
+                               ng-model="authCtrl.password"
                                ng-minlength="6"
                                type="password"
                                class="form-control"
