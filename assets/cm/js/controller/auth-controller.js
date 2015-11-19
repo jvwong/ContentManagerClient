@@ -3,60 +3,50 @@
 
 angular.module('cmApp')
   .controller('cmAuthCtrl', [
-    'DataLoaderPromise',
-    'TokenStorageService',
-    'UrlService',
-    function(DataLoaderPromise,
-             TokenStorageService,
-             UrlService) {
+    '$location',
+    'AuthenticationService',
+    function($location,
+             AuthenticationService) {
 
       var self;
       self = this;
 
-      self.username = null;
-      self.password = null;
-      self.data = [];
+      self.user = {
+        username: undefined
+      };
+
       self.authenticated = false;
+      self.formErrors = [];
 
       /**
-       * Retrieve the user information based on credentials
+       * Defer to the authentication-service implementation to
+       * retrieve the user information based on credentials
        *
-       * You could also decode the token itself and check the expiration time,
-       * trusting the local client time to be accurate enough.
+       * Case I: status 200 OK
+       *
+       *
+       * Case II: error response
+       *
        */
-      self.login = function() {
-        var credentials = {
-            username: self.username,
-            password: self.password
-          },
-
-          auth_path = 'auth/',
-          user_path = 'users/',
-
-          auth_url = UrlService.apiUrl(auth_path),
-          user_url = UrlService.apiUrl(user_path);
-
-        /**
-         * The response object has these properties:
-         *  data – {string|Object} – The response body transformed with the transform functions.
-         *  status – {number} – HTTP status code of the response.
-         *  headers – {function([headerName])} – Header getter function.
-         *  config – {Object} – The configuration object that was used to generate the request.
-         *  statusText – {string} – HTTP status text of the response.
-         */
-          DataLoaderPromise.postData(auth_url, credentials).then(
-            function(response) {
-              console.log(response);
-              if(response.status === 200){
-                self.data = response.data;
-                self.authenticated = true;
-                TokenStorageService.store(response.headers('X-AUTH-TOKEN'));
-              }
-            },
-            function(errResponse) {
-              self.errorMessage = errResponse;
+      self.login = function(username, password) {
+        AuthenticationService
+          .login(username, password)
+          .then(function(response){
+            if(response.status === 200){
+              self.user.username = response.data[0].username;
+              self.authenticated = true;
+              //change the location
+              $location.url('/');
+            } else {
+              //go back to login
+              $location.url('/login');
             }
-          );
+          },
+          function(errResponse){
+            //go back to login
+            $location.url('/login');
+            console.error('AuthController login error');
+          });
       }; /* END login */
 
     //self.logout = function () {

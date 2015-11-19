@@ -1,5 +1,5 @@
 <!-- body -->
-<div class="cm-auth cm-login">
+<div class="cm-auth-login">
     <div class="container-fluid">
         <!-- START row -->
         <div class="row">
@@ -15,30 +15,36 @@
                 <!-- END auth-register-header -->
 
                 <!-- START form-auth -->
-                <form class="form-auth col-xs-12 col-sm-6">
+                <form class="form-auth col-xs-12 col-sm-6"
+                      name="loginForm"
+                      ng-submit="authCtrl.login()">
                     <div class="form-group">
                         <input autocapitalize="off"
-                               ng-model="authCtrl.username"
+                               ng-model="authCtrl.user.username"
+                               ng-minlength="6"
                                type="text"
                                class="form-control"
                                name="username"
-                               id="identifier"
+                               id="username"
                                placeholder="Username" required>
                     </div>
                     <div class="form-group">
                         <input autocapitalize="off"
-                               ng-model="authCtrl.password"
+                               ng-model="authCtrl.user.password"
+                               ng-minlength="6"
                                type="password"
                                class="form-control"
-                               name="password" id="password"
+                               name="password"
+                               id="password"
                                placeholder="Password" required>
                     </div>
-                    <button id="submit"
-                            ng-click="authCtrl.login()"
-                            class="btn btn-default">
-                      Submit
-                    </button>
+                    <div class="form-group">
+                      <input type="submit" value="Submit" class="btn btn-default">
+                    </div>
                     <!-- START form-auth errors -->
+                    <div ng-repeat="error in authCtrl.formErrors">
+                      <span class="error">{{error}}</span>
+                    </div>
                     <!-- END form-auth errors -->
                 </form><!-- END form-auth -->
             </div>
