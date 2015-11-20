@@ -43,6 +43,7 @@ angular.module('cmApp')
 
               // Specific permissions are specified.
             } else if (loginRequired === true && requiredPermissions.length > 0) {
+
               loweredPermissions = [];
               angular.forEach(user.permissions, function (permission) {
                 loweredPermissions.push(permission.toLowerCase());

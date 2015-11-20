@@ -34,7 +34,6 @@ angular.module('cmApp')
             next.access.permissionCheckType,
             next.access.isNotLoggedIn);
 
-
           if (authorised === SECURITY.enums.authorised.loginRequired)
           {
             $location.path(SECURITY.routes.login);

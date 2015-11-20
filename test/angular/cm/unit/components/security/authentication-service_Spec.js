@@ -38,7 +38,7 @@ describe('authentication-service', function () {
         "lastModifiedDate": "2015-01-12T02:32:29Z",
         "fullName": "fullnameAdmin",
         "username": "adminUser",
-        "role": "ROLE_ADMIN"
+        "role": "ROLE_CMSUSER"
       },
 
       userData = {
@@ -140,14 +140,15 @@ describe('authentication-service', function () {
   describe('register', function(){
 
     var fetched,
-    authUrl = 'users/',
-    targetUrl = endpoint + authUrl,
+      authUrl = 'auth/',
+      userUrl = 'users/',
+
     postData = {
       username: 'username24',
       password: 'password24',
       fullName: 'fullname24',
       email: 'email24@email.com',
-      role: 'CMSUSER'
+      role: 'ROLE_CMSUSER'
     },
 
     returnData = {
@@ -157,7 +158,7 @@ describe('authentication-service', function () {
       "lastModifiedDate": "2015-11-20T15:26:56.310Z",
       "fullName": "fullname24",
       "username": "username24",
-      "role": "CMSUSER"
+      "role": "ROLE_CMSUSER"
     },
 
     userData = {
@@ -171,7 +172,12 @@ describe('authentication-service', function () {
     beforeEach(inject(function(AuthenticationService, $httpBackend){
       authenticationService = AuthenticationService;
       mockBackend = $httpBackend;
-      mockBackend.expectPOST(targetUrl, postData, headers)
+      mockBackend.expectPOST(endpoint + userUrl, postData, headers)
+        .respond(JSON.stringify(returnData));
+      mockBackend.expectPOST(endpoint + authUrl, {
+        username: postData.username,
+        password: postData.password
+      }, headers)
         .respond(JSON.stringify(returnData));
     }));
 

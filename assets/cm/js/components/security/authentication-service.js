@@ -128,7 +128,9 @@ angular.module('cmApp')
           email   : email,
           role    : role
         }, utils.transformRes)
-        .then(onSuccess, onFail);
+        .then(function(response){
+          return login(username, password);
+        }, onFail);
 
       return promise;
 

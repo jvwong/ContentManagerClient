@@ -18,7 +18,7 @@ describe('auth-storage-service', function () {
       username: 'testuser',
       fullName: 'Test User',
       createdDate: '2015-19-04',
-      permissions: 'ROLE_USER'
+      permissions: 'ROLE_CMSUSER'
     },
     invalid = 28;
 

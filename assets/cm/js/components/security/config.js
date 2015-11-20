@@ -35,7 +35,7 @@ angular.module('cmApp')
       users: 'users/'
     },
     roles: {
-      defaultValue: 'CMSUSER'
+      defaultValue: 'ROLE_CMSUSER'
     }
   })
 ;
