@@ -78,7 +78,7 @@ angular.module('cmApp')
 
           // Check if this route prevents logged in users from accessing it
           // Typically this is a login or registration page
-          if(notLoggedIn){
+          if(notLoggedIn && (user !== undefined && user !== null)){
             result = SECURITY.enums.authorised.ignore;
           }
         }

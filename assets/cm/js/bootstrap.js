@@ -31,12 +31,29 @@ angular.module('cmApp')
           authorised = AuthorizationService.authorize(
             next.access.requiresLogin,
             next.access.permissions,
-            next.access.permissionCheckType);
+            next.access.permissionCheckType,
+            next.access.isNotLoggedIn);
 
-          if (authorised === SECURITY.enums.authorised.loginRequired) {
+          if (authorised === SECURITY.enums.authorised.loginRequired)
+          {
             $location.path(SECURITY.routes.login);
-          } else if (authorised === SECURITY.enums.authorised.notAuthorised) {
+
+          }
+          else if (authorised === SECURITY.enums.authorised.notAuthorised)
+          {
             $location.path(SECURITY.routes.notAuthorised).replace();
+
+          }
+          else if (authorised === SECURITY.enums.authorised.ignore) {
+            if(current)
+            {
+              //console.log(current.$$route.originalPath);
+              $location.path(current.$$route.originalPath).replace();
+            }
+            else
+            {
+              $location.path(SECURITY.routes.success).replace();
+            }
           }
         }
       });
