@@ -5,7 +5,8 @@ angular.module('cmApp')
       authorised: {
         authorised: 0,
         loginRequired: 1,
-        notAuthorised: 2
+        notAuthorised: 2,
+        ignore: 3
       },
       permissionCheckType: {
         atLeastOne: 0,

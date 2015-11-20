@@ -19,6 +19,7 @@ angular.module('cmApp')
         'cm/styles/auth.css'
       ],
       access: {
+        isNotLoggedIn: true,
         requiresLogin: false,
         permissions: [],
         permissionType: undefined
@@ -31,6 +32,7 @@ angular.module('cmApp')
         'cm/styles/auth.css'
       ],
       access: {
+        isNotLoggedIn: true,
         requiresLogin: false,
         permissions: [],
         permissionType: undefined
@@ -43,6 +45,7 @@ angular.module('cmApp')
         'cm/styles/app.css'
       ],
       access: {
+        isNotLoggedIn: false,
         requiresLogin: true,
         permissions: ['ROLE_CMSUSER', 'ROLE_ADMIN'],
         permissionType: SECURITY.enums.permissionCheckType.atLeastOne
