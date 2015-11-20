@@ -1,18 +1,18 @@
 <!-- body -->
-<div class="cm-auth cm-auth-login" ng-controller="cmAuthCtrl as ctrl">
+<div class="cm-auth">
   <div class="container-fluid">
     <!-- START row -->
     <div class="row">
-      <!-- START auth-recover -->
-      <div class="auth-register">
-        <!-- START auth-register-header -->
+      <!-- START auth-login -->
+      <div class="auth-login" ng-controller="cmAuthCtrl as ctrl">
+        <!-- START auth-login-header -->
         <div class="auth-header auth-login-header col-xs-12 col-sm-6">
           <p class="auth-login-links">
               <a href="#/register">Register</a>
           </p>
           <h3 class="">Login</h3>
         </div>
-        <!-- END auth-register-header -->
+        <!-- END auth-login-header -->
 
         <!-- START form-auth -->
         <form class="form-auth col-xs-12 col-sm-6"
@@ -22,7 +22,7 @@
                 loginForm.password.$modelValue)">
             <div class="form-group">
                 <input autocapitalize="off"
-                       ng-model="ctrl.username"
+                       ng-model="ctrl.loginForm.username"
                        ng-minlength="6"
                        type="text"
                        class="form-control"
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <input autocapitalize="off"
-                       ng-model="ctrl.password"
+                       ng-model="ctrl.loginForm.password"
                        ng-minlength="6"
                        type="password"
                        class="form-control"
@@ -50,7 +50,7 @@
             <!-- END form-auth errors -->
         </form><!-- END form-auth -->
       </div>
-      <!-- END auth-register -->
+      <!-- END auth-login  -->
     </div>
     <!-- END row -->
   </div> <!-- END container -->

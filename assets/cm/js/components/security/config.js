@@ -33,6 +33,9 @@ angular.module('cmApp')
     paths: {
       authentication: 'auth/',
       users: 'users/'
+    },
+    roles: {
+      defaultValue: 'CMSUSER'
     }
   })
 ;

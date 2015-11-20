@@ -47,7 +47,7 @@ angular.module('cmApp')
       access: {
         isNotLoggedIn: false,
         requiresLogin: true,
-        permissions: ['ROLE_CMSUSER', 'ROLE_ADMIN'],
+        permissions: ["ROLE_CMSUSER", "ROLE_ADMIN"],
         permissionType: SECURITY.enums.permissionCheckType.atLeastOne
       }
     })

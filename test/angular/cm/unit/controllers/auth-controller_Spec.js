@@ -24,12 +24,6 @@ describe('auth-controller', function () {
     'Accept': MIME_TYPE_JSON
   },
   endpoint = 'http://127.0.0.1:8080/cm-web-0.1-SNAPSHOT/services/rest/',
-  authUrl = 'auth/',
-  targetUrl = endpoint + authUrl,
-  postData = {
-    username: 'adminUser',
-    password: 'asdasdasd'
-  },
 
   returnData = {
     "id": "10929DF8-15C5-472B-9398-7158AB89A0A6",
@@ -52,7 +46,198 @@ describe('auth-controller', function () {
 
   beforeEach(module('cmApp'));
 
-  describe('login', function(){
+  describe('login, logout, etc.', function(){
+    var postData = {
+        username: 'adminUser',
+        password: 'asdasdasd'
+      },
+      url = 'auth/',
+      targetUrl = endpoint + url
+      ;
+    describe('login', function(){
+
+
+      describe('success', function(){
+
+        beforeEach(inject(function($rootScope,
+                                   SECURITY,
+                                   $controller,
+                                   $location,
+                                   AuthenticationStorageService,
+                                   AuthenticationService,
+                                   TokenStorageService,
+                                   $httpBackend){
+          scope = $rootScope.$new();
+          ctrl = $controller('cmAuthCtrl', {$scope:scope });
+          security = SECURITY;
+          authenticationService = AuthenticationService;
+          authenticationStorageService = AuthenticationStorageService;
+          tokenStorageService = TokenStorageService;
+          mockBackend = $httpBackend;
+          location = $location;
+
+          spyOn(ctrl, 'login').and.callThrough();
+          spyOn(tokenStorageService, 'store').and.stub();
+          spyOn(authenticationStorageService, 'store').and.stub();
+
+          mockBackend.expectPOST(targetUrl, postData, headers)
+            .respond(JSON.stringify(returnData));
+        }));
+
+        it('should call the login function and set url to "#/', function(){
+          ctrl.login(postData.username, postData.password);
+          mockBackend.flush();
+          expect(ctrl.login).toHaveBeenCalled();
+          expect(location.url()).toEqual(security.routes.success);
+        });
+
+        it('should attempt to set the user token', function(){
+          ctrl.login(postData.username, postData.password);
+          mockBackend.flush();
+          expect(tokenStorageService.store).toHaveBeenCalled();
+          expect(authenticationStorageService.store).toHaveBeenCalled();
+        });
+
+        it('should have set the user object and authentication state', function(){
+          ctrl.login(postData.username, postData.password);
+          mockBackend.flush();
+          expect(ctrl.user.username).toEqual(postData.username);
+          expect(ctrl.authenticated).toBeTruthy();
+        });
+
+        afterEach(function(){
+          mockBackend.verifyNoOutstandingExpectation(); //expectX calls
+          mockBackend.verifyNoOutstandingRequest(); //flush calls
+        });
+
+      }); /* END success */
+
+      describe('failure', function(){
+
+        beforeEach(inject(function($rootScope,
+                                   SECURITY,
+                                   $controller,
+                                   $location,
+                                   AuthenticationStorageService,
+                                   AuthenticationService,
+                                   TokenStorageService,
+                                   $httpBackend){
+          scope = $rootScope.$new();
+          ctrl = $controller('cmAuthCtrl', {$scope:scope });
+          security = SECURITY;
+          authenticationStorageService = AuthenticationStorageService;
+          authenticationService = AuthenticationService;
+          tokenStorageService = TokenStorageService;
+          mockBackend = $httpBackend;
+          location = $location;
+
+          spyOn(ctrl, 'login').and.callThrough();
+          spyOn(tokenStorageService, 'store').and.stub();
+          spyOn(authenticationStorageService, 'store').and.stub();
+
+          mockBackend.expectPOST(targetUrl, postData, headers)
+            .respond(500, 'Server error');
+        }));
+
+        it('should call the login function but reboot the login page', function(){
+          ctrl.login(postData.username, postData.password);
+          mockBackend.flush();
+          expect(ctrl.login).toHaveBeenCalled();
+          expect(location.url()).toEqual(security.routes.fail);
+        });
+
+        it('should not set the user token', function(){
+          ctrl.login(postData.username, postData.password);
+          mockBackend.flush();
+          expect(tokenStorageService.store).not.toHaveBeenCalled();
+          expect(authenticationStorageService.store).not.toHaveBeenCalled();
+        });
+
+        it('should not set the user object and authentication state', function(){
+          ctrl.login(postData.username, postData.password);
+          mockBackend.flush();
+          expect(ctrl.user).toBe(null);
+          expect(ctrl.authenticated).toBeFalsy();
+        });
+
+        afterEach(function(){
+          mockBackend.verifyNoOutstandingExpectation(); //expectX calls
+          mockBackend.verifyNoOutstandingRequest(); //flush calls
+        });
+
+      }); /* END failure */
+
+    }); /* END login */
+
+    describe('logout', function(){
+
+      var postData = {
+        username: 'adminUser',
+        password: 'asdasdasd'
+      }
+      ;
+
+      beforeEach(inject(function($rootScope,
+                                 SECURITY,
+                                 $controller,
+                                 $location,
+                                 AuthenticationService,
+                                 AuthenticationStorageService,
+                                 TokenStorageService,
+                                 $httpBackend){
+        scope = $rootScope.$new();
+        ctrl = $controller('cmAuthCtrl', {$scope:scope });
+        security = SECURITY;
+        authenticationStorageService = AuthenticationStorageService;
+        authenticationService = AuthenticationService;
+        tokenStorageService = TokenStorageService;
+        mockBackend = $httpBackend;
+        location = $location;
+
+        spyOn(ctrl, 'logout').and.callThrough();
+        spyOn(tokenStorageService, 'clear').and.stub();
+        spyOn(authenticationStorageService, 'clear').and.stub();
+
+        mockBackend.expectPOST(targetUrl, postData, headers)
+          .respond(returnData);
+        ctrl.login(postData.username, postData.password);
+        mockBackend.flush();
+      }));
+
+      it('should call the logout function and set url to "#/', function(){
+        ctrl.logout();
+        expect(ctrl.logout).toHaveBeenCalled();
+        expect(location.url()).toEqual(security.routes.login);
+      });
+
+      it('should attempt to clear the user token', function(){
+        ctrl.logout();
+        expect(tokenStorageService.clear).toHaveBeenCalled();
+        expect(authenticationStorageService.clear).toHaveBeenCalled();
+      });
+
+      it('should have set the user object and authentication state', function(){
+        ctrl.logout();
+        expect(ctrl.user).toBeUndefined();
+        expect(ctrl.authenticated).toBeFalsy();
+      });
+
+    }); /* END logout */
+
+  }); /* END login, logout etc... */
+
+  describe('register', function(){
+
+    var postData = {
+      username: 'username24',
+      password: 'password24',
+      fullName: 'fullname24',
+      email   : 'email24@email.com',
+      role    : 'CMSUSER'
+    },
+    url = 'users/',
+    targetUrl = endpoint + url
+    ;
 
     describe('success', function(){
 
@@ -73,7 +258,7 @@ describe('auth-controller', function () {
         mockBackend = $httpBackend;
         location = $location;
 
-        spyOn(ctrl, 'login').and.callThrough();
+        spyOn(ctrl, 'register').and.callThrough();
         spyOn(tokenStorageService, 'store').and.stub();
         spyOn(authenticationStorageService, 'store').and.stub();
 
@@ -81,24 +266,39 @@ describe('auth-controller', function () {
           .respond(JSON.stringify(returnData));
       }));
 
-      it('should call the login function and set url to "#/', function(){
-        ctrl.login(postData.username, postData.password);
+      it('should call register and set url to "#/', function(){
+        ctrl.register(
+          postData.username,
+          postData.password,
+          postData.password,
+          postData.fullName,
+          postData.email);
         mockBackend.flush();
-        expect(ctrl.login).toHaveBeenCalled();
+        expect(ctrl.register).toHaveBeenCalled();
         expect(location.url()).toEqual(security.routes.success);
       });
 
       it('should attempt to set the user token', function(){
-        ctrl.login(postData.username, postData.password);
+        ctrl.register(
+          postData.username,
+          postData.password,
+          postData.password,
+          postData.fullName,
+          postData.email);
         mockBackend.flush();
         expect(tokenStorageService.store).toHaveBeenCalled();
         expect(authenticationStorageService.store).toHaveBeenCalled();
       });
 
       it('should have set the user object and authentication state', function(){
-        ctrl.login(postData.username, postData.password);
+        ctrl.register(
+          postData.username,
+          postData.password,
+          postData.password,
+          postData.fullName,
+          postData.email);
         mockBackend.flush();
-        expect(ctrl.user.username).toEqual(postData.username);
+        expect(ctrl.user.username).toEqual(returnData.username);
         expect(ctrl.authenticated).toBeTruthy();
       });
 
@@ -128,7 +328,7 @@ describe('auth-controller', function () {
         mockBackend = $httpBackend;
         location = $location;
 
-        spyOn(ctrl, 'login').and.callThrough();
+        spyOn(ctrl, 'register').and.callThrough();
         spyOn(tokenStorageService, 'store').and.stub();
         spyOn(authenticationStorageService, 'store').and.stub();
 
@@ -137,23 +337,38 @@ describe('auth-controller', function () {
       }));
 
       it('should call the login function but reboot the login page', function(){
-        ctrl.login(postData.username, postData.password);
+        ctrl.register(
+          postData.username,
+          postData.password,
+          postData.password,
+          postData.fullName,
+          postData.email);
         mockBackend.flush();
-        expect(ctrl.login).toHaveBeenCalled();
+        expect(ctrl.register).toHaveBeenCalled();
         expect(location.url()).toEqual(security.routes.fail);
       });
 
       it('should not set the user token', function(){
-        ctrl.login(postData.username, postData.password);
+        ctrl.register(
+          postData.username,
+          postData.password,
+          postData.password,
+          postData.fullName,
+          postData.email);
         mockBackend.flush();
         expect(tokenStorageService.store).not.toHaveBeenCalled();
         expect(authenticationStorageService.store).not.toHaveBeenCalled();
       });
 
       it('should not set the user object and authentication state', function(){
-        ctrl.login(postData.username, postData.password);
+        ctrl.register(
+          postData.username,
+          postData.password,
+          postData.password,
+          postData.fullName,
+          postData.email);
         mockBackend.flush();
-        expect(ctrl.user).toBe(null);
+        expect(ctrl.user.id).toBeUndefined();
         expect(ctrl.authenticated).toBeFalsy();
       });
 
@@ -164,56 +379,7 @@ describe('auth-controller', function () {
 
     }); /* END failure */
 
-  }); /* END login */
-
-  describe('logout', function(){
-
-    beforeEach(inject(function($rootScope,
-                               SECURITY,
-                               $controller,
-                               $location,
-                               AuthenticationService,
-                               AuthenticationStorageService,
-                               TokenStorageService,
-                               $httpBackend){
-      scope = $rootScope.$new();
-      ctrl = $controller('cmAuthCtrl', {$scope:scope });
-      security = SECURITY;
-      authenticationStorageService = AuthenticationStorageService;
-      authenticationService = AuthenticationService;
-      tokenStorageService = TokenStorageService;
-      mockBackend = $httpBackend;
-      location = $location;
-
-      spyOn(ctrl, 'logout').and.callThrough();
-      spyOn(tokenStorageService, 'clear').and.stub();
-      spyOn(authenticationStorageService, 'clear').and.stub();
-
-      mockBackend.expectPOST(targetUrl, postData, headers)
-        .respond(returnData);
-      ctrl.login(postData.username, postData.password);
-      mockBackend.flush();
-    }));
-
-    it('should call the logout function and set url to "#/', function(){
-      ctrl.logout();
-      expect(ctrl.logout).toHaveBeenCalled();
-      expect(location.url()).toEqual(security.routes.login);
-    });
-
-    it('should attempt to clear the user token', function(){
-      ctrl.logout();
-      expect(tokenStorageService.clear).toHaveBeenCalled();
-      expect(authenticationStorageService.clear).toHaveBeenCalled();
-    });
-
-    it('should have set the user object and authentication state', function(){
-      ctrl.logout();
-      expect(ctrl.user).toBeUndefined();
-      expect(ctrl.authenticated).toBeFalsy();
-    });
-
-  }); /* END logout */
+  }); /* END register */
 
 }); /* END auth-controller */
 /* END TESTS */

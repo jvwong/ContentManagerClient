@@ -17,6 +17,7 @@ angular.module('cmApp')
       currentUser = undefined,
       login,
       logout,
+      register,
       getCurrentLoginUser
     ;
 
@@ -27,8 +28,13 @@ angular.module('cmApp')
      */
     function createUser(config) {
 
-      if(!config){
+      if(config === null || config === undefined){
         return null;
+      }
+
+      var roles = [];
+      if(config.role && !Array.isArray(config.role)){
+        roles = config.role.split(',');
       }
 
       return {
@@ -36,9 +42,40 @@ angular.module('cmApp')
         username: config.username,
         fullName: config.fullName,
         createdDate: config.createdDate,
-        permissions: [config.role]
+        permissions: roles
       };
     } /* END createUser */
+
+
+    /**
+     * Setup post login or register
+     * @param response the response object
+     * @returns {*}
+     */
+    function onSuccess(response) {
+      //console.log(response);
+
+      if(response.status === 200){
+        TokenStorageService.store(response.headers('X-AUTH-TOKEN'));
+        currentUser = createUser(response.data);
+        AuthenticationStorageService.store(currentUser);
+        return response;
+
+      } else {
+        return response;
+      }
+
+    } /* END onSuccess */
+
+    /**
+     * Setup post failed login or register
+     * @param response the response object
+     * @returns {*}
+     */
+    function onFail(response) {
+      console.error('AuthenticationService Data load error');
+      return errResponse;
+    } /* END onFail */
 
     /**
      * Initialize the currentUser from
@@ -51,7 +88,7 @@ angular.module('cmApp')
 
     login = function (username, password) {
       var
-      auth_url = UrlService.apiUrl(SECURITY.paths.authentication);
+      url = UrlService.apiUrl(SECURITY.paths.authentication);
       /**
        * The response object has these properties:
        *  data – {string|Object} – The response body transformed with the transform functions.
@@ -61,31 +98,39 @@ angular.module('cmApp')
        *  statusText – {string} – HTTP status text of the response.
        */
       var promise = DataLoaderPromise
-        .postData(auth_url, {
+        .postData(url, {
           username: username,
           password: password
         }, utils.transformRes)
-        .then(
-          // The server success callback
-          function(response) {
-            if(response.status === 200){
-              TokenStorageService.store(response.headers('X-AUTH-TOKEN'));
-              currentUser = createUser(response.data);
-              AuthenticationStorageService.store(currentUser);
-              return response;
-
-            } else {
-              return response;
-            }
-          },
-          // error callback
-          function(errResponse) {
-            console.error('AuthenticationService Data load error');
-            return errResponse;
-          }
-        );
+        .then(onSuccess, onFail);
 
       return promise;
+    };
+
+    register = function(username, password, fullName, email){
+      var
+        url = UrlService.apiUrl(SECURITY.paths.users),
+        role = SECURITY.roles.defaultValue;
+      /**
+       * The response object has these properties:
+       *  data – {string|Object} – The response body transformed with the transform functions.
+       *  status – {number} – HTTP status code of the response.
+       *  headers – {function([headerName])} – Header getter function.
+       *  config – {Object} – The configuration object that was used to generate the request.
+       *  statusText – {string} – HTTP status text of the response.
+       */
+      var promise = DataLoaderPromise
+        .postData(url, {
+          username: username,
+          password: password,
+          fullName: fullName,
+          email   : email,
+          role    : role
+        }, utils.transformRes)
+        .then(onSuccess, onFail);
+
+      return promise;
+
     };
 
     logout = function (){
@@ -105,6 +150,7 @@ angular.module('cmApp')
 
     return {
         login   : login
+      , register: register
       , logout  : logout
       , getCurrentLoginUser: getCurrentLoginUser
     };
