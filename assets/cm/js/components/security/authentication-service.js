@@ -40,6 +40,15 @@ angular.module('cmApp')
       };
     } /* END createUser */
 
+    /**
+     * Initialize the currentUser from
+     * @param config
+     * @returns {*}
+     */
+    function initializeUser() {
+      currentUser = AuthenticationStorageService.retrieve();
+    } /* END initializeUser */
+
     login = function (username, password) {
       var
       auth_url = UrlService.apiUrl(SECURITY.paths.authentication);
@@ -91,6 +100,8 @@ angular.module('cmApp')
     getCurrentLoginUser = function (){
       return currentUser;
     };
+
+    initializeUser();
 
     return {
         login   : login

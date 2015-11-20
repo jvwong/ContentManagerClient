@@ -22,13 +22,16 @@ angular.module('cmApp')
           permission,
           i;
 
+        //console.log('AuthorizationService');
+        //console.log(user);
+
         permissionCheckType
           = permissionCheckType || SECURITY.enums.permissionCheckType.atLeastOne;
 
-        if (loginRequired === true && user === undefined) {
+        if (loginRequired === true && (user === null || user === undefined)) {
           result = SECURITY.enums.authorised.loginRequired;
 
-        } else if ((loginRequired === true && user !== undefined) &&
+        } else if ((loginRequired === true && typeof user !== 'object') &&
           (requiredPermissions === undefined || requiredPermissions.length === 0)) {
           // Login is required but no specific permissions are specified.
           result = SECURITY.enums.authorised.authorised;

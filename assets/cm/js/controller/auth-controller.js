@@ -60,7 +60,7 @@ angular.module('cmApp')
         // Just clear the local storage
         AuthenticationService.logout();
         self.authenticated = false;
-        self.user.username = undefined;
+        self.user = undefined;
         $location.url(SECURITY.routes.login);
       };
 
@@ -76,16 +76,5 @@ angular.module('cmApp')
         },
         true
       );
-
-      self.init = function () {
-        console.log('init');
-      //  $http.get('/api/users/current').success(function (user) {
-      //    if(user.username !== 'anonymousUser'){
-      //      $scope.authenticated = true;
-      //      $scope.username = user.username;
-      //    }
-      //  });
-      };
-
   }]);
 

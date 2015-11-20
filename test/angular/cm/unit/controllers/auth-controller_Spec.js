@@ -209,7 +209,7 @@ describe('auth-controller', function () {
 
     it('should have set the user object and authentication state', function(){
       ctrl.logout();
-      expect(ctrl.user.username).toBeUndefined();
+      expect(ctrl.user).toBeUndefined();
       expect(ctrl.authenticated).toBeFalsy();
     });
 

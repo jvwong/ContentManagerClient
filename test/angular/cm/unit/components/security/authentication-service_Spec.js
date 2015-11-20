@@ -9,7 +9,6 @@ describe('authentication-service', function () {
 
   var
     authenticationService,
-    fetched,
 
     MIME_TYPE_JSON = 'application/json;charset=UTF-8',
     headers = {
@@ -55,6 +54,8 @@ describe('authentication-service', function () {
 
   describe('login', function(){
 
+    var fetched;
+
     beforeEach(function(){
       spyOn(authenticationService, 'login').and.callThrough();
       authenticationService
@@ -80,16 +81,14 @@ describe('authentication-service', function () {
   }); /* END login */
 
   describe('getCurrentLoginUser', function(){
+    var fetched;
 
     beforeEach(function(){
       authenticationService
-        .login(postData.username, postData.password);
-    });
-
-    it('should be undefined before http call', function(){
-      fetched = authenticationService.getCurrentLoginUser();
-      expect(fetched).not.toBeDefined();
-      mockBackend.flush();
+        .login(postData.username, postData.password)
+        .then(function(response){
+          fetched = response.data;
+        });
     });
 
     it('should call getCurrentLoginUser', function(){
@@ -107,6 +106,7 @@ describe('authentication-service', function () {
   }); /* END getCurrentLoginUser */
 
   describe('logout', function(){
+    var fetched;
 
     beforeEach(function(){
       spyOn(authenticationService, 'logout').and.callThrough();

@@ -10,12 +10,14 @@ angular.module('cmApp')
     '$location',
     'SECURITY',
     'AuthorizationService',
+    'AuthenticationService',
     function (
       $rootScope,
       $templateRequest,
       $location,
       SECURITY,
-      AuthorizationService) {
+      AuthorizationService,
+      AuthenticationService) {
 
       /* pages */
       $templateRequest('../cm/templates/auth/login.html', true);
