@@ -6,18 +6,22 @@
  */
 
 angular.module('cmApp')
-  .config(['$routeProvider', function($routeProvider) {
+  .config([
+    '$routeProvider',
+    'SECURITY',
+    function($routeProvider,
+             SECURITY) {
   $routeProvider
     .when('/login', {
-      //controller: 'cmAuthCtrl',
-      //controllerAs: 'authCtrl',
       title: 'Login',
       templateUrl: 'cm/templates/auth/login.html',
       css: [
         'cm/styles/auth.css'
       ],
       access: {
-        requiresLogin: false
+        requiresLogin: false,
+        permissions: [],
+        permissionType: undefined
       }
     })
     .when('/register', {
@@ -27,7 +31,9 @@ angular.module('cmApp')
         'cm/styles/auth.css'
       ],
       access: {
-        requiresLogin: false
+        requiresLogin: false,
+        permissions: [],
+        permissionType: undefined
       }
     })
     .when('/', {
@@ -37,7 +43,9 @@ angular.module('cmApp')
         'cm/styles/app.css'
       ],
       access: {
-        requiresLogin: true
+        requiresLogin: true,
+        permissions: ['ROLE_CMSUSER', 'ROLE_ADMIN'],
+        permissionType: SECURITY.enums.permissionCheckType.atLeastOne
       }
     })
     .otherwise({
