@@ -36,7 +36,7 @@ angular.module('cmApp')
         username: config.username,
         fullName: config.fullName,
         createdDate: config.createdDate,
-        permissions: config.role
+        permissions: [config.role]
       };
     } /* END createUser */
 

@@ -33,8 +33,7 @@ angular.module('cmApp')
           // Login is required but no specific permissions are specified.
           result = SECURITY.enums.authorised.authorised;
 
-        } else if (loginRequired === true && requiredPermissions) {
-          // Login is not required?
+        } else if (loginRequired === true && requiredPermissions.length > 0) {
           loweredPermissions = [];
           angular.forEach(user.permissions, function (permission) {
             loweredPermissions.push(permission.toLowerCase());
