@@ -152,7 +152,7 @@ describe('DataLoaderCache', function () {
         cached = dataCache.get(url1, postData1);
         //console.log(cached);
         expect(cached).toBeDefined();
-        expect(cached).toEqual(data);
+        expect(cached.data).toEqual(data);
         mockBackend.flush(1);
       });
 

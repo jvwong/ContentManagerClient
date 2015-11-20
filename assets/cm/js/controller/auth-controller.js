@@ -35,6 +35,7 @@ angular.module('cmApp')
         AuthenticationService
           .login(username, password)
           .then(function(response){
+            //caution - data could be cached
             if(response.status === 200){
               self.user = response.data;
               self.authenticated = true;

@@ -84,9 +84,7 @@ angular.module('cmApp')
           if(cacheResult){
             //console.log('cache hit: %s', url);
             deferred = $q.defer();
-            deferred.resolve({
-              data: angular.copy(cacheResult)
-            });
+            deferred.resolve(angular.copy(cacheResult));
             return deferred.promise;
           }
 
@@ -98,7 +96,7 @@ angular.module('cmApp')
           })
           .then(
             function(response){
-              DataLoaderCacheService.put(url, object, angular.copy(response.data));
+              DataLoaderCacheService.put(url, object, angular.copy(response));
               return response;
             },
             function(errResponse){
