@@ -10,7 +10,13 @@
   <div class="container-fluid">
     <!-- START row -->
     <div class="row">
-      <span>THis is just some bloat</span>
+      <h3>Articles</h3>
+      <ul id="article-list" ng-repeat="article in ctrl.articles">
+        <h4>Title: <span ng-bind="article.title"></span></h4>
+        <li>Description: <span ng-bind="article.description"></span></li>
+        <li>Date: <span ng-bind="article.createdDate"></span></li>
+        <br/><br/><br/>
+      </ul>
     </div>
     <!-- END row -->
   </div> <!-- END container -->

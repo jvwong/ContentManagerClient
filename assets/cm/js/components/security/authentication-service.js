@@ -74,7 +74,7 @@ angular.module('cmApp')
      */
     function onFail(response) {
       console.error('AuthenticationService Data load error');
-      return errResponse;
+      return response;
     } /* END onFail */
 
     /**

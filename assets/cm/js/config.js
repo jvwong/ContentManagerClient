@@ -10,7 +10,13 @@ angular.module('cmApp')
   }])
   .config(['$httpProvider', function($httpProvider){
     var MIME_TYPE_JSON = 'application/json;charset=UTF-8';
+    $httpProvider.defaults.headers.common['Accept']= MIME_TYPE_JSON;
     $httpProvider.defaults.headers.post['Accept']= MIME_TYPE_JSON;
     $httpProvider.defaults.headers.post['Content-Type']= MIME_TYPE_JSON;
   }])
+  .constant('CM', {
+    paths: {
+      articles: 'articles/'
+    }
+  })
 ;
