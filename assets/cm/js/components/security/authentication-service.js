@@ -129,7 +129,15 @@ angular.module('cmApp')
           role    : role
         }, utils.transformRes)
         .then(function(response){
-          return login(username, password);
+          //console.log(response);
+
+          if(response.status !== 201){
+            return response;
+
+          } else {
+            return login(username, password);
+          }
+
         }, onFail);
 
       return promise;

@@ -173,7 +173,7 @@ describe('authentication-service', function () {
       authenticationService = AuthenticationService;
       mockBackend = $httpBackend;
       mockBackend.expectPOST(endpoint + userUrl, postData, headers)
-        .respond(JSON.stringify(returnData));
+        .respond(201, JSON.stringify(returnData));
       mockBackend.expectPOST(endpoint + authUrl, {
         username: postData.username,
         password: postData.password
