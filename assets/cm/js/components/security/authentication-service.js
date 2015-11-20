@@ -55,7 +55,7 @@ angular.module('cmApp')
     function onSuccess(response) {
       //console.log(response);
 
-      if(response.status === 200){
+      if(response.status === 200 || response.status === 201){
         TokenStorageService.store(response.headers('X-AUTH-TOKEN'));
         currentUser = createUser(response.data);
         AuthenticationStorageService.store(currentUser);
@@ -119,6 +119,7 @@ angular.module('cmApp')
        *  config – {Object} – The configuration object that was used to generate the request.
        *  statusText – {string} – HTTP status text of the response.
        */
+
       var promise = DataLoaderPromise
         .postData(url, {
           username: username,

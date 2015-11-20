@@ -263,7 +263,7 @@ describe('auth-controller', function () {
         spyOn(authenticationStorageService, 'store').and.stub();
 
         mockBackend.expectPOST(targetUrl, postData, headers)
-          .respond(JSON.stringify(returnData));
+          .respond(201, JSON.stringify(returnData));
       }));
 
       it('should call register and set url to "#/', function(){

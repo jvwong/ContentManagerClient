@@ -89,16 +89,24 @@ angular.module('cmApp')
         AuthenticationService
           .register(username, password, fullName, email)
           .then(function(response){
+
             //caution - data could be cached
-            if(response.status === 200){
+            if(response.status === 201){
               self.user = response.data;
               self.authenticated = true;
 
               //change the location
               $location.url(SECURITY.routes.success);
+
             } else {
-              //go back to login
-              self.formErrors = ['Registration failed'];
+
+              if(response.status === 409) {
+                self.formErrors = ['User exists'];
+
+              } else {
+                self.formErrors = ['Registration failed'];
+              }
+              //go back to registration
               $location.url(SECURITY.routes.register);
             }
           },
