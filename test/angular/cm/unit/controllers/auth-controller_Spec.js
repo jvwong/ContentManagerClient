@@ -143,7 +143,7 @@ describe('auth-controller', function () {
           ctrl.login(postData.username, postData.password);
           mockBackend.flush();
           expect(ctrl.login).toHaveBeenCalled();
-          expect(location.url()).toEqual(security.routes.fail);
+          expect(location.url()).toEqual(security.routes.login);
         });
 
         it('should not set the user token', function(){
@@ -345,7 +345,7 @@ describe('auth-controller', function () {
           postData.email);
         mockBackend.flush();
         expect(ctrl.register).toHaveBeenCalled();
-        expect(location.url()).toEqual(security.routes.fail);
+        expect(location.url()).toEqual(security.routes.register);
       });
 
       it('should not set the user token', function(){

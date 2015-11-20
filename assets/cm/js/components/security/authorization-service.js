@@ -80,6 +80,8 @@ angular.module('cmApp')
           // Typically this is a login or registration page
           if(notLoggedIn && (user !== undefined && user !== null)){
             result = SECURITY.enums.authorised.ignore;
+          } else {
+            result = SECURITY.enums.authorised.authorised;
           }
         }
 

@@ -23,7 +23,7 @@ angular.module('cmApp')
         username: undefined,
         password: undefined
       };
-      self.registerForm = {
+      self.registerInputs = {
         username  : undefined,
         password  : undefined,
         password2 : undefined,
@@ -56,12 +56,12 @@ angular.module('cmApp')
             } else {
               //go back to login
               self.formErrors = ['Login failed'];
-              $location.url(SECURITY.routes.fail);
+              $location.url(SECURITY.routes.login);
             }
           },
           function(errResponse){
             //go back to login
-            $location.url(SECURITY.routes.fail);
+            $location.url(SECURITY.routes.login);
             self.formErrors = ['Login failed'];
             console.error('AuthController login error');
           });
@@ -81,13 +81,6 @@ angular.module('cmApp')
       self.register = function(username, password, password2,
                                fullName, email){
 
-        //console.log("username ", username);
-        //console.log("password ", password);
-        //console.log("password2 ", password2);
-        //console.log("fullName ", fullName);
-        //console.log("email ", email);
-
-
         if(password !== password2){
           self.formErrors = ['Password mismatch'];
           return;
@@ -105,13 +98,13 @@ angular.module('cmApp')
               $location.url(SECURITY.routes.success);
             } else {
               //go back to login
-              self.formErrors = ['Login failed'];
-              $location.url(SECURITY.routes.fail);
+              self.formErrors = ['Registration failed'];
+              $location.url(SECURITY.routes.register);
             }
           },
           function(errResponse){
             //go back to login
-            $location.url(SECURITY.routes.fail);
+            $location.url(SECURITY.routes.register);
             self.formErrors = ['Registration failed'];
             console.error('AuthController login error');
           });

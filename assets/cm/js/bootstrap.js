@@ -38,7 +38,6 @@ angular.module('cmApp')
           if (authorised === SECURITY.enums.authorised.loginRequired)
           {
             $location.path(SECURITY.routes.login);
-
           }
           else if (authorised === SECURITY.enums.authorised.notAuthorised)
           {
