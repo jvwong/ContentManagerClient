@@ -6,18 +6,19 @@
 </div>
 
 <!-- body -->
-<div class="cm-app cm-app-home" ng-controller="cmHomeCtrl as ctrl">
-  <div class="container-fluid">
-    <!-- START row -->
-    <div class="row">
-      <h3>Articles</h3>
-      <ul id="article-list" ng-repeat="article in ctrl.articles">
-        <h4>Title: <span ng-bind="article.title"></span></h4>
-        <li>Description: <span ng-bind="article.description"></span></li>
-        <li>Date: <span ng-bind="article.createdDate"></span></li>
-        <br/><br/><br/>
-      </ul>
-    </div>
-    <!-- END row -->
-  </div> <!-- END container -->
+<div class="cm-app">
+  <div class="cm-app-home" ng-controller="cmHomeCtrl as ctrl">
+    <div class="container-fluid">
+      <!-- START row -->
+      <div class="row">
+        <h3>Articles</h3>
+        <div id="article-list" >
+          <a ng-repeat="article in ctrl.articles" href="">
+            <div class="article-title" ng-bind="article.title"></div>
+          </a>
+        </div>
+      </div>
+      <!-- END row -->
+    </div> <!-- END cm-app-home -->
+  </div> <!-- END cm-app -->
 </div>

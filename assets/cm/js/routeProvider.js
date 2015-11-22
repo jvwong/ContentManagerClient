@@ -16,7 +16,7 @@ angular.module('cmApp')
       title: 'Login',
       templateUrl: 'cm/templates/auth/login.html',
       css: [
-        'cm/styles/auth.css'
+        'cm/styles/auth/auth.css'
       ],
       access: {
         isNotLoggedIn: true,
@@ -29,7 +29,7 @@ angular.module('cmApp')
       title: 'Register',
       templateUrl: 'cm/templates/auth/register.html',
       css: [
-        'cm/styles/auth.css'
+        'cm/styles/auth/auth.css'
       ],
       access: {
         isNotLoggedIn: true,
@@ -42,7 +42,7 @@ angular.module('cmApp')
       title: 'Home',
       templateUrl: 'cm/templates/app/home.html',
       css: [
-        'cm/styles/app.css'
+        'cm/styles/app/app.css'
       ],
       access: {
         isNotLoggedIn: false,
