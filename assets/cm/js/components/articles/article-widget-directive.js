@@ -1,7 +1,7 @@
 angular.module('cmApp')
   .directive('articleWidget', [function (){
       return {
-        templateUrl: '../../../templates/components/articles/article-widget.html',
+        templateUrl: 'cm/templates/components/articles/article-widget.html',
         restrict: 'A',
         scope: {
           articleContent: '=',

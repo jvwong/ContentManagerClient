@@ -1,14 +1,8 @@
 <div class="article-widget">
-  Title:
-  <span class="article-title"
-        ng-bind="articleTitle">
-  </span>
-  Description:
-  <span class="article-description"
-        ng-bind="articleContent.description">
-  </span>
-  Created:
-  <span class="article-created"
-        ng-bind="articleContent.createdDate">
-  </span>
+  <a class="article-title" href="#/{{articleContent.id}}/"
+        ng-bind="articleTitle"></a>
+  <div class="article-description"
+        ng-bind="articleContent.description"></div>
+  <div class="article-created"
+        ng-bind="articleContent.createdDate"></div>
 </div>

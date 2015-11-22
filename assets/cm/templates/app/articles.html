@@ -11,12 +11,15 @@
     <div class="container-fluid">
       <!-- START row -->
       <div class="row">
-        <h3>Articles</h3>
+        <!-- START article-list -->
         <div id="article-list" >
-          <a ng-repeat="article in ctrl.articles" href="">
-            <div class="article-title" ng-bind="article.title"></div>
-          </a>
-        </div>
+          <div ng-repeat="article in ctrl.articles">
+            <div article-widget
+                 article-content="article"
+                 article-title="{{article.title}}">
+            </div>
+          </div>
+        </div><!-- END article-list -->
       </div>
       <!-- END row -->
     </div> <!-- END cm-app-home -->

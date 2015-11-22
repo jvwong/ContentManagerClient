@@ -48,7 +48,7 @@ describe('article-widget', function () {
     scope.title = article.title;
 
     // create the html template
-    mockBackend.expectGET('../../../templates/components/articles/article-widget.html')
+    mockBackend.expectGET('cm/templates/components/articles/article-widget.html')
       .respond(
       '<div ng-bind="articleTitle"></div>' +
       '<div ng-bind="articleContent.description"></div>' +

@@ -39,8 +39,8 @@ angular.module('cmApp')
       }
     })
     .when('/', {
-      title: 'Home',
-      templateUrl: 'cm/templates/app/home.html',
+      title: 'Articles',
+      templateUrl: 'cm/templates/app/articles.html',
       css: [
         'cm/styles/app/app.css'
       ],

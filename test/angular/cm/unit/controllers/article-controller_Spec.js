@@ -1,11 +1,11 @@
 /**
- * auth-controller.js tests
+ * article-controller.js tests
  * @author jvwong
  * @created 09/11/15
  */
 
 /* START TESTS */
-describe('home-controller', function () {
+describe('article-controller', function () {
 
   var
   location,
@@ -69,7 +69,7 @@ describe('home-controller', function () {
                              $location,
                              $httpBackend){
     scope = $rootScope.$new();
-    ctrl = $controller('cmHomeCtrl', {$scope:scope });
+    ctrl = $controller('cmArticleCtrl', {$scope:scope });
     security = SECURITY;
     cm = CM;
     mockBackend = $httpBackend;

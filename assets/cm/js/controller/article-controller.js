@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('cmApp')
-  .controller('cmHomeCtrl', [
+  .controller('cmArticleCtrl', [
     'ArticleService',
     function(ArticleService){
 
