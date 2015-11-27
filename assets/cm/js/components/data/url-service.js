@@ -1,49 +1,50 @@
 /* global angular */
-'use strict';
-
-/**
- * The service for use in conjunction with the UrlServiceProvide
- * @class UrlService
- * @constructor
- * @param {object} opt_endpoint the optional url endpoint
- */
-function UrlService(ep) {
-  var endpoint;
-
-  //Should validate this endpoint
-  endpoint = ep;
+(function (angular, cms) {
+  'use strict';
 
   /**
-   * Construct a url for the api
-   * @method apiUrl
-   * @param {string} path the url for the ajax GET
+   * The service for use in conjunction with the UrlServiceProvide
+   * @class UrlService
+   * @constructor
+   * @param {object} opt_endpoint the optional url endpoint
    */
-  this.apiUrl = function(path) {
-    var path_clean,
-      endpoint_clean,
-      url;
+  function UrlService(ep) {
+    var endpoint;
 
-    //validate
-    if(typeof path !== 'string'){
-      throw "invalid apiUrl parameter type";
-    }
+    //Should validate this endpoint
+    endpoint = ep;
 
-    //filter out forward slashes
-    path_clean = path.trim().replace(/^\//g, '');
-    endpoint_clean = endpoint.trim().replace(/^\/|\/$/g, '');
+    /**
+     * Construct a url for the api
+     * @method apiUrl
+     * @param {string} path the url for the ajax GET
+     */
+    this.apiUrl = function(path) {
+      var path_clean,
+        endpoint_clean,
+        url;
 
-    //construct the url
-    url = [endpoint_clean, path_clean].join('/');
-    return url;
-  };
-}
+      //validate
+      if(typeof path !== 'string'){
+        throw "invalid apiUrl parameter type";
+      }
 
-angular.module('cmApp')
-/**
- * Provider for the UrlService. The paths are appended to this prefix.
- * @class UrlServiceProvider
- * @constructor
- */
+      //filter out forward slashes
+      path_clean = path.trim().replace(/^\//g, '');
+      endpoint_clean = endpoint.trim().replace(/^\/|\/$/g, '');
+
+      //construct the url
+      url = [endpoint_clean, path_clean].join('/');
+      return url;
+    };
+  }
+
+  angular.module(cms.modules.app.name)
+  /**
+   * Provider for the UrlService. The paths are appended to this prefix.
+   * @class UrlServiceProvider
+   * @constructor
+   */
   .provider('UrlService', function() {
 
     var endpoint = 'http://127.0.0.1:8080/cm-web-0.1-SNAPSHOT/services/rest/';
@@ -58,6 +59,5 @@ angular.module('cmApp')
       return new UrlService(endpoint);
     }];
   });
-
-
+}(angular, cms));
 

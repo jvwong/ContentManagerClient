@@ -1,7 +1,8 @@
 /* global angular */
-'use strict';
+(function (angular, cms) {
+  'use strict';
 
-angular.module('cmApp')
+  angular.module(cms.modules.app.name)
   .controller('cmAuthCtrl', [
     '$scope',
     'SECURITY',
@@ -133,4 +134,4 @@ angular.module('cmApp')
         true
       );
   }]);
-
+}(angular, cms));

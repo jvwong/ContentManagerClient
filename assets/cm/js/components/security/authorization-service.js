@@ -1,12 +1,13 @@
 /* global angular */
-'use strict';
+(function (angular, cms) {
+  'use strict';
 
-/**
- * Authorization Service object
- * @class AuthorizationService
- */
+  /**
+   * Authorization Service object
+   * @class AuthorizationService
+   */
 
-angular.module('cmApp')
+  angular.module(cms.modules.app.name)
   .factory('AuthorizationService', [
     'SECURITY',
     'AuthenticationService',
@@ -95,7 +96,7 @@ angular.module('cmApp')
       };
 
   }]);
-
+}(angular, cms));
 
 
 

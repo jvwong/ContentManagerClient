@@ -20,7 +20,7 @@ module.exports = function(grunt) {
 					cwd: './assets/cm/styles/',
 					src: [
 						'base.less',
-            'app/app.less',
+            'components/articles/articles.less',
 						'auth/auth.less'
 					],
 					dest: '.tmp/public/cm/styles/',

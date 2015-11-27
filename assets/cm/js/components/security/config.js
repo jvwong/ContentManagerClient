@@ -1,5 +1,6 @@
-
-angular.module('cmApp')
+/* global angular */
+(function (angular, cms) {
+  angular.module(cms.modules.app.name)
   .constant('SECURITY', {
     enums: {
       authorised: {
@@ -21,7 +22,7 @@ angular.module('cmApp')
       login: 'cmAuthCtrl'
     },
     services: {
-      authentication: 'authentication',
+      authentication: 'AuthenticationService',
       authorization: 'authorization'
     },
     routes: {
@@ -37,5 +38,5 @@ angular.module('cmApp')
     roles: {
       defaultValue: 'ROLE_CMSUSER'
     }
-  })
-;
+  });
+}(angular, cms));

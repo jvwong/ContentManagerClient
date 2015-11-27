@@ -1,4 +1,7 @@
-angular.module('cmApp')
+(function (angular, cms) {
+  'use strict';
+
+  angular.module(cms.modules.app.name)
   .factory('ArticleService', [
     'DataLoaderPromise',
     'UrlService',
@@ -69,3 +72,4 @@ angular.module('cmApp')
       };
     }
   ]);
+}(angular, cms));

@@ -34,8 +34,10 @@ var jsFilesToInject = [
     'bower_components/angular-route-styles/route-styles.js',
     'bower_components/angular-toastr/dist/angular-toastr.min.js',
     'bower_components/angular-loading-bar/build/loading-bar.min.js',
+    'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
 
     // CM
+    'cm/js/cms.js',
     'cm/js/app.js',
     'cm/js/bootstrap.js',
     'cm/js/config.js',

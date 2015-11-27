@@ -1,7 +1,8 @@
 /* global angular */
-'use strict';
+(function (angular, cms) {
+  'use strict';
 
-angular.module('cmApp')
+  angular.module(cms.modules.app.name)
   .factory('TokenAuthInterceptor', [
     '$q',
     'TokenStorageService',
@@ -25,5 +26,5 @@ angular.module('cmApp')
   }])
   .config(function($httpProvider) {
     $httpProvider.interceptors.push('TokenAuthInterceptor');
-  })
-;
+  });
+}(angular, cms));

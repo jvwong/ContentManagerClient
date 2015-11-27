@@ -1,48 +1,48 @@
 /* global angular, $ */
-'use strict';
+(function (angular, cms) {
+  'use strict';
 
-/**
- * Thin wrapper around the $cacheFactory that accepts POST parameters
- * @class DataLoaderCacheService
- * @constructor
- */
-function DataLoaderCacheService(cache) {
+  /**
+   * Thin wrapper around the $cacheFactory that accepts POST parameters
+   * @class DataLoaderCacheService
+   * @constructor
+   */
+  function DataLoaderCacheService(cache) {
 
-  var local = cache;
+    var local = cache;
 
-  this.get = function(key, params) {
-    var encoded = '',
-      keyParams = key;
+    this.get = function(key, params) {
+      var encoded = '',
+        keyParams = key;
 
-    if(angular.isObject(params)){
-      encoded = $.param(params);
-      keyParams += encoded;
-    }
-    return local.get(keyParams);
-  };
+      if(angular.isObject(params)){
+        encoded = $.param(params);
+        keyParams += encoded;
+      }
+      return local.get(keyParams);
+    };
 
-  this.put = function(key, params, data) {
-    var encoded = '',
-      keyParams = key;
+    this.put = function(key, params, data) {
+      var encoded = '',
+        keyParams = key;
 
-    if(angular.isObject(params)){
-      encoded = $.param(params);
-      keyParams += encoded;
-    }
-    local.put(keyParams, data);
+      if(angular.isObject(params)){
+        encoded = $.param(params);
+        keyParams += encoded;
+      }
+      local.put(keyParams, data);
 
-    return keyParams;
-  };
-}
+      return keyParams;
+    };
+  }
 
-angular.module('cmApp')
-/**
- * Provider for the DataLoaderCacheService.
- * @class DataLoaderCacheServiceProvider
- * @constructor
- */
+  angular.module(cms.modules.app.name)
+  /**
+   * Provider for the DataLoaderCacheService.
+   * @class DataLoaderCacheServiceProvider
+   * @constructor
+   */
   .provider('DataLoaderCacheService', function() {
-
     var cacheName = 'grCache';
 
     //config method
@@ -56,5 +56,4 @@ angular.module('cmApp')
       return new DataLoaderCacheService(cache);
     }];
   });
-
-
+}(angular, cms));

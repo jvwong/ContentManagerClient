@@ -1,46 +1,47 @@
 /* global angular */
-'use strict';
-
-/**
- * The TokenStorage is just a wrapper service over localStorage
- * Putting the token in the localStorage protects it from being read
- * by script outside the origin of the script that saved it,
- * just like cookies. However because the token is not an actual
- * Cookie, no browser can be instructed add it to requests automatically.
- * This is essential as it completely prevents any form of CSRF attacks.
- * @constructor
- */
-function TokenStorageService(tokenKey){
+(function (angular, cms) {
+    'use strict';
 
   /**
-   * Store a token to localstorage
-   * @param token the string token
-   * @returns {boolean} true if stored and valid
+   * The TokenStorage is just a wrapper service over localStorage
+   * Putting the token in the localStorage protects it from being read
+   * by script outside the origin of the script that saved it,
+   * just like cookies. However because the token is not an actual
+   * Cookie, no browser can be instructed add it to requests automatically.
+   * This is essential as it completely prevents any form of CSRF attacks.
+   * @constructor
    */
-  this.store = function(tokenValue){
-    if(tokenValue === undefined || typeof tokenValue !== "string") return false;
-    localStorage.setItem(tokenKey, tokenValue);
-    return true;
-  };
+  function TokenStorageService(tokenKey){
 
-  /**
-   * Get a token from localstorage
-   * @returns {boolean} the token from localstorage
-   */
-  this.retrieve = function(){
-    var tokenValue = localStorage.getItem(tokenKey);
-    return tokenValue;
-  };
+    /**
+     * Store a token to localstorage
+     * @param token the string token
+     * @returns {boolean} true if stored and valid
+     */
+    this.store = function(tokenValue){
+      if(tokenValue === undefined || typeof tokenValue !== "string") return false;
+      localStorage.setItem(tokenKey, tokenValue);
+      return true;
+    };
 
-  /**
-   * Clear the token from localstorage
-   */
-  this.clear = function(){
-    localStorage.removeItem(tokenKey);
-  };
-}
+    /**
+     * Get a token from localstorage
+     * @returns {boolean} the token from localstorage
+     */
+    this.retrieve = function(){
+      var tokenValue = localStorage.getItem(tokenKey);
+      return tokenValue;
+    };
 
-angular.module('cmApp')
+    /**
+     * Clear the token from localstorage
+     */
+    this.clear = function(){
+      localStorage.removeItem(tokenKey);
+    };
+  }
+
+  angular.module(cms.modules.app.name)
   .provider('TokenStorageService', function(){
 
     // default value
@@ -57,5 +58,6 @@ angular.module('cmApp')
     this.$get = [function() {
       return new TokenStorageService(key);
     }];
-  })
-;
+  });
+
+}(angular, cms));

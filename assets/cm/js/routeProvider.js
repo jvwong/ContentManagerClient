@@ -40,9 +40,11 @@ angular.module('cmApp')
     })
     .when('/', {
       title: 'Articles',
-      templateUrl: 'cm/templates/app/articles.html',
+      templateUrl: 'cm/templates/components/articles/article_list.html',
+      controller: 'cmArticleListCtrl',
+      controllerAs: 'articleListCtrl',
       css: [
-        'cm/styles/app/app.css'
+        'cm/styles/components/articles/articles.css'
       ],
       access: {
         isNotLoggedIn: false,

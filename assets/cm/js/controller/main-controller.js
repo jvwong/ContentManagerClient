@@ -1,9 +1,11 @@
-// /* global angular */
-'use strict';
+/* global angular */
+(function (angular, cms) {
+  'use strict';
 
-angular.module('cmApp')
+  angular.module(cms.modules.app.name)
   .controller('cmMainCtrl', [
     function() {
       var self;
       self = this;
   }]);
+}(angular, cms));

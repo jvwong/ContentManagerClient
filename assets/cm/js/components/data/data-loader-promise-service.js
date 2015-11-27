@@ -1,16 +1,17 @@
 /* global angular, $, google */
-'use strict';
-/**
- * @module data-loader-promise-service
- */
+(function (angular, cms) {
+  'use strict';
 
-angular.module('cmApp')
-/**
- * DataLoaderPromise service
- * @class DataLoaderPromise
- * @constructor
- * @param {object} $http stock angular service
- */
+  /**
+   * @module data-loader-promise-service
+   */
+  angular.module(cms.modules.app.name)
+  /**
+   * DataLoaderPromise service
+   * @class DataLoaderPromise
+   * @constructor
+   * @param {object} $http stock angular service
+   */
   .factory('DataLoaderPromise', [
     '$q',
     '$rootScope',
@@ -129,5 +130,5 @@ angular.module('cmApp')
 
       };
     }]);
-
+}(angular, cms));
 

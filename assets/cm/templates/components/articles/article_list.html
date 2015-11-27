@@ -1,0 +1,25 @@
+<!-- nav -->
+<div class="cm-nav">
+  <!-- START nav -->
+  <div ng-include="'../cm/templates/nav/master.html'"></div>
+  <!-- END nav -->
+</div>
+
+<!-- body -->
+<!-- START article-list -->
+<div class="container-fluid cm-article-list">
+  <!-- START row -->
+  <div class="row">
+      <div class="cm-article-meta" ng-repeat="article in articleListCtrl.articles.content">
+        <div article-widget
+             article-content="article"
+             article-title="{{article.title}}">
+        </div>
+      </div>
+
+    <div class="pagination-container">
+      <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+    </div> <!-- END pagination-container -->
+  </div>
+  <!-- END row -->
+</div><!-- END article-list -->
