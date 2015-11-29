@@ -1,8 +1,8 @@
 /**
- * article-service.js tests
- * @author jvwong
- * @created 18/11/15
- */
+* article-service.js tests
+* @author jvwong
+* @created 18/11/15
+*/
 
 /* START TESTS */
 describe('article-service', function () {
@@ -69,12 +69,12 @@ describe('article-service', function () {
 
   describe('findAll', function(){
     beforeEach(function(){
-      mockBackend.expectGET(endpoint + 'articles/', headers)
+      mockBackend.expectGET(endpoint + 'articles/?page=1', headers)
         .respond(200, JSON.stringify(returnData));
     });
 
     it('should return a list of articles', function(){
-      articleService.findAll()
+      articleService.findAll(1)
         .then(function(response){
           fetched = response;
         });

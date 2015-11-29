@@ -65,6 +65,43 @@ describe('url-service', function () {
       expect(fetched).toMatch(path);
       expect(fetched).toMatch(endpoint);
     });
+  });
+
+  describe('encodeParams', function(){
+    var
+      urlService,
+      fetched,
+      params,
+      endpoint,
+      path,
+      urlServiceProvider;
+
+    endpoint = 'http://someotherdomain.com/';
+    params = {
+      "page": 1,
+      "good": "bye"
+    };
+
+    path = endpoint + "?page=1&good=bye";
+
+    beforeEach(module('cmApp', function(UrlServiceProvider){
+      urlServiceProvider = UrlServiceProvider;
+      urlServiceProvider.setEndpoint(endpoint);
+    }));
+
+    beforeEach(inject(function(UrlService){
+      urlService = UrlService;
+      spyOn(urlService, 'encodeParams').and.callThrough();
+      fetched = urlService.encodeParams(endpoint, params);
+    }));
+
+    it('should be defined', function(){
+      expect(urlService).toBeDefined();
+    });
+
+    it('should contain passed in params', function(){
+      expect(fetched).toEqual(path);
+    });
   }); /* END default endpoint */
 
 }); /* END  data-service: UrlService */

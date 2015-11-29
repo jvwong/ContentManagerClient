@@ -1,8 +1,8 @@
 /**
- * data-data-loader-promise-service.js tests
- * @author jvwong
- * @created 16/11/15
- */
+* data-data-loader-promise-service.js tests
+* @author jvwong
+* @created 16/11/15
+*/
 
 /* START TESTS */
 describe('DataLoaderPromise', function () {

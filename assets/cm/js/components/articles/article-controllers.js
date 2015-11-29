@@ -4,24 +4,29 @@
 
   angular.module(cms.modules.app.name)
   .controller('cmArticleListCtrl', [
-    'ArticleService',
-    function(ArticleService){
+      'ARTICLES',
+      'ArticleService',
+    function(ARTICLES,
+             ArticleService){
 
-      var self;
+      var self,
+        rest_map;
+
+
       self = this;
+      rest_map = ARTICLES.pagination.bootstrap_rest_map;
 
-      self.articles = {};
+      // This should expose Spring Data Pageable elements
+      self.data = {};
 
       // pagination
-      self.totalItems = 64;
-      self.currentPage = 4;
-      self.maxSize = 5;
-      self.bigTotalItems = 175;
-      self.bigCurrentPage = 1;
+      self.totalItems = 0;
+      self.currentPage = 1;
 
       self.setPage = function (pageNo) {
         self.currentPage = pageNo;
       };
+
       self.pageChanged = function() {
         console.log('Page changed to: ' + self.currentPage);
       };
@@ -29,9 +34,13 @@
       ArticleService
         .findAll()
         .then(function(response){
-          self.articles = response.data;
+          angular.copy(response.data, self.data);
+          self.totalItems = self.data[rest_map.totalItems];
+          self.itemsPerPage = self.data[rest_map.itemsPerPage];
+          self.currentPage = self.data[rest_map.currentPage] + 1;
+          //console.log(self);
         });
 
-    }]); /* END cmHomeCtrl */
+    }]); /* END cmArticleListCtrl */
 
 }(angular, cms));

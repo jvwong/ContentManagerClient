@@ -16,6 +16,8 @@ module.exports = function(config) {
             'assets/bower_components/angular-route-styles/route-styles.js',
             'assets/bower_components/angular-loading-bar/build/loading-bar.min.js',
             'assets/bower_components/angular-toastr/dist/angular-toastr.min.js',
+            'assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+
             'assets/cm/js/cms.js',
             'assets/cm/js/app.js',
             'assets/cm/js/config.js',

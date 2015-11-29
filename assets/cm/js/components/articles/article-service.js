@@ -40,10 +40,18 @@
 
       /**
        * Get the list of articles for this user
-       * @returns {*}
+       * @param pageNumber String for the the 1-indexed page number to return
+       * @returns promise from the underlying DataLoaderPromise
        */
-      findAll = function() {
-        var url = UrlService.apiUrl(CM.paths.articles);
+      findAll = function(pageNumber) {
+        var url,
+          page = pageNumber || "1";
+
+        url = UrlService.apiUrl(CM.paths.articles);
+        url = UrlService.encodeParams(url, {
+          page: pageNumber
+        });
+
         var promise = DataLoaderPromise
           .getData(url, utils.transformRes)
           .then(onSuccess, onFail);

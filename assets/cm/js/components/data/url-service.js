@@ -8,6 +8,27 @@
    * @constructor
    * @param {object} opt_endpoint the optional url endpoint
    */
+  angular.module(cms.modules.app.name)
+  /**
+   * Provider for the UrlService. The paths are appended to this prefix.
+   * @class UrlServiceProvider
+   * @constructor
+   */
+  .provider('UrlService', function() {
+
+    var endpoint = 'http://127.0.0.1:8080/cm-web-0.1-SNAPSHOT/services/rest/';
+
+    //config method
+    this.setEndpoint = function(ep) {
+      endpoint = ep;
+    };
+
+    // Return a rlService instance
+    this.$get = [function() {
+      return new UrlService(endpoint);
+    }];
+  });
+
   function UrlService(ep) {
     var endpoint;
 
@@ -37,27 +58,39 @@
       url = [endpoint_clean, path_clean].join('/');
       return url;
     };
-  }
 
-  angular.module(cms.modules.app.name)
-  /**
-   * Provider for the UrlService. The paths are appended to this prefix.
-   * @class UrlServiceProvider
-   * @constructor
-   */
-  .provider('UrlService', function() {
+    /**
+     * Append parameters
+     * @method param
+     * @param {object} a map of key and values to encode
+     */
+    this.encodeParams = function(url, params) {
+      var
+        length,
+        iteration;
 
-    var endpoint = 'http://127.0.0.1:8080/cm-web-0.1-SNAPSHOT/services/rest/';
+      //validate
+      if(!url || typeof url !== 'string'){
+        throw "invalid url type";
+      }
+      if(!params || typeof params !== 'object'){
+        throw "params must be an object hash";
+      }
 
-    //config method
-    this.setEndpoint = function(ep) {
-      endpoint = ep;
+      length = Object.keys(params).length;
+      iteration = 0;
+
+      //construct the url
+      angular.forEach(params, function(value, key){
+        //add the ? char to the beginning only
+        url += iteration ? "" : "?";
+        url += key + "=" + value;
+        url += iteration === length - 1 ? "": "&";
+        iteration += 1;
+      });
+
+      return url;
     };
-
-    // Return a rlService instance
-    this.$get = [function() {
-      return new UrlService(endpoint);
-    }];
-  });
+  }
 }(angular, cms));
 
