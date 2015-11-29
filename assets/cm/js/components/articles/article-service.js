@@ -49,7 +49,7 @@
 
         url = UrlService.apiUrl(CM.paths.articles);
         url = UrlService.encodeParams(url, {
-          page: pageNumber
+          page: page
         });
 
         var promise = DataLoaderPromise

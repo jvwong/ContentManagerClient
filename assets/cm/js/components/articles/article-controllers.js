@@ -28,7 +28,11 @@
       };
 
       self.pageChanged = function() {
-        console.log('Page changed to: ' + self.currentPage);
+        ArticleService
+          .findAll(self.currentPage)
+          .then(function(response){
+            angular.copy(response.data, self.data)
+          });
       };
 
       ArticleService
