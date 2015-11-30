@@ -25,15 +25,16 @@
       authentication: 'AuthenticationService',
       authorization: 'authorization'
     },
-    routes: {
-      login: '/login',
-      register: '/register',
-      success: '/',
-      notAuthorised: '/not-authorised'
+    states: {
+      login: 'login',
+      register: 'register',
+      notAuthorised: 'not-authorised'
     },
     paths: {
-      authentication: 'auth/',
-      users: 'users/'
+      login: '/login',
+      register: '/register',
+      authentication: '/auth',
+      users: '/users'
     },
     roles: {
       defaultValue: 'ROLE_CMSUSER'

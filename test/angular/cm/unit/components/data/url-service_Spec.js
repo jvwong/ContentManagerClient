@@ -13,8 +13,7 @@ describe('url-service', function () {
     var
       urlService,
       fetched,
-      path,
-      path = "users";
+      path = "/users";
 
     beforeEach(inject(function(UrlService){
       urlService = UrlService;
@@ -32,6 +31,10 @@ describe('url-service', function () {
 
     it('should contain passed in path', function(){
       expect(fetched).toMatch(path);
+    });
+
+    it('should close with a forward slash', function(){
+      expect(fetched).toMatch(/.*\/$/);
     });
   }); /* END default endpoint */
 

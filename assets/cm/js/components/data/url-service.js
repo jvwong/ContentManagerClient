@@ -46,16 +46,16 @@
         url;
 
       //validate
-      if(typeof path !== 'string'){
+      if(!path || typeof path !== 'string'){
         throw "invalid apiUrl parameter type";
       }
 
       //filter out forward slashes
-      path_clean = path.trim().replace(/^\//g, '');
+      path_clean = path.trim().replace(/^\/|\/$/g, '');
       endpoint_clean = endpoint.trim().replace(/^\/|\/$/g, '');
 
       //construct the url
-      url = [endpoint_clean, path_clean].join('/');
+      url = [endpoint_clean, path_clean].join('/').concat('/');
       return url;
     };
 

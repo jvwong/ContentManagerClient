@@ -27,6 +27,8 @@ angular.module('cmApp')
       $rootScope.$on('$routeChangeStart', function (event, next, current) {
         var authorised;
 
+        console.log('next: ', next);
+
         if (next.access !== undefined) {
           authorised = AuthorizationService.authorize(
             next.access.requiresLogin,

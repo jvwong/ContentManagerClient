@@ -15,8 +15,11 @@ angular.module('cmApp')
     $httpProvider.defaults.headers.post['Content-Type']= MIME_TYPE_JSON;
   }])
   .constant('CM', {
+    states: {
+      articles: 'articles'
+    },
     paths: {
-      articles: 'articles/'
+      articles: '/articles'
     }
   })
 ;

@@ -13,7 +13,7 @@ describe('auth-controller', function () {
   authenticationStorageService,
   fetched,
   security,
-  location,
+  state,
   scope,
   ctrl,
   mockBackend,
@@ -62,7 +62,7 @@ describe('auth-controller', function () {
         beforeEach(inject(function($rootScope,
                                    SECURITY,
                                    $controller,
-                                   $location,
+                                   $state,
                                    AuthenticationStorageService,
                                    AuthenticationService,
                                    TokenStorageService,
@@ -74,11 +74,12 @@ describe('auth-controller', function () {
           authenticationStorageService = AuthenticationStorageService;
           tokenStorageService = TokenStorageService;
           mockBackend = $httpBackend;
-          location = $location;
+          state = $state;
 
           spyOn(ctrl, 'login').and.callThrough();
           spyOn(tokenStorageService, 'store').and.stub();
           spyOn(authenticationStorageService, 'store').and.stub();
+          spyOn(state, 'go').and.stub();
 
           mockBackend.expectPOST(targetUrl, postData, headers)
             .respond(JSON.stringify(returnData));
@@ -88,7 +89,7 @@ describe('auth-controller', function () {
           ctrl.login(postData.username, postData.password);
           mockBackend.flush();
           expect(ctrl.login).toHaveBeenCalled();
-          expect(location.url()).toEqual(security.routes.success);
+          expect(state.go).toHaveBeenCalled();
         });
 
         it('should attempt to set the user token', function(){
@@ -117,7 +118,7 @@ describe('auth-controller', function () {
         beforeEach(inject(function($rootScope,
                                    SECURITY,
                                    $controller,
-                                   $location,
+                                   $state,
                                    AuthenticationStorageService,
                                    AuthenticationService,
                                    TokenStorageService,
@@ -129,11 +130,12 @@ describe('auth-controller', function () {
           authenticationService = AuthenticationService;
           tokenStorageService = TokenStorageService;
           mockBackend = $httpBackend;
-          location = $location;
+          state = $state;
 
           spyOn(ctrl, 'login').and.callThrough();
           spyOn(tokenStorageService, 'store').and.stub();
           spyOn(authenticationStorageService, 'store').and.stub();
+          spyOn(state, 'go').and.stub();
 
           mockBackend.expectPOST(targetUrl, postData, headers)
             .respond(500, 'Server error');
@@ -143,7 +145,7 @@ describe('auth-controller', function () {
           ctrl.login(postData.username, postData.password);
           mockBackend.flush();
           expect(ctrl.login).toHaveBeenCalled();
-          expect(location.url()).toEqual(security.routes.login);
+          expect(state.go).toHaveBeenCalled();
         });
 
         it('should not set the user token', function(){
@@ -180,7 +182,7 @@ describe('auth-controller', function () {
       beforeEach(inject(function($rootScope,
                                  SECURITY,
                                  $controller,
-                                 $location,
+                                 $state,
                                  AuthenticationService,
                                  AuthenticationStorageService,
                                  TokenStorageService,
@@ -192,11 +194,12 @@ describe('auth-controller', function () {
         authenticationService = AuthenticationService;
         tokenStorageService = TokenStorageService;
         mockBackend = $httpBackend;
-        location = $location;
+        state = $state;
 
         spyOn(ctrl, 'logout').and.callThrough();
         spyOn(tokenStorageService, 'clear').and.stub();
         spyOn(authenticationStorageService, 'clear').and.stub();
+        spyOn(state, 'go').and.stub();
 
         mockBackend.expectPOST(targetUrl, postData, headers)
           .respond(returnData);
@@ -207,7 +210,7 @@ describe('auth-controller', function () {
       it('should call the logout function and set url to "#/', function(){
         ctrl.logout();
         expect(ctrl.logout).toHaveBeenCalled();
-        expect(location.url()).toEqual(security.routes.login);
+        expect(state.go).toHaveBeenCalled();
       });
 
       it('should attempt to clear the user token', function(){
@@ -244,7 +247,7 @@ describe('auth-controller', function () {
       beforeEach(inject(function($rootScope,
                                  SECURITY,
                                  $controller,
-                                 $location,
+                                 $state,
                                  AuthenticationStorageService,
                                  AuthenticationService,
                                  TokenStorageService,
@@ -256,11 +259,12 @@ describe('auth-controller', function () {
         authenticationStorageService = AuthenticationStorageService;
         tokenStorageService = TokenStorageService;
         mockBackend = $httpBackend;
-        location = $location;
+        state = $state;
 
         spyOn(ctrl, 'register').and.callThrough();
         spyOn(tokenStorageService, 'store').and.stub();
         spyOn(authenticationStorageService, 'store').and.stub();
+        spyOn(state, 'go').and.stub();
 
         mockBackend.expectPOST(endpoint + userUrl, postData, headers)
           .respond(201, JSON.stringify(returnData));
@@ -280,7 +284,7 @@ describe('auth-controller', function () {
 
         mockBackend.flush();
         expect(ctrl.register).toHaveBeenCalled();
-        expect(location.url()).toEqual(security.routes.success);
+        expect(state.go).toHaveBeenCalled();
       });
 
       it('should attempt to set the user token', function(){
@@ -319,7 +323,7 @@ describe('auth-controller', function () {
       beforeEach(inject(function($rootScope,
                                  SECURITY,
                                  $controller,
-                                 $location,
+                                 $state,
                                  AuthenticationStorageService,
                                  AuthenticationService,
                                  TokenStorageService,
@@ -331,11 +335,12 @@ describe('auth-controller', function () {
         authenticationService = AuthenticationService;
         tokenStorageService = TokenStorageService;
         mockBackend = $httpBackend;
-        location = $location;
+        state = $state;
 
         spyOn(ctrl, 'register').and.callThrough();
         spyOn(tokenStorageService, 'store').and.stub();
         spyOn(authenticationStorageService, 'store').and.stub();
+        spyOn(state, 'go').and.stub();
 
         mockBackend.expectPOST(endpoint + userUrl, postData, headers)
           .respond(500, 'Server error');
@@ -350,7 +355,7 @@ describe('auth-controller', function () {
           postData.email);
         mockBackend.flush();
         expect(ctrl.register).toHaveBeenCalled();
-        expect(location.url()).toEqual(security.routes.register);
+        expect(state.go).toHaveBeenCalled();
       });
 
       it('should not set the user token', function(){

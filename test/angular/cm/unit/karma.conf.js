@@ -1,67 +1,88 @@
 module.exports = function(config) {
-    config.set({
-        // base path, that will be used to resolve files and exclude
-        basePath: '../../../../',
+  config.set({
+    // base path, that will be used to resolve files and exclude
+    basePath: '../../../../',
 
-        // testing framework to use (jasmine/mocha/qunit/...)
-        frameworks: ['jasmine'],
+    // testing framework to use (jasmine/mocha/qunit/...)
+    frameworks: ['jasmine'],
 
-        // list of files / patterns to load in the browser
-        //ORDER MATTERS!
-        files: [
-            'assets/bower_components/jquery/dist/jquery.min.js',
-            'assets/bower_components/angular/angular.min.js',
-            'assets/bower_components/angular-mocks/angular-mocks.js',
-            'assets/bower_components/angular-route/angular-route.min.js',
-            'assets/bower_components/angular-route-styles/route-styles.js',
-            'assets/bower_components/angular-loading-bar/build/loading-bar.min.js',
-            'assets/bower_components/angular-toastr/dist/angular-toastr.min.js',
-            'assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+    // list of files / patterns to load in the browser
+    //ORDER MATTERS!
+    files: [
+      'assets/bower_components/jquery/dist/jquery.min.js',
+      'assets/bower_components/angular/angular.min.js',
+      'assets/bower_components/angular-mocks/angular-mocks.js',
+      //'assets/bower_components/angular-route/angular-route.min.js',
+      //'assets/bower_components/angular-route-styles/route-styles.js',
+      'assets/bower_components/angular-ui-router/release/angular-ui-router.min.js',
+      'assets/bower_components/angular-loading-bar/build/loading-bar.min.js',
+      'assets/bower_components/angular-toastr/dist/angular-toastr.min.js',
+      'assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
 
-            'assets/cm/js/cms.js',
-            'assets/cm/js/app.js',
-            'assets/cm/js/config.js',
+      'assets/cm/js/cms.js',
+      'assets/cm/js/app.js',
+      'assets/cm/js/config.js',
 
-            'assets/cm/js/utils/utils.js',
-            'assets/cm/js/controller/*.js',
-            'assets/cm/js/components/articles/**/*.js',
-            'assets/cm/js/components/data/**/*.js',
-            'assets/cm/js/components/security/*.js',
-            'test/**/*_Spec.js'
-        ],
+      'assets/cm/js/utils/utils.js',
+      'assets/cm/js/controller/*.js',
+      'assets/cm/js/components/articles/**/*.js',
+      'assets/cm/js/components/data/**/*.js',
+      'assets/cm/js/components/security/*.js'
 
-        // list of files / patterns to exclude
-        exclude: [],
+      //'test/**/*_Spec.js'
+      // data
+      , 'test/angular/cm/unit/components/data/data-loader-cache-service_Spec.js'
+      , 'test/angular/cm/unit/components/data/data-loader-promise-service_Spec.js'
+      , 'test/angular/cm/unit/components/data/url-service_Spec.js'
 
-        // web server port
-        port: 8080,
+      // security
+      , 'test/angular/cm/unit/components/security/auth-controller_Spec.js'
+      , 'test/angular/cm/unit/components/security/authentication-service_Spec.js'
+      , 'test/angular/cm/unit/components/security/authentication-storage-service_Spec.js'
+      , 'test/angular/cm/unit/components/security/authorization-service_Spec.js'
+      , 'test/angular/cm/unit/components/security/token-storage-service_Spec.js'
 
-        // level of logging
-        // possible values: LOG_DISABLE || LOG_ERROR ||
-        //                  LOG_WARN || LOG_INFO || LOG_DEBUG
-        logLevel: config.LOG_INFO,
+      // articles
+      , 'test/angular/cm/unit/components/articles/article-controllers_Spec.js'
+      , 'test/angular/cm/unit/components/articles/article-service_Spec.js'
+      , 'test/angular/cm/unit/components/articles/article-widget-directive_Spec.js'
 
 
-        // enable / disable watching file and executing tests
-        // whenever any file changes
-        autoWatch: true,
 
-        // Start these browsers, currently available:
-        // - Chrome
-        // - ChromeCanary
-        // - Firefox
-        // - Opera
-        // - Safari (only Mac)
-        // - PhantomJS
-        // - IE (only Windows)
-        browsers: [
-            //'PhantomJS'
-             'Chrome'
-            // ,'Firefox'
-        ],
+    ],
 
-        // Continuous Integration mode
-        // if true, it capture browsers, run tests and exit
-        singleRun: false
-    });
+    // list of files / patterns to exclude
+    exclude: [],
+
+    // web server port
+    port: 8080,
+
+    // level of logging
+    // possible values: LOG_DISABLE || LOG_ERROR ||
+    //                  LOG_WARN || LOG_INFO || LOG_DEBUG
+    logLevel: config.LOG_INFO,
+
+
+    // enable / disable watching file and executing tests
+    // whenever any file changes
+    autoWatch: true,
+
+    // Start these browsers, currently available:
+    // - Chrome
+    // - ChromeCanary
+    // - Firefox
+    // - Opera
+    // - Safari (only Mac)
+    // - PhantomJS
+    // - IE (only Windows)
+    browsers: [
+        //'PhantomJS'
+         'Chrome'
+        // ,'Firefox'
+    ],
+
+    // Continuous Integration mode
+    // if true, it capture browsers, run tests and exit
+    singleRun: false
+  });
 };

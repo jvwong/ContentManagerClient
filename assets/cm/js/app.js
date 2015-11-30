@@ -5,8 +5,8 @@
  */
 (function(angular, cms) {
     angular.module(cms.modules.app.name, [
-      'ngRoute',
-      'routeStyles',
+      'ui.router',
+      //'routeStyles',
       'angular-loading-bar',
       'toastr',
       'ui.bootstrap'

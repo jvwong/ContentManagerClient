@@ -41,7 +41,8 @@
 
       <!-- body -->
       <div class="container cm-body">
-          <div ng-view></div>
+          <!--<div ng-view></div>-->
+        <div ui-view></div>
       </div>
 
     <!--
@@ -97,8 +98,7 @@
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/bower_components/angular/angular.min.js"></script>
-    <script src="/bower_components/angular-route/angular-route.min.js"></script>
-    <script src="/bower_components/angular-route-styles/route-styles.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="/bower_components/angular-toastr/dist/angular-toastr.min.js"></script>
     <script src="/bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
     <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
@@ -106,7 +106,7 @@
     <script src="/cm/js/app.js"></script>
     <script src="/cm/js/bootstrap.js"></script>
     <script src="/cm/js/config.js"></script>
-    <script src="/cm/js/routeProvider.js"></script>
+    <script src="/cm/js/stateProvider.js"></script>
     <script src="/cm/js/utils/utils.js"></script>
     <script src="/cm/js/components/articles/article-controllers.js"></script>
     <script src="/cm/js/components/articles/article-service.js"></script>

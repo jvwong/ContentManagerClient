@@ -6,12 +6,14 @@
   .controller('cmAuthCtrl', [
     '$scope',
     'SECURITY',
-    '$location',
+    'CM',
+    '$state',
     'AuthenticationStorageService',
     'AuthenticationService',
     function($scope,
              SECURITY,
-             $location,
+             CM,
+             $state,
              AuthenticationStorageService,
              AuthenticationService) {
 
@@ -52,17 +54,16 @@
               self.user = response.data;
               self.authenticated = true;
 
-              //change the location
-              $location.url(SECURITY.routes.success);
+              //change the state
+              $state.go(CM.states.articles);
             } else {
               //go back to login
               self.formErrors = ['Login failed'];
-              $location.url(SECURITY.routes.login);
+              $state.go(SECURITY.states.login);
             }
           },
           function(errResponse){
             //go back to login
-            $location.url(SECURITY.routes.login);
             self.formErrors = ['Login failed'];
             console.error('AuthController login error');
           });
@@ -75,7 +76,7 @@
         AuthenticationService.logout();
         self.authenticated = false;
         self.user = undefined;
-        $location.url(SECURITY.routes.login);
+        $state.go(SECURITY.states.login);
       }; /* END logout */
 
 
@@ -97,7 +98,7 @@
               self.authenticated = true;
 
               //change the location
-              $location.url(SECURITY.routes.success);
+              $state.go(CM.states.articles);
 
             } else {
 
@@ -108,12 +109,12 @@
                 self.formErrors = ['Registration failed'];
               }
               //go back to registration
-              $location.url(SECURITY.routes.register);
+              $state.go(SECURITY.states.articles);
             }
           },
           function(errResponse){
             //go back to login
-            $location.url(SECURITY.routes.register);
+            $state.go(SECURITY.states.register);
             self.formErrors = ['Registration failed'];
             console.error('AuthController login error');
           });

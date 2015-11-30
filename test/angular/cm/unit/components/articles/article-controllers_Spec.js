@@ -8,7 +8,7 @@
 describe('article-controller', function () {
 
   var
-  location,
+  state,
   scope,
   ctrl,
   security,
@@ -87,17 +87,17 @@ describe('article-controller', function () {
                                SECURITY,
                                CM,
                                $controller,
-                               $location,
+                               $state,
                                $httpBackend){
       scope = $rootScope.$new();
       ctrl = $controller('cmArticleListCtrl', {$scope:scope });
       security = SECURITY;
       cm = CM;
       mockBackend = $httpBackend;
-      location = $location;
-      articleUrl = CM.paths.articles;
+      state = $state;
+      articleUrl = (CM.paths.articles).trim().replace(/^\/|\/$/g, '');
 
-      mockBackend.expectGET(endpoint + articleUrl + "?page=1", headers)
+      mockBackend.expectGET(endpoint + articleUrl + "/?page=1", headers)
         .respond(200, JSON.stringify(returnData));
     }));
 

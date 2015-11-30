@@ -2,6 +2,18 @@
   <div ng-include="'../cm/templates/nav/navbar.html'"></div>
 </div> <!-- END cm-nav -->
 
+<h2>Article List</h2>
+
+<div class="pagination-container">
+  <uib-pagination
+    ng-change="articleListCtrl.pageChanged()"
+    ng-model="articleListCtrl.currentPage"
+    total-items="articleListCtrl.totalItems"
+    items-per-page="articleListCtrl.itemsPerPage"
+    >
+  </uib-pagination>
+</div> <!-- END pagination-container -->
+
 <!-- body -->
 <!-- START article-list -->
 <div class="container-fluid cm-article-list">
@@ -14,12 +26,3 @@
   </div><!-- END cm-article-meta -->
 </div><!-- END article-list -->
 
-<div class="pagination-container">
-  <uib-pagination
-    ng-change="articleListCtrl.pageChanged()"
-    ng-model="articleListCtrl.currentPage"
-    total-items="articleListCtrl.totalItems"
-    items-per-page="articleListCtrl.itemsPerPage"
-    >
-  </uib-pagination>
-</div> <!-- END pagination-container -->

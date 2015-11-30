@@ -47,7 +47,7 @@
         var url,
           page = pageNumber || "1";
 
-        url = UrlService.apiUrl(CM.paths.articles);
+        url = UrlService.apiUrl(CM.states.articles);
         url = UrlService.encodeParams(url, {
           page: page
         });

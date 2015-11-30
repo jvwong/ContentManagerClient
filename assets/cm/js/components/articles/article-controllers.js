@@ -3,6 +3,7 @@
   'use strict';
 
   angular.module(cms.modules.app.name)
+
   .controller('cmArticleListCtrl', [
       'ARTICLES',
       'ArticleService',
