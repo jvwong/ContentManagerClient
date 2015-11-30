@@ -39,11 +39,11 @@
       ArticleService
         .findAll()
         .then(function(response){
+
           angular.copy(response.data, self.data);
           self.totalItems = self.data[rest_map.totalItems];
           self.itemsPerPage = self.data[rest_map.itemsPerPage];
           self.currentPage = self.data[rest_map.currentPage] + 1;
-          //console.log(self);
         });
 
     }]); /* END cmArticleListCtrl */

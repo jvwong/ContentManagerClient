@@ -27,15 +27,49 @@
         $stateProvider
           .state('login', {
             url: SECURITY.paths.login,
-            templateUrl: 'cm/templates/auth/login.html'
+            templateUrl: 'cm/templates/auth/login.html',
+            data: {
+              css: [
+                'cm/styles/auth/auth.css'
+              ]
+            },
+            access: {
+              isNotLoggedIn: true,
+              requiresLogin: false,
+              permissions: [],
+              permissionType: undefined
+            }
           })
           .state('register', {
             url: SECURITY.paths.register,
-            templateUrl: 'cm/templates/auth/register.html'
+            templateUrl: 'cm/templates/auth/register.html',
+            data: {
+              css: [
+                'cm/styles/auth/auth.css'
+              ]
+            },
+            access: {
+              isNotLoggedIn: true,
+              requiresLogin: false,
+              permissions: [],
+              permissionType: undefined
+            }
           })
           .state('articles', {
             url: CM.paths.articles,
-            templateUrl: 'cm/templates/components/articles/article_list.html'
+            controller: 'cmArticleListCtrl as articleListCtrl',
+            templateUrl: 'cm/templates/components/articles/article_list.html',
+            data: {
+              css: [
+                'cm/styles/components/articles/articles.css'
+              ]
+            },
+            access: {
+              isNotLoggedIn: false,
+              requiresLogin: true,
+              permissions: ["ROLE_CMSUSER", "ROLE_ADMIN"],
+              permissionType: SECURITY.enums.permissionCheckType.atLeastOne
+            }
           })
           ;
 

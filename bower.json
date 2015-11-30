@@ -26,12 +26,11 @@
     "angular": "~1.3.8",
     "angular-mocks": "~1.3.8",
     "nouislider": "~7.0.10",
-    "angular-route": "~1.3.10",
-    "angular-route-styles": "*",
     "angular-loading-bar": "~0.6.0",
     "angular-animate": "~1.3.10",
     "angular-toastr": "~0.5.2",
     "angular-bootstrap": "~0.14.3",
-    "angular-ui-router": "~0.2.15"
+    "angular-ui-router": "~0.2.15",
+    "angular-ui-router-styles": "~0.0.6"
   }
 }

@@ -7,14 +7,14 @@ angular.module('cmApp')
   .run([
     '$rootScope',
     '$templateRequest',
-    '$location',
+    '$state',
     'SECURITY',
     'AuthorizationService',
     'AuthenticationService',
     function (
       $rootScope,
       $templateRequest,
-      $location,
+      $state,
       SECURITY,
       AuthorizationService,
       AuthenticationService) {
@@ -24,40 +24,27 @@ angular.module('cmApp')
       $templateRequest('../cm/templates/auth/register.html', true);
 
       /* START */
-      $rootScope.$on('$routeChangeStart', function (event, next, current) {
+      $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
         var authorised;
 
-        console.log('next: ', next);
-
-        if (next.access !== undefined) {
+        if (toState.access !== undefined) {
           authorised = AuthorizationService.authorize(
-            next.access.requiresLogin,
-            next.access.permissions,
-            next.access.permissionCheckType,
-            next.access.isNotLoggedIn);
+            toState.access.requiresLogin,
+            toState.access.permissions,
+            toState.access.permissionCheckType,
+            toState.access.isNotLoggedIn);
 
           if (authorised === SECURITY.enums.authorised.loginRequired)
           {
-            $location.path(SECURITY.routes.login);
+            event.preventDefault();
+            $state.go(SECURITY.states.login, {}, { location: 'replace' });
           }
-          else if (authorised === SECURITY.enums.authorised.notAuthorised)
+          else if (authorised === SECURITY.enums.authorised.notAuthorised ||
+            authorised === SECURITY.enums.authorised.ignore)
           {
-            $location.path(SECURITY.routes.notAuthorised).replace();
-
-          }
-          else if (authorised === SECURITY.enums.authorised.ignore) {
-            if(current)
-            {
-              $location.path(current.$$route.originalPath).replace();
-            }
-            else
-            {
-              $location.path(SECURITY.routes.success).replace();
-            }
+            event.preventDefault();
           }
         }
-      });
-      $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
       });
     }])
 ;

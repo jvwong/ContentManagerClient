@@ -6,7 +6,7 @@
 (function(angular, cms) {
     angular.module(cms.modules.app.name, [
       'ui.router',
-      //'routeStyles',
+      'uiRouterStyles',
       'angular-loading-bar',
       'toastr',
       'ui.bootstrap'
