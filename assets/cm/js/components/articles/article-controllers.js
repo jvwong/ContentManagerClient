@@ -4,6 +4,18 @@
 
   angular.module(cms.modules.app.name)
 
+  .controller('cmArticleCtrl', [
+    'ARTICLES',
+    function(ARTICLES){
+
+      var self
+      ;
+      self = this;
+      this.radioModel;
+
+
+    }]) /* END cmArticleCtrl */
+
   .controller('cmArticleListCtrl', [
       'ARTICLES',
       'ArticleService',
@@ -46,6 +58,17 @@
           self.currentPage = self.data[rest_map.currentPage] + 1;
         });
 
-    }]); /* END cmArticleListCtrl */
+    }]) /* END cmArticleListCtrl */
+
+    .controller('cmArticleCreateCtrl', [
+      'ARTICLES',
+      'ArticleService',
+      function(ARTICLES,
+               ArticleService){
+
+        var self;
+        self = this;
+      }]); /* END cmArticleCreateCtrl */
+
 
 }(angular, cms));

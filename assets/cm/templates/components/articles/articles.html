@@ -1,0 +1,31 @@
+<div class="cm-nav">
+  <div ng-include="'../cm/templates/nav/navbar.html'"></div>
+</div> <!-- END cm-nav -->
+
+<div class="articles-container">
+  <div class="btn-group articles-nav">
+
+    <label class="btn btn-primary"
+           ng-model="articleCtrl.radioModel"
+           uib-btn-radio="'Left'"
+           ui-sref="articles.list"
+           uncheckable>
+      List
+    </label>
+    <label class="btn btn-primary"
+           ng-model="articleCtrl.radioModel"
+           uib-btn-radio="'Middle'"
+           ui-sref="articles.create"
+           uncheckable>
+      Create
+    </label>
+    <label class="btn btn-primary"
+           ng-model="articleCtrl.radioModel"
+           uib-btn-radio="'Right'"
+           uncheckable>
+      Right
+    </label>
+  </div><!-- END articles-nav -->
+
+  <div ui-view></div>
+</div><!-- END articles-container -->

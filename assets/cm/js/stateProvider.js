@@ -57,8 +57,38 @@
           })
           .state('articles', {
             url: CM.paths.articles,
+            controller: 'cmArticleCtrl as articleCtrl',
+            templateUrl: 'cm/templates/components/articles/articles.html',
+            data: {
+              css: [
+                'cm/styles/components/articles/articles.css'
+              ]
+            },
+            access: {
+              isNotLoggedIn: false,
+              requiresLogin: true,
+              permissions: ["ROLE_CMSUSER", "ROLE_ADMIN"],
+              permissionType: SECURITY.enums.permissionCheckType.atLeastOne
+            }
+          })
+          .state('articles.list', {
             controller: 'cmArticleListCtrl as articleListCtrl',
-            templateUrl: 'cm/templates/components/articles/article_list.html',
+            templateUrl: 'cm/templates/components/articles/article-list.html',
+            data: {
+              css: [
+                'cm/styles/components/articles/articles.css'
+              ]
+            },
+            access: {
+              isNotLoggedIn: false,
+              requiresLogin: true,
+              permissions: ["ROLE_CMSUSER", "ROLE_ADMIN"],
+              permissionType: SECURITY.enums.permissionCheckType.atLeastOne
+            }
+          })
+          .state('articles.create', {
+            controller: 'cmArticleCreateCtrl as articleCreateCtrl',
+            templateUrl: 'cm/templates/components/articles/article-create.html',
             data: {
               css: [
                 'cm/styles/components/articles/articles.css'
