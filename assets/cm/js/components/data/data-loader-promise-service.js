@@ -35,12 +35,13 @@
          *  config – {Object} – The configuration object that was used to generate the request.
          *  statusText – {string} – HTTP status text of the response.
          */
-        getData: function(url, transformResp){
+        getData: function(url, transformResp, doCache){
+          var caching = doCache === undefined ? true : doCache;
           var promise = $http({
             method: 'GET',
             url: url,
             transformResponse: transformResp,
-            cache: true
+            cache: caching
           })
           .then(
             function(response){

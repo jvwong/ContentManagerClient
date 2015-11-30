@@ -12,7 +12,8 @@
               CM) {
       var
         findAll,
-        findOne
+        findOne,
+        create
         ;
 
       /**
@@ -45,6 +46,7 @@
        */
       findAll = function(pageNumber) {
         var url,
+          doCache = false,
           page = pageNumber || "1";
 
         url = UrlService.apiUrl(CM.states.articles);
@@ -53,7 +55,7 @@
         });
 
         var promise = DataLoaderPromise
-          .getData(url, utils.transformRes)
+          .getData(url, utils.transformRes, doCache)
           .then(onSuccess, onFail);
 
         return promise;
@@ -74,9 +76,30 @@
         return promise;
       };
 
+      /**
+       * Create a new article
+       * @returns {*}
+       */
+      create = function(title, description, keywords){
+
+        var url = UrlService.apiUrl(CM.paths.articles);
+
+        var promise = DataLoaderPromise
+          .postData(url, {
+            title: title,
+            description: description,
+            keywords: keywords
+          }, utils.transformRes)
+          .then(onSuccess, onFail);
+
+        return promise;
+      };
+
+
       return {
         findAll : findAll,
-        findOne : findOne
+        findOne : findOne,
+        create  : create
       };
     }
   ]);

@@ -16,7 +16,9 @@ angular.module('cmApp')
   }])
   .constant('CM', {
     states: {
-      articles: 'articles'
+      articles: 'articles',
+      articlesList: 'articles.list',
+      articlesCreate: 'articles.create'
     },
     paths: {
       articles: '/articles'

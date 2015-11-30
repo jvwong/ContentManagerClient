@@ -55,7 +55,7 @@
               permissionType: undefined
             }
           })
-          .state('articles', {
+          .state(CM.states.articles, {
             url: CM.paths.articles,
             controller: 'cmArticleCtrl as articleCtrl',
             templateUrl: 'cm/templates/components/articles/articles.html',
@@ -71,7 +71,7 @@
               permissionType: SECURITY.enums.permissionCheckType.atLeastOne
             }
           })
-          .state('articles.list', {
+          .state(CM.states.articlesList, {
             controller: 'cmArticleListCtrl as articleListCtrl',
             templateUrl: 'cm/templates/components/articles/article-list.html',
             data: {
@@ -86,7 +86,7 @@
               permissionType: SECURITY.enums.permissionCheckType.atLeastOne
             }
           })
-          .state('articles.create', {
+          .state(CM.states.articlesCreate, {
             controller: 'cmArticleCreateCtrl as articleCreateCtrl',
             templateUrl: 'cm/templates/components/articles/article-create.html',
             data: {
