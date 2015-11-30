@@ -5,14 +5,18 @@
   angular.module(cms.modules.app.name)
 
   .controller('cmArticleCtrl', [
-    'ARTICLES',
-    function(ARTICLES){
+    '$timeout',
+    function($timeout){
 
       var self
       ;
       self = this;
-      this.radioModel;
+      self.radioModel;
 
+      $timeout(function() {
+        angular.element('#articles-list').triggerHandler('click');
+        self.radioModel = "Left";
+      }, 10);
 
     }]) /* END cmArticleCtrl */
 
