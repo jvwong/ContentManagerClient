@@ -9,6 +9,7 @@ angular.module('cmApp')
     '$templateRequest',
     '$state',
     'SECURITY',
+    'CM',
     'AuthorizationService',
     'AuthenticationService',
     function (
@@ -16,8 +17,8 @@ angular.module('cmApp')
       $templateRequest,
       $state,
       SECURITY,
-      AuthorizationService,
-      AuthenticationService) {
+      CM,
+      AuthorizationService) {
 
       /* pages */
       $templateRequest('../cm/templates/auth/login.html', true);
@@ -27,7 +28,8 @@ angular.module('cmApp')
       $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
         var authorised;
 
-        if (toState.access !== undefined) {
+        if (toState.access !== undefined)
+        {
           authorised = AuthorizationService.authorize(
             toState.access.requiresLogin,
             toState.access.permissions,
@@ -43,6 +45,17 @@ angular.module('cmApp')
             authorised === SECURITY.enums.authorised.ignore)
           {
             event.preventDefault();
+            authorised = 0;
+
+            if(fromState.name)
+            {
+              $state.go(fromState.name, {}, { location: 'replace' });
+            }
+            else
+            {
+              $state.go(CM.states.articles, {}, { location: 'replace' });
+            }
+
           }
         }
       });
