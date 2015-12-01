@@ -23,7 +23,7 @@
        * @returns {*}
        */
       function onSuccess(response) {
-        if(response.status === 200){
+        if(response.status){
           return response;
         } else {
           return response;

@@ -13,7 +13,9 @@ describe('article-service', function () {
   beforeEach(module(cms.components.articles.name));
   beforeEach(module('DataLoaderPromiseMock'));
   beforeEach(module('UrlServiceMock'));
-  beforeEach(inject(function(ArticleService, $rootScope){
+  beforeEach(inject(function(
+    ArticleService,
+    $rootScope){
     articleService = ArticleService;
     rootScope = $rootScope;
   }));

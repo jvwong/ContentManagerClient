@@ -1,9 +1,10 @@
 (function (angular, cms) {
   'use strict';
-  angular.module(cms.components.app.name)
+
+  angular.module(cms.components.articles.name)
   .directive('articleWidget', [
-      'CM',
-      function (CM){
+      'ARTICLES',
+      function (ARTICLES){
     return {
       templateUrl: 'cm/templates/components/articles/article-widget.html',
       restrict: 'A',
@@ -14,7 +15,7 @@
       link: function($scope, $element, $attrs) {
         $scope.articleUrl = [
           '#',
-          CM.states.articles,
+          ARTICLES.routing.states.articles,
           $scope.articleContent.id
         ].join('/').concat('/');
       }

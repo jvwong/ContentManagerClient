@@ -30,6 +30,8 @@ module.exports = function(config) {
       , 'assets/cm/js/components/articles/components.articles.js'
       , 'assets/cm/js/components/articles/components.articles.config.js'
       , 'assets/cm/js/components/articles/article-service.js'
+      , 'assets/cm/js/components/articles/article-widget-directive.js'
+      , 'assets/cm/js/components/articles/article-controllers.js'
       //'assets/cm/js/components/articles/**/*.js'
 
 
@@ -54,9 +56,9 @@ module.exports = function(config) {
 
       // articles
       , 'test/angular/cm/unit/components/articles/article-mocks.js'
-      //, 'test/angular/cm/unit/components/articles/article-controllers_Spec.js'
+      , 'test/angular/cm/unit/components/articles/article-controllers_Spec.js'
       , 'test/angular/cm/unit/components/articles/article-service_Spec.js'
-      //, 'test/angular/cm/unit/components/articles/article-widget-directive_Spec.js'
+      , 'test/angular/cm/unit/components/articles/article-widget-directive_Spec.js'
 
 
 

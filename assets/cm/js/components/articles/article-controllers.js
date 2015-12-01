@@ -2,12 +2,11 @@
 (function (angular, cms) {
   'use strict';
 
-  angular.module(cms.components.app.name)
+  angular.module(cms.components.articles.name)
 
-  .controller('cmArticleCtrl', [
+  .controller(cms.components.articles.controllers.article, [
     '$timeout',
     function($timeout){
-
       var self
       ;
       self = this;
@@ -19,14 +18,12 @@
       }, 1);
     }]) /* END cmArticleCtrl */
 
-  .controller('cmArticleListCtrl', [
-      'ARTICLES',
-      'CM',
+  .controller(cms.components.articles.controllers.articleList, [
       '$scope',
-      'ArticleService',
-    function(ARTICLES,
-             CM,
-             $scope,
+      'ARTICLES',
+      cms.components.articles.services.ArticleService,
+    function($scope,
+             ARTICLES,
              ArticleService){
 
       var self,
@@ -56,7 +53,7 @@
 
       // Move this to resolve of stateProvider.js
       ArticleService
-        .findAll()
+        .findAll(null)
         .then(function(response){
 
           angular.copy(response.data, self.data);
@@ -66,14 +63,12 @@
         });
     }]) /* END cmArticleListCtrl */
 
-    .controller('cmArticleCreateCtrl', [
-      'CM',
+    .controller(cms.components.articles.controllers.articleCreate, [
       'ARTICLES',
-      'ArticleService',
+      cms.components.articles.services.ArticleService,
       '$state',
       '$stateParams',
-      function(CM,
-               ARTICLES,
+      function(ARTICLES,
                ArticleService,
                $state,
                $stateParams){
@@ -99,7 +94,8 @@
                 angular.copy(response.data, self.data);
 
                 //change the location
-                $state.go(CM.states.articlesList, $stateParams, { reload: true });
+                $state.go(ARTICLES.routing.states.articlesList,
+                  $stateParams, { reload: true });
 
               } else {
 
@@ -109,7 +105,7 @@
                   self.formErrors = ['Could not create article'];
                 }
                 //go back to create form
-                $state.go(CM.states.articlesCreate);
+                $state.go(ARTICLES.routing.states.articlesCreate);
               }
             },
             function(errResponse){
@@ -120,7 +116,7 @@
             });
 
         }; /* END createArticle */
-      }]); /* END cmArticleCreateCtrl */
-
+      }]) /* END cmArticleCreateCtrl */
+;
 
 }(angular, cms));
