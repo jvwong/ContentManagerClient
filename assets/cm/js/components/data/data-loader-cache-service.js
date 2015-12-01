@@ -36,7 +36,7 @@
     };
   }
 
-  angular.module(cms.modules.app.name)
+  angular.module(cms.components.app.name)
   /**
    * Provider for the DataLoaderCacheService.
    * @class DataLoaderCacheServiceProvider

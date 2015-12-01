@@ -1,8 +1,8 @@
-/* global angular */
+/* global angular, cms */
 (function (angular, cms) {
   'use strict';
 
-  angular.module(cms.modules.app.name)
+  angular.module(cms.components.app.name)
   .factory('TokenAuthInterceptor', [
     '$q',
     'TokenStorageService',

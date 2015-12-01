@@ -7,7 +7,7 @@
 
   var cms = window.cms = window.cms || {};
 
-  cms.modules = {
+  cms.components = {
     app: {
       name: 'cmApp'
     }

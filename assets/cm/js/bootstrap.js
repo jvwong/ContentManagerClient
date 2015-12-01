@@ -5,7 +5,7 @@
   /**
    * Preload templates and cache them on the client
    **/
-  angular.module(cms.modules.app.name)
+  angular.module(cms.components.app.name)
   .run([
     '$rootScope',
     '$templateRequest',

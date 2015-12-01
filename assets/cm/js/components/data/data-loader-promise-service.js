@@ -5,7 +5,7 @@
   /**
    * @module data-loader-promise-service
    */
-  angular.module(cms.modules.app.name)
+  angular.module(cms.components.app.name)
   /**
    * DataLoaderPromise service
    * @class DataLoaderPromise

@@ -1,4 +1,4 @@
-/* global angular */
+/* global angular, cms */
 (function (angular, cms) {
   'use strict';
 
@@ -8,7 +8,7 @@
    * @constructor
    * @param {object} opt_endpoint the optional url endpoint
    */
-  angular.module(cms.modules.app.name)
+  angular.module(cms.components.app.name)
   /**
    * Provider for the UrlService. The paths are appended to this prefix.
    * @class UrlServiceProvider

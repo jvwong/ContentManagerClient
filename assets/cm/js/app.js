@@ -4,7 +4,7 @@
  * Manual bootstrap
  */
 (function(angular, cms) {
-    angular.module(cms.modules.app.name, [
+    angular.module(cms.components.app.name, [
       'ui.router',
       'uiRouterStyles',
       //'angular-loading-bar',
@@ -16,7 +16,7 @@
 
     function bootstrapApplication() {
         angular.element(document).ready(function(){
-            angular.bootstrap(document, [cms.modules.app.name]);
+            angular.bootstrap(document, [cms.components.app.name]);
         });
     }
 }(angular, cms));

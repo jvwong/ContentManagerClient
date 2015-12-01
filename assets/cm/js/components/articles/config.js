@@ -1,6 +1,6 @@
 /* global angular */
 (function (angular, cms) {
-  angular.module(cms.modules.app.name)
+  angular.module(cms.components.app.name)
     .constant('ARTICLES', {
       pagination: {
         bootstrap_rest_map: {

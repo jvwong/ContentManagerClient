@@ -1,4 +1,4 @@
-/* global angular */
+/* global angular, cms */
 (function (angular, cms) {
   'use strict';
 
@@ -7,7 +7,7 @@
    * @class AuthorizationService
    */
 
-  angular.module(cms.modules.app.name)
+  angular.module(cms.components.app.name)
   .factory('AuthorizationService', [
     'SECURITY',
     'AuthenticationService',
