@@ -72,6 +72,22 @@
             }
           })
           .state(CM.states.articlesList, {
+            resolve: {
+              initialData: function(){
+
+                //var promise,
+                //  data = {};
+                //
+                //promise = ArticleService
+                //  .findAll()
+                //  .then(function(response){
+                //    angular.copy(response.data, data);
+                //    return data;
+                //  });
+                //
+                //return promise;
+              }
+            },
             controller: 'cmArticleListCtrl as articleListCtrl',
             templateUrl: 'cm/templates/components/articles/article-list.html',
             data: {

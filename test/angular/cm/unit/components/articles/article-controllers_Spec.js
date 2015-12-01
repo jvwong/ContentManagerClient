@@ -179,6 +179,7 @@ describe('article-controller', function () {
           state = $state;
 
           spyOn(ctrl, 'createArticle').and.callThrough();
+          spyOn($state, 'go').and.stub();
           articleUrl = (CM.paths.articles).trim().replace(/^\/|\/$/g, '');
 
 
@@ -226,6 +227,7 @@ describe('article-controller', function () {
           state = $state;
 
           spyOn(ctrl, 'createArticle').and.callThrough();
+          spyOn($state, 'go').and.stub();
           articleUrl = (CM.paths.articles).trim().replace(/^\/|\/$/g, '');
 
 

@@ -7,8 +7,8 @@
     angular.module(cms.modules.app.name, [
       'ui.router',
       'uiRouterStyles',
-      'angular-loading-bar',
-      'toastr',
+      //'angular-loading-bar',
+      //'toastr',
       'ui.bootstrap'
     ]);
 

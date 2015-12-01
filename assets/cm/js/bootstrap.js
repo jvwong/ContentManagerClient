@@ -1,9 +1,11 @@
 /* global angular */
-'use strict';
-/**
- * Preload templates and cache them on the client
- **/
-angular.module('cmApp')
+(function (angular, cms) {
+  'use strict';
+
+  /**
+   * Preload templates and cache them on the client
+   **/
+  angular.module(cms.modules.app.name)
   .run([
     '$rootScope',
     '$templateRequest',
@@ -59,5 +61,5 @@ angular.module('cmApp')
           }
         }
       });
-    }])
-;
+    }]);
+}(angular, cms));

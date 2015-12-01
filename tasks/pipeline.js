@@ -29,13 +29,13 @@ var jsFilesToInject = [
     'bower_components/bootstrap/dist/js/bootstrap.min.js',
 
     //Angular
-    'bower_components/angular/angular.min.js',
-    'bower_components/angular-ui-router/release/angular-ui-router.min.js',
+    'bower_components/angular/angular.js',
+    'bower_components/angular-ui-router/release/angular-ui-router.js',
     'bower_components/angular-ui-router-styles/ui-router-styles.js',
 
-    'bower_components/angular-toastr/dist/angular-toastr.min.js',
-    'bower_components/angular-loading-bar/build/loading-bar.min.js',
-    'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+    //'bower_components/angular-toastr/dist/angular-toastr.min.js',
+    //'bower_components/angular-loading-bar/build/loading-bar.min.js',
+    'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
 
     // CM
     'cm/js/cms.js',

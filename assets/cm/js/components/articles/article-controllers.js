@@ -21,9 +21,11 @@
 
   .controller('cmArticleListCtrl', [
       'ARTICLES',
+      'CM',
       '$scope',
       'ArticleService',
     function(ARTICLES,
+             CM,
              $scope,
              ArticleService){
 
@@ -52,6 +54,7 @@
           });
       };
 
+      // Move this to resolve of stateProvider.js
       ArticleService
         .findAll()
         .then(function(response){

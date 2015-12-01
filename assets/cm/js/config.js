@@ -1,7 +1,8 @@
 /* global angular, sails */
-'use strict';
+(function (angular, cms) {
+  'use strict';
 
-angular.module('cmApp')
+  angular.module(cms.modules.app.name)
   .config(['TokenStorageServiceProvider', function(TokenStorageServiceProvider){
     TokenStorageServiceProvider.setKey('cm-auth-token');
   }])
@@ -23,5 +24,6 @@ angular.module('cmApp')
     paths: {
       articles: '/articles'
     }
-  })
-;
+  });
+
+}(angular, cms));
