@@ -7,7 +7,7 @@
 /* START TESTS */
 describe('url-service', function () {
 
-  beforeEach(module('cmApp'));
+  beforeEach(module(cms.components.data.name));
 
   describe('default endpoint', function(){
     var
@@ -49,7 +49,7 @@ describe('url-service', function () {
     endpoint = 'http://someotherdomain.com/';
     path = 'flames';
 
-    beforeEach(module('cmApp', function(UrlServiceProvider){
+    beforeEach(module(cms.components.data.name, function(UrlServiceProvider){
       urlServiceProvider = UrlServiceProvider;
       urlServiceProvider.setEndpoint(endpoint);
     }));
@@ -87,7 +87,7 @@ describe('url-service', function () {
 
     path = endpoint + "?page=1&good=bye";
 
-    beforeEach(module('cmApp', function(UrlServiceProvider){
+    beforeEach(module(cms.components.data.name, function(UrlServiceProvider){
       urlServiceProvider = UrlServiceProvider;
       urlServiceProvider.setEndpoint(endpoint);
     }));

@@ -55,7 +55,7 @@ describe('DataLoaderCache', function () {
       result,
       fetched;
 
-    beforeEach(module('cmApp'));
+    beforeEach(module(cms.components.data.name));
     beforeEach(inject(function(DataLoaderCacheService){
       dataCache = DataLoaderCacheService;
       spyOn(dataCache, 'put').and.callThrough();
@@ -87,9 +87,9 @@ describe('DataLoaderCache', function () {
 
   describe('postData', function(){
 
-    beforeEach(module('cmApp'));
+    beforeEach(module(cms.components.data.name));
     beforeEach(function(){
-      angular.module('dataAppTest', ['cmApp'])
+      angular.module('dataAppTest', [cms.components.data.name])
         .controller('testCtrl', ['DataLoaderPromise', function(DataLoaderPromise) {
           var self;
 

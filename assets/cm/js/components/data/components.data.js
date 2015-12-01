@@ -3,10 +3,11 @@
   'use strict';
 
   cms.components.data = {
-    name: 'cms-components',
+    name: 'cms-components-data',
     services: {
       DataLoaderCacheService  : 'DataLoaderCacheService',
-      DataLoaderPromise       : 'DataLoaderPromise'
+      DataLoaderPromise       : 'DataLoaderPromise',
+      UrlService              : 'UrlService'
     }
   };
 

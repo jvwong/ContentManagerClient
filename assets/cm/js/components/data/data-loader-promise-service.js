@@ -5,14 +5,14 @@
   /**
    * @module data-loader-promise-service
    */
-  angular.module(cms.components.app.name)
+  angular.module(cms.components.data.name)
   /**
    * DataLoaderPromise service
    * @class DataLoaderPromise
    * @constructor
    * @param {object} $http stock angular service
    */
-  .factory('DataLoaderPromise', [
+  .factory(cms.components.data.services.DataLoaderPromise, [
     '$q',
     '$rootScope',
     '$http',

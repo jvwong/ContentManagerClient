@@ -1,4 +1,4 @@
-/* global angular, $ */
+/* global angular, cms */
 (function (angular, cms) {
   'use strict';
 
@@ -36,13 +36,13 @@
     };
   }
 
-  angular.module(cms.components.app.name)
+  angular.module(cms.components.data.name)
   /**
    * Provider for the DataLoaderCacheService.
    * @class DataLoaderCacheServiceProvider
    * @constructor
    */
-  .provider('DataLoaderCacheService', function() {
+  .provider(cms.components.data.services.DataLoaderCacheService, function() {
     var cacheName = 'grCache';
 
     //config method

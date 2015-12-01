@@ -1,15 +1,16 @@
 (function (angular, cms) {
   'use strict';
 
-  angular.module(cms.components.app.name)
-  .factory('ArticleService', [
+  angular.module(cms.components.articles.name)
+  .factory(cms.components.articles.services.ArticleService, [
+
     'DataLoaderPromise',
     'UrlService',
-    'CM',
+    'ARTICLES',
 
     function (DataLoaderPromise,
               UrlService,
-              CM) {
+              ARTICLES) {
       var
         findAll,
         findOne,
@@ -49,7 +50,7 @@
           doCache = false,
           page = pageNumber || "1";
 
-        url = UrlService.apiUrl(CM.states.articles);
+        url = UrlService.apiUrl(ARTICLES.routing.states.articles);
         url = UrlService.encodeParams(url, {
           page: page
         });
@@ -57,7 +58,6 @@
         var promise = DataLoaderPromise
           .getData(url, utils.transformRes, doCache)
           .then(onSuccess, onFail);
-
         return promise;
       }; /* END findAll */
 
@@ -68,7 +68,7 @@
        */
       findOne = function(id){
 
-        var url = UrlService.apiUrl(CM.paths.articles) + id + '/';
+        var url = UrlService.apiUrl(ARTICLES.routing.urls.articles) + id + '/';
         var promise = DataLoaderPromise
           .getData(url, utils.transformRes)
           .then(onSuccess, onFail);
@@ -82,7 +82,7 @@
        */
       create = function(title, description, keywords){
 
-        var url = UrlService.apiUrl(CM.paths.articles);
+        var url = UrlService.apiUrl(ARTICLES.routing.urls.articles);
 
         var promise = DataLoaderPromise
           .postData(url, {

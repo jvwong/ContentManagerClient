@@ -8,13 +8,13 @@
    * @constructor
    * @param {object} opt_endpoint the optional url endpoint
    */
-  angular.module(cms.components.app.name)
+  angular.module(cms.components.data.name)
   /**
    * Provider for the UrlService. The paths are appended to this prefix.
    * @class UrlServiceProvider
    * @constructor
    */
-  .provider('UrlService', function() {
+  .provider(cms.components.data.services.UrlService, function() {
 
     var endpoint = 'http://127.0.0.1:8080/cm-web-0.1-SNAPSHOT/services/rest/';
 

@@ -48,6 +48,7 @@ describe('DataLoaderPromise', function () {
 
   var ctrl,
     mockBackend,
+    mockDataLoaderCacheService,
     error,
     endPoint = '/api/summary/',
     query = 'query_1',
@@ -64,8 +65,8 @@ describe('DataLoaderPromise', function () {
 
   describe('getData', function(){
     beforeEach(function(){
-      angular.module('dataAppTest', ['cmApp'])
-        .controller('testCtrl', ['DataLoaderPromise', function(DataLoaderPromise) {
+      angular.module('dataAppTest', [cms.components.data.name])
+        .controller('testCtrl', [cms.components.data.services.DataLoaderPromise, function(DataLoaderPromise) {
           var self;
 
           self = this;
@@ -82,7 +83,8 @@ describe('DataLoaderPromise', function () {
         }]);
     });
 
-    beforeEach(module('cmApp'));
+    beforeEach(module(cms.components.data.name));
+    beforeEach(module('DataLoaderCacheServiceMock'));
     beforeEach(module('dataAppTest'));
 
     describe('success response', function(){
@@ -136,7 +138,7 @@ describe('DataLoaderPromise', function () {
 
   describe('postData', function(){
     beforeEach(function(){
-      angular.module('dataAppTest', ['cmApp'])
+      angular.module('dataAppTest', [cms.components.data.name])
         .controller('testCtrl', ['DataLoaderPromise', function(DataLoaderPromise) {
           var self;
 
@@ -156,7 +158,7 @@ describe('DataLoaderPromise', function () {
         }]);
     });
 
-    beforeEach(module('cmApp'));
+    beforeEach(module(cms.components.data.name));
     beforeEach(module('dataAppTest'));
 
     describe('success response', function(){
