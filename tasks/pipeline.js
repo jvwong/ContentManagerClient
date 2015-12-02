@@ -24,30 +24,45 @@ var cssFilesToInject = [
 // Client-side javascript files to inject in order
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
-    //Bootstrap
-    'bower_components/jquery/dist/jquery.min.js',
-    'bower_components/bootstrap/dist/js/bootstrap.min.js',
+  //Bootstrap
+  'bower_components/jquery/dist/jquery.min.js'
+  , 'bower_components/angular/angular.min.js'
+  , 'bower_components/angular-mocks/angular-mocks.js'
+  , 'bower_components/angular-ui-router/release/angular-ui-router.min.js'
+  , 'bower_components/angular-ui-router-styles/ui-router-styles.js'
+  , 'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
 
-    //Angular
-    'bower_components/angular/angular.js',
-    'bower_components/angular-ui-router/release/angular-ui-router.js',
-    'bower_components/angular-ui-router-styles/ui-router-styles.js',
+  , 'cm/js/cms.js'
+  , 'cm/js/utils/utils.js'
 
-    //'bower_components/angular-toastr/dist/angular-toastr.min.js',
-    //'bower_components/angular-loading-bar/build/loading-bar.min.js',
-    'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+  // data
+  , 'cm/js/components/data/components.data.config.js'
+  , 'cm/js/components/data/components.data.js'
+  , 'cm/js/components/data/data-loader-cache-service.js'
+  , 'cm/js/components/data/data-loader-promise-service.js'
+  , 'cm/js/components/data/url-service.js'
 
-    // CM
-    'cm/js/cms.js',
-    'cm/js/app.js',
-    'cm/js/bootstrap.js',
-    'cm/js/config.js',
-    //'cm/js/routeProvider.js',
-    'cm/js/stateProvider.js',
+  // articles
+  , 'cm/js/components/articles/components.articles.js'
+  , 'cm/js/components/articles/article-controllers.js'
+  , 'cm/js/components/articles/article-service.js'
+  , 'cm/js/components/articles/article-widget-directive.js'
+  , 'cm/js/components/articles/components.articles.config.js'
 
-    'cm/js/utils/**/*.js',
-    'cm/js/components/**/*.js',
-    'cm/js/controller/**/*.js'
+  // security
+  , 'cm/js/components/security/components.security.js'
+  , 'cm/js/components/security/components.security.config.js'
+  , 'cm/js/components/security/authentication-storage-service.js'
+  , 'cm/js/components/security/token-storage-service.js'
+  , 'cm/js/components/security/token-auth-interceptor.js'
+  , 'cm/js/components/security/authentication-service.js'
+  , 'cm/js/components/security/authorization-service.js'
+  , 'cm/js/components/security/auth-controller.js'
+
+  , 'cm/js/app.js'
+  , 'cm/js/config.js'
+  , 'cm/js/bootstrap.js'
+  , 'cm/js/stateProvider.js'
 ];
 
 

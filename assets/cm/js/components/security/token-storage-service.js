@@ -41,8 +41,8 @@
     };
   }
 
-  angular.module(cms.components.app.name)
-  .provider('TokenStorageService', function(){
+  angular.module(cms.components.security.name)
+  .provider(cms.components.security.services.TokenStorageService, function(){
 
     // default value
     var key = "auth-token";

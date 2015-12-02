@@ -25,50 +25,47 @@ module.exports = function(config) {
       , 'assets/cm/js/app.js'
       , 'assets/cm/js/config.js'
 
-
       // articles
       , 'assets/cm/js/components/articles/components.articles.js'
-      , 'assets/cm/js/components/articles/components.articles.config.js'
-      , 'assets/cm/js/components/articles/article-service.js'
-      , 'assets/cm/js/components/articles/article-widget-directive.js'
-      , 'assets/cm/js/components/articles/article-controllers.js'
-      //'assets/cm/js/components/articles/**/*.js'
-
+      , 'assets/cm/js/components/articles/**/*.js'
 
       // security
-      //'assets/cm/js/components/security/*.js',
-
+      , 'assets/cm/js/components/security/components.security.js'
+      , 'assets/cm/js/components/security/components.security.config.js'
+      , 'assets/cm/js/components/security/authentication-storage-service.js'
+      , 'assets/cm/js/components/security/token-storage-service.js'
+      , 'assets/cm/js/components/security/token-auth-interceptor.js'
+      , 'assets/cm/js/components/security/authentication-service.js'
+      , 'assets/cm/js/components/security/authorization-service.js'
+      , 'assets/cm/js/components/security/auth-controller.js'
 
       //'test/**/*_Spec.js'
       // data
       , 'test/angular/cm/unit/components/data/data-mocks.js'
-      //, 'test/angular/cm/unit/components/data/data-loader-cache-service_Spec.js'
-      //, 'test/angular/cm/unit/components/data/data-loader-promise-service_Spec.js'
-      //, 'test/angular/cm/unit/components/data/url-service_Spec.js'
+      , 'test/angular/cm/unit/components/data/data-loader-cache-service_Spec.js'
+      , 'test/angular/cm/unit/components/data/data-loader-promise-service_Spec.js'
+      , 'test/angular/cm/unit/components/data/url-service_Spec.js'
 
       // security
-      //, 'test/angular/cm/unit/components/security/auth-controller_Spec.js'
-      //, 'test/angular/cm/unit/components/security/auth-controller_Spec.js'
-      //, 'test/angular/cm/unit/components/security/authentication-service_Spec.js'
-      //, 'test/angular/cm/unit/components/security/authentication-storage-service_Spec.js'
-      //, 'test/angular/cm/unit/components/security/authorization-service_Spec.js'
-      //, 'test/angular/cm/unit/components/security/token-storage-service_Spec.js'
+      , 'test/angular/cm/unit/components/security/security-mocks.js'
+      , 'test/angular/cm/unit/components/security/auth-controller_Spec.js'
+      , 'test/angular/cm/unit/components/security/authentication-service_Spec.js'
+      , 'test/angular/cm/unit/components/security/authentication-storage-service_Spec.js'
+      , 'test/angular/cm/unit/components/security/authorization-service_Spec.js'
+      , 'test/angular/cm/unit/components/security/token-storage-service_Spec.js'
 
       // articles
       , 'test/angular/cm/unit/components/articles/article-mocks.js'
       , 'test/angular/cm/unit/components/articles/article-controllers_Spec.js'
       , 'test/angular/cm/unit/components/articles/article-service_Spec.js'
       , 'test/angular/cm/unit/components/articles/article-widget-directive_Spec.js'
-
-
-
     ],
 
     // list of files / patterns to exclude
     exclude: [],
 
     // web server port
-    port: 8080,
+    port: 8081,
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR ||

@@ -21,13 +21,13 @@
 
         getData: function(url, transformResp, doCache){
           var deferred = $q.defer();
-          deferred.resolve({status: 200, data: 'ok'});
+          deferred.resolve({status: 200, data: 'ok', headers: function(){}});
           return deferred.promise;
         },
 
         postData: function(url, object, transformResp){
           var deferred = $q.defer();
-          deferred.resolve({status: 201, data: 'created'});
+          deferred.resolve({status: 201, data: 'created', headers: function(){}});
           return deferred.promise;
         },
 

@@ -7,13 +7,15 @@
    * @class AuthorizationService
    */
 
-  angular.module(cms.components.app.name)
-  .factory('AuthorizationService', [
+  angular.module(cms.components.security.name)
+  .factory(cms.components.security.services.AuthorizationService, [
     'SECURITY',
-    'AuthenticationService',
-    function(SECURITY,
+    cms.components.security.services.AuthenticationService,
+
+      function(SECURITY,
              AuthenticationService){
-      var authorize = function(loginRequired, requiredPermissions, permissionCheckType, notLoggedIn) {
+
+        var authorize = function(loginRequired, requiredPermissions, permissionCheckType, notLoggedIn) {
         var
           // routes are authorised by default
           result = SECURITY.enums.authorised.authorised,

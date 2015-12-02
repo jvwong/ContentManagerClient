@@ -2,11 +2,12 @@
 (function (angular, cms) {
   'use strict';
 
-  angular.module(cms.components.app.name)
-  .factory('TokenAuthInterceptor', [
+  angular.module(cms.components.security.name)
+  .factory(cms.components.security.services.TokenAuthInterceptor, [
     '$q',
-    'TokenStorageService',
-    function($q, TokenStorageService) {
+    cms.components.security.services.TokenStorageService,
+    function($q,
+             TokenStorageService) {
 
       return {
         request: function(config) {
@@ -25,6 +26,8 @@
       };
   }])
   .config(function($httpProvider) {
-    $httpProvider.interceptors.push('TokenAuthInterceptor');
+    $httpProvider
+      .interceptors
+      .push(cms.components.security.services.TokenAuthInterceptor);
   });
 }(angular, cms));

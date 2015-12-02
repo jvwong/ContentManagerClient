@@ -13,20 +13,18 @@
       '$stateProvider',
       '$urlRouterProvider',
       'SECURITY',
-      'CM',
 
       function($stateProvider,
                $urlRouterProvider,
-               SECURITY,
-               CM) {
+               SECURITY) {
 
         // For any unmatched url
-        $urlRouterProvider.otherwise(SECURITY.states.login);
+        $urlRouterProvider.otherwise(SECURITY.routing.states.login);
 
         // Set up the states
         $stateProvider
           .state('login', {
-            url: SECURITY.paths.login,
+            url: SECURITY.routing.urls.login,
             templateUrl: 'cm/templates/auth/login.html',
             data: {
               css: [
@@ -41,7 +39,7 @@
             }
           })
           .state('register', {
-            url: SECURITY.paths.register,
+            url: SECURITY.routing.urls.register,
             templateUrl: 'cm/templates/auth/register.html',
             data: {
               css: [
@@ -55,68 +53,68 @@
               permissionType: undefined
             }
           })
-          .state(CM.states.articles, {
-            url: CM.paths.articles,
-            controller: 'cmArticleCtrl as articleCtrl',
-            templateUrl: 'cm/templates/components/articles/articles.html',
-            data: {
-              css: [
-                'cm/styles/components/articles/articles.css'
-              ]
-            },
-            access: {
-              isNotLoggedIn: false,
-              requiresLogin: true,
-              permissions: ["ROLE_CMSUSER", "ROLE_ADMIN"],
-              permissionType: SECURITY.enums.permissionCheckType.atLeastOne
-            }
-          })
-          .state(CM.states.articlesList, {
-            resolve: {
-              initialData: function(){
-
-                //var promise,
-                //  data = {};
-                //
-                //promise = ArticleService
-                //  .findAll()
-                //  .then(function(response){
-                //    angular.copy(response.data, data);
-                //    return data;
-                //  });
-                //
-                //return promise;
-              }
-            },
-            controller: 'cmArticleListCtrl as articleListCtrl',
-            templateUrl: 'cm/templates/components/articles/article-list.html',
-            data: {
-              css: [
-                'cm/styles/components/articles/articles.css'
-              ]
-            },
-            access: {
-              isNotLoggedIn: false,
-              requiresLogin: true,
-              permissions: ["ROLE_CMSUSER", "ROLE_ADMIN"],
-              permissionType: SECURITY.enums.permissionCheckType.atLeastOne
-            }
-          })
-          .state(CM.states.articlesCreate, {
-            controller: 'cmArticleCreateCtrl as articleCreateCtrl',
-            templateUrl: 'cm/templates/components/articles/article-create.html',
-            data: {
-              css: [
-                'cm/styles/components/articles/articles.css'
-              ]
-            },
-            access: {
-              isNotLoggedIn: false,
-              requiresLogin: true,
-              permissions: ["ROLE_CMSUSER", "ROLE_ADMIN"],
-              permissionType: SECURITY.enums.permissionCheckType.atLeastOne
-            }
-          })
+          //.state(CM.states.articles, {
+          //  url: CM.paths.articles,
+          //  controller: 'cmArticleCtrl as articleCtrl',
+          //  templateUrl: 'cm/templates/components/articles/articles.html',
+          //  data: {
+          //    css: [
+          //      'cm/styles/components/articles/articles.css'
+          //    ]
+          //  },
+          //  access: {
+          //    isNotLoggedIn: false,
+          //    requiresLogin: true,
+          //    permissions: ["ROLE_CMSUSER", "ROLE_ADMIN"],
+          //    permissionType: SECURITY.enums.permissionCheckType.atLeastOne
+          //  }
+          //})
+          //.state(CM.states.articlesList, {
+          //  resolve: {
+          //    initialData: function(){
+          //
+          //      //var promise,
+          //      //  data = {};
+          //      //
+          //      //promise = ArticleService
+          //      //  .findAll()
+          //      //  .then(function(response){
+          //      //    angular.copy(response.data, data);
+          //      //    return data;
+          //      //  });
+          //      //
+          //      //return promise;
+          //    }
+          //  },
+          //  controller: 'cmArticleListCtrl as articleListCtrl',
+          //  templateUrl: 'cm/templates/components/articles/article-list.html',
+          //  data: {
+          //    css: [
+          //      'cm/styles/components/articles/articles.css'
+          //    ]
+          //  },
+          //  access: {
+          //    isNotLoggedIn: false,
+          //    requiresLogin: true,
+          //    permissions: ["ROLE_CMSUSER", "ROLE_ADMIN"],
+          //    permissionType: SECURITY.enums.permissionCheckType.atLeastOne
+          //  }
+          //})
+          //.state(CM.states.articlesCreate, {
+          //  controller: 'cmArticleCreateCtrl as articleCreateCtrl',
+          //  templateUrl: 'cm/templates/components/articles/article-create.html',
+          //  data: {
+          //    css: [
+          //      'cm/styles/components/articles/articles.css'
+          //    ]
+          //  },
+          //  access: {
+          //    isNotLoggedIn: false,
+          //    requiresLogin: true,
+          //    permissions: ["ROLE_CMSUSER", "ROLE_ADMIN"],
+          //    permissionType: SECURITY.enums.permissionCheckType.atLeastOne
+          //  }
+          //})
           ;
 
       }]);

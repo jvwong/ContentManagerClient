@@ -7,10 +7,9 @@
 /* START TESTS */
 describe('token-storage-service', function () {
 
-  beforeEach(module('cmApp'));
-
   var tokenStorageService;
 
+  beforeEach(module(cms.components.security.name));
   beforeEach(inject(function(TokenStorageService){
     tokenStorageService = TokenStorageService;
   }));

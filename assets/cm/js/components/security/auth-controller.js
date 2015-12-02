@@ -2,17 +2,15 @@
 (function (angular, cms) {
   'use strict';
 
-  angular.module(cms.components.app.name)
-  .controller('cmAuthCtrl', [
+  angular.module(cms.components.security.name)
+  .controller(cms.components.security.controllers.auth, [
     '$scope',
     'SECURITY',
-    'CM',
     '$state',
-    'AuthenticationStorageService',
-    'AuthenticationService',
+    cms.components.security.services.AuthenticationStorageService,
+    cms.components.security.services.AuthenticationService,
     function($scope,
              SECURITY,
-             CM,
              $state,
              AuthenticationStorageService,
              AuthenticationService) {
@@ -55,11 +53,11 @@
               self.authenticated = true;
 
               //change the state
-              $state.go(CM.states.articles);
+              $state.go(SECURITY.routing.states.success);
             } else {
               //go back to login
               self.formErrors = ['Login failed'];
-              $state.go(SECURITY.states.login);
+              $state.go(SECURITY.routing.states.login);
             }
           },
           function(errResponse){
@@ -76,7 +74,7 @@
         AuthenticationService.logout();
         self.authenticated = false;
         self.user = undefined;
-        $state.go(SECURITY.states.login);
+        $state.go(SECURITY.routing.states.login);
       }; /* END logout */
 
 
@@ -93,12 +91,12 @@
           .then(function(response){
 
             //caution - data could be cached
-            if(response.status === 200){
+            if(response.status === 200 || response.status === 201){
               self.user = response.data;
               self.authenticated = true;
 
               //change the location
-              $state.go(CM.states.articles);
+              $state.go(SECURITY.routing.states.success);
 
             } else {
 
@@ -109,12 +107,12 @@
                 self.formErrors = ['Registration failed'];
               }
               //go back to registration
-              $state.go(SECURITY.states.articles);
+              $state.go(SECURITY.routing.states.success);
             }
           },
           function(errResponse){
             //go back to login
-            $state.go(SECURITY.states.register);
+            $state.go(SECURITY.routing.states.register);
             self.formErrors = ['Registration failed'];
             console.error('AuthController login error');
           });

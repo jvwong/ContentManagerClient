@@ -2,21 +2,19 @@
 (function (angular, cms) {
   'use strict';
 
-  angular.module(cms.components.app.name)
-    .factory('AuthenticationService', [
+  angular.module(cms.components.security.name)
+    .factory(cms.components.security.services.AuthenticationService, [
       'SECURITY',
-      'DataLoaderPromise',
-      'UrlService',
-      'TokenStorageService',
-      'AuthenticationStorageService',
-      '$rootScope',
+      cms.components.data.services.DataLoaderPromise,
+      cms.components.data.services.UrlService,
+      cms.components.security.services.TokenStorageService,
+      cms.components.security.services.AuthenticationStorageService,
 
     function (SECURITY,
               DataLoaderPromise,
               UrlService,
               TokenStorageService,
-              AuthenticationStorageService,
-              $rootScope) {
+              AuthenticationStorageService) {
       var
         currentUser = undefined,
         login,
@@ -92,7 +90,7 @@
 
       login = function (username, password) {
         var
-        url = UrlService.apiUrl(SECURITY.paths.authentication);
+        url = UrlService.apiUrl(SECURITY.routing.urls.authentication);
         /**
          * The response object has these properties:
          *  data – {string|Object} – The response body transformed with the transform functions.
@@ -113,7 +111,7 @@
 
       register = function(username, password, fullName, email){
         var
-          url = UrlService.apiUrl(SECURITY.paths.users),
+          url = UrlService.apiUrl(SECURITY.routing.urls.users),
           role = SECURITY.roles.defaultValue;
         /**
          * The response object has these properties:

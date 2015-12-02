@@ -11,15 +11,13 @@
     '$templateRequest',
     '$state',
     'SECURITY',
-    'CM',
-    'AuthorizationService',
-    'AuthenticationService',
+    cms.components.security.services.AuthorizationService,
+
     function (
       $rootScope,
       $templateRequest,
       $state,
       SECURITY,
-      CM,
       AuthorizationService) {
 
       /* pages */
@@ -41,7 +39,7 @@
           if (authorised === SECURITY.enums.authorised.loginRequired)
           {
             event.preventDefault();
-            $state.go(SECURITY.states.login, {}, { location: 'replace' });
+            $state.go(SECURITY.routing.states.login, {}, { location: 'replace' });
           }
           else if (authorised === SECURITY.enums.authorised.notAuthorised ||
             authorised === SECURITY.enums.authorised.ignore)
@@ -55,7 +53,7 @@
             }
             else
             {
-              $state.go(CM.states.articles, {}, { location: 'replace' });
+              $state.go(SECURITY.routing.states.success, {}, { location: 'replace' });
             }
 
           }

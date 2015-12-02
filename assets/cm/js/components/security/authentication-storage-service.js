@@ -20,7 +20,7 @@
     };
 
     /**
-     * Get an auth bject from localstorage
+     * Get an auth object from local storage
      * @returns {object} the JSON representation of the auth
      */
     this.retrieve = function () {
@@ -37,9 +37,8 @@
 
   }
 
-  angular.module(cms.components.app.name)
-  .provider('AuthenticationStorageService', function () {
-
+  angular.module(cms.components.security.name)
+  .provider(cms.components.security.services.AuthenticationStorageService, function () {
     // default value
     var key = "user";
 

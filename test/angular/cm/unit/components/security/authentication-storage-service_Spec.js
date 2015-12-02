@@ -7,7 +7,7 @@
 /* START TESTS */
 describe('auth-storage-service', function () {
 
-  beforeEach(module('cmApp'));
+  beforeEach(module(cms.components.security.name));
 
   var
     authStorageService,

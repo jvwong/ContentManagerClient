@@ -53,7 +53,8 @@ describe('authorization-service', function () {
     }
     ;
 
-  beforeEach(module('cmApp'));
+  beforeEach(module(cms.components.security.name));
+  beforeEach(module(cms.components.security.services.AuthenticationService + 'Mock'));
   beforeEach(inject(function(AuthorizationService,
                              AuthenticationService,
                              SECURITY){
@@ -65,7 +66,6 @@ describe('authorization-service', function () {
   }));
 
   describe('authorize', function(){
-
 
     it('should authorise an unprotected route', function(){
       spyOn(authenticationService, 'getCurrentLoginUser')
