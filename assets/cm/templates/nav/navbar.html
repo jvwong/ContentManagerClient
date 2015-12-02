@@ -1,5 +1,5 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container-fluid">
+  <div class="container-fluid" ng-controller="cmAuthCtrl as ctrl">
 
     <div class="navbar-header">
       <button type="button"
@@ -14,9 +14,10 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#/">CMS</a>
+      <a class="navbar-brand" href="" ng-click="ctrl.logout()">logout</a>
     </div> <!--END navbar-header-->
 
-    <div class="navbar-collapse collapse" ng-controller="cmAuthCtrl as ctrl">
+    <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="" ng-bind="ctrl.user.username">Anonymous</a></li>
         <li class="dropdown">

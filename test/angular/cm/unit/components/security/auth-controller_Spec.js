@@ -9,12 +9,10 @@ describe('auth-controller', function () {
 
   var
   authenticationService,
-  tokenStorageService,
-  authenticationStorageService,
-  fetched,
   security,
   state,
   scope,
+  mockBackend,
   ctrl
   ;
 
@@ -44,7 +42,7 @@ describe('auth-controller', function () {
 
         it('should call the login function and set url to "#/', function(){
           ctrl.login("username", "password");
-          scope.$apply();
+          scope.$digest();
           expect(ctrl.login).toHaveBeenCalled();
           expect(state.go).toHaveBeenCalled();
         });

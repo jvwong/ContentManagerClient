@@ -9,25 +9,22 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     //ORDER MATTERS!
     files: [
-      'assets/bower_components/jquery/dist/jquery.min.js',
-      'assets/bower_components/angular/angular.min.js',
-      'assets/bower_components/angular-mocks/angular-mocks.js',
-      'assets/bower_components/angular-ui-router/release/angular-ui-router.min.js',
-      'assets/bower_components/angular-ui-router-styles/ui-router-styles.js',
-      'assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
+        'assets/bower_components/jquery/dist/jquery.js'
+      , 'assets/bower_components/angular/angular.js'
+      , 'assets/bower_components/angular-mocks/angular-mocks.js'
+      , 'assets/bower_components/angular-ui-router/release/angular-ui-router.js'
+      , 'assets/bower_components/angular-ui-router-styles/ui-router-styles.js'
+      , 'assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
 
       , 'assets/cm/js/cms.js'
       , 'assets/cm/js/utils/utils.js'
 
       // data
-      , 'assets/cm/js/components/data/**/*.js'
-
-      , 'assets/cm/js/app.js'
-      , 'assets/cm/js/config.js'
-
-      // articles
-      , 'assets/cm/js/components/articles/components.articles.js'
-      , 'assets/cm/js/components/articles/**/*.js'
+      , 'assets/cm/js/components/data/components.data.js'
+      , 'assets/cm/js/components/data/components.data.config.js'
+      , 'assets/cm/js/components/data/data-loader-cache-service.js'
+      , 'assets/cm/js/components/data/data-loader-promise-service.js'
+      , 'assets/cm/js/components/data/url-service.js'
 
       // security
       , 'assets/cm/js/components/security/components.security.js'
@@ -38,6 +35,17 @@ module.exports = function(config) {
       , 'assets/cm/js/components/security/authentication-service.js'
       , 'assets/cm/js/components/security/authorization-service.js'
       , 'assets/cm/js/components/security/auth-controller.js'
+
+      // articles
+      , 'assets/cm/js/components/articles/components.articles.js'
+      , 'assets/cm/js/components/articles/article-controllers.js'
+      , 'assets/cm/js/components/articles/article-service.js'
+      , 'assets/cm/js/components/articles/article-widget-directive.js'
+      , 'assets/cm/js/components/articles/components.articles.config.js'
+
+      // Other
+      , 'assets/cm/js/app.js'
+      , 'assets/cm/js/config.js'
 
       //'test/**/*_Spec.js'
       // data
@@ -59,6 +67,7 @@ module.exports = function(config) {
       , 'test/angular/cm/unit/components/articles/article-controllers_Spec.js'
       , 'test/angular/cm/unit/components/articles/article-service_Spec.js'
       , 'test/angular/cm/unit/components/articles/article-widget-directive_Spec.js'
+
     ],
 
     // list of files / patterns to exclude

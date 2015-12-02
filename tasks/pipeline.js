@@ -24,13 +24,12 @@ var cssFilesToInject = [
 // Client-side javascript files to inject in order
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
-  //Bootstrap
-  'bower_components/jquery/dist/jquery.min.js'
-  , 'bower_components/angular/angular.min.js'
+    'bower_components/jquery/dist/jquery.js'
+  , 'bower_components/angular/angular.js'
   , 'bower_components/angular-mocks/angular-mocks.js'
-  , 'bower_components/angular-ui-router/release/angular-ui-router.min.js'
+  , 'bower_components/angular-ui-router/release/angular-ui-router.js'
   , 'bower_components/angular-ui-router-styles/ui-router-styles.js'
-  , 'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
+  , 'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
 
   , 'cm/js/cms.js'
   , 'cm/js/utils/utils.js'
@@ -45,6 +44,7 @@ var jsFilesToInject = [
   // security
   , 'cm/js/components/security/components.security.js'
   , 'cm/js/components/security/components.security.config.js'
+  , 'cm/js/components/security/components.security.routing.js'
   , 'cm/js/components/security/authentication-storage-service.js'
   , 'cm/js/components/security/token-storage-service.js'
   , 'cm/js/components/security/token-auth-interceptor.js'
@@ -55,11 +55,13 @@ var jsFilesToInject = [
 
   // articles
   , 'cm/js/components/articles/components.articles.js'
+  , 'cm/js/components/articles/components.articles.routing.js'
   , 'cm/js/components/articles/article-controllers.js'
   , 'cm/js/components/articles/article-service.js'
   , 'cm/js/components/articles/article-widget-directive.js'
   , 'cm/js/components/articles/components.articles.config.js'
 
+  // Other
   , 'cm/js/app.js'
   , 'cm/js/config.js'
 ];
