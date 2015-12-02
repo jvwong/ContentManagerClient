@@ -42,13 +42,6 @@ var jsFilesToInject = [
   , 'cm/js/components/data/data-loader-promise-service.js'
   , 'cm/js/components/data/url-service.js'
 
-  // articles
-  , 'cm/js/components/articles/components.articles.js'
-  , 'cm/js/components/articles/article-controllers.js'
-  , 'cm/js/components/articles/article-service.js'
-  , 'cm/js/components/articles/article-widget-directive.js'
-  , 'cm/js/components/articles/components.articles.config.js'
-
   // security
   , 'cm/js/components/security/components.security.js'
   , 'cm/js/components/security/components.security.config.js'
@@ -58,11 +51,17 @@ var jsFilesToInject = [
   , 'cm/js/components/security/authentication-service.js'
   , 'cm/js/components/security/authorization-service.js'
   , 'cm/js/components/security/auth-controller.js'
+  , 'cm/js/components/security/components.security.bootstrap.js'
+
+  // articles
+  , 'cm/js/components/articles/components.articles.js'
+  , 'cm/js/components/articles/article-controllers.js'
+  , 'cm/js/components/articles/article-service.js'
+  , 'cm/js/components/articles/article-widget-directive.js'
+  , 'cm/js/components/articles/components.articles.config.js'
 
   , 'cm/js/app.js'
   , 'cm/js/config.js'
-  , 'cm/js/bootstrap.js'
-  , 'cm/js/stateProvider.js'
 ];
 
 

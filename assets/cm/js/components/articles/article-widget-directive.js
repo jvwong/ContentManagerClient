@@ -1,3 +1,4 @@
+/* global angular, cms */
 (function (angular, cms) {
   'use strict';
 
@@ -6,7 +7,7 @@
       'ARTICLES',
       function (ARTICLES){
     return {
-      templateUrl: 'cm/templates/components/articles/article-widget.html',
+      templateUrl: 'cm/js/components/articles/templates/article-widget.html',
       restrict: 'A',
       scope: {
         articleContent: '=',

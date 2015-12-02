@@ -18,7 +18,8 @@
   };
 
   angular.module(cms.components.articles.name, [
+      'ui.router',
       cms.components.data.name,
-      'ui.router'
+      cms.components.security.name
     ]);
 }(angular, cms));

@@ -9,7 +9,8 @@
     'uiRouterStyles',
     'ui.bootstrap',
     cms.components.data.name,
-    cms.components.security.name
+    cms.components.security.name,
+    cms.components.articles.name
   ]);
 
   bootstrapApplication();
