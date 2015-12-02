@@ -20,28 +20,28 @@ module.exports = function(config) {
       , 'assets/cm/js/utils/utils.js'
 
       // data
-      , 'assets/cm/components/data/components.data.js'
-      , 'assets/cm/components/data/components.data.config.js'
-      , 'assets/cm/components/data/data-loader-cache-service.js'
-      , 'assets/cm/components/data/data-loader-promise-service.js'
-      , 'assets/cm/components/data/url-service.js'
+      , 'assets/cm/components/data/js/config/components.data.js'
+      , 'assets/cm/components/data/js/config/components.data.config.js'
+      , 'assets/cm/components/data/js/services/data-loader-cache-service.js'
+      , 'assets/cm/components/data/js/services/data-loader-promise-service.js'
+      , 'assets/cm/components/data/js/services/url-service.js'
 
       // security
-      , 'assets/cm/components/security/components.security.js'
-      , 'assets/cm/components/security/components.security.config.js'
-      , 'assets/cm/components/security/authentication-storage-service.js'
-      , 'assets/cm/components/security/token-storage-service.js'
-      , 'assets/cm/components/security/token-auth-interceptor.js'
-      , 'assets/cm/components/security/authentication-service.js'
-      , 'assets/cm/components/security/authorization-service.js'
-      , 'assets/cm/components/security/auth-controller.js'
+      , 'assets/cm/components/security/js/config/components.security.js'
+      , 'assets/cm/components/security/js/config/components.security.config.js'
+      , 'assets/cm/components/security/js/services/authentication-storage-service.js'
+      , 'assets/cm/components/security/js/services/token-storage-service.js'
+      , 'assets/cm/components/security/js/services/token-auth-interceptor.js'
+      , 'assets/cm/components/security/js/services/authentication-service.js'
+      , 'assets/cm/components/security/js/services/authorization-service.js'
+      , 'assets/cm/components/security/js/controllers/auth-controller.js'
 
       // articles
-      , 'assets/cm/components/articles/components.articles.js'
-      , 'assets/cm/components/articles/article-controllers.js'
-      , 'assets/cm/components/articles/article-service.js'
-      , 'assets/cm/components/articles/article-widget-directive.js'
-      , 'assets/cm/components/articles/components.articles.config.js'
+      , 'assets/cm/components/articles/js/config/components.articles.js'
+      , 'assets/cm/components/articles/js/controllers/article-controllers.js'
+      , 'assets/cm/components/articles/js/services/article-service.js'
+      , 'assets/cm/components/articles/js/services/article-widget-directive.js'
+      , 'assets/cm/components/articles/js/config/components.articles.config.js'
 
       // Other
       , 'assets/cm/js/app.js'
