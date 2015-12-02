@@ -19,6 +19,7 @@
 
   angular.module(cms.components.articles.name, [
       'ui.router',
+      'uiRouterStyles',
       cms.components.data.name,
       cms.components.security.name
     ]);

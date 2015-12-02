@@ -22,7 +22,7 @@
             templateUrl: 'cm/js/components/security/templates/login.html',
             data: {
               css: [
-                'cm/styles/auth/auth.css'
+                'cm/js/components/security/styles/security.css'
               ]
             },
             access: {
@@ -37,7 +37,7 @@
             templateUrl: 'cm/js/components/security/templates/register.html',
             data: {
               css: [
-                'cm/styles/auth/auth.css'
+                'cm/js/components/security/styles/security.css'
               ]
             },
             access: {

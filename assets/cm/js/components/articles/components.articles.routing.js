@@ -25,7 +25,7 @@
             templateUrl: 'cm/js/components/articles/templates/articles.html',
             data: {
               css: [
-                'cm/styles/components/articles/articles.css'
+                'cm/js/components/articles/styles/articles.css'
               ]
             },
             access: {
@@ -36,27 +36,11 @@
             }
           })
           .state(ARTICLES.routing.states.articlesList, {
-            resolve: {
-              initialData: function(){
-
-                //var promise,
-                //  data = {};
-                //
-                //promise = ArticleService
-                //  .findAll()
-                //  .then(function(response){
-                //    angular.copy(response.data, data);
-                //    return data;
-                //  });
-                //
-                //return promise;
-              }
-            },
             controller: 'cmArticleListCtrl as articleListCtrl',
             templateUrl: 'cm/js/components/articles/templates/article-list.html',
             data: {
               css: [
-                'cm/styles/components/articles/articles.css'
+                'cm/js/components/articles/styles/articles.css'
               ]
             },
             access: {
@@ -71,7 +55,7 @@
             templateUrl: 'cm/js/components/articles/templates/article-create.html',
             data: {
               css: [
-                'cm/styles/components/articles/articles.css'
+                'cm/js/components/articles/styles/articles.css'
               ]
             },
             access: {

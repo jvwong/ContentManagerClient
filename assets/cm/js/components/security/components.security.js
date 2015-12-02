@@ -17,7 +17,8 @@
   };
 
   angular.module(cms.components.security.name, [
-    cms.components.data.name,
-    'ui.router'
+    'ui.router',
+    'uiRouterStyles',
+    cms.components.data.name
   ]);
 }(angular, cms));
