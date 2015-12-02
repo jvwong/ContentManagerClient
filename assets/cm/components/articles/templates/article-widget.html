@@ -1,8 +1,10 @@
 <div class="article-widget">
-  <a class="article-title" href="{{articleUrl}}"
+  <a class="article-title" ui-sref="articles.detail" href="{{articleUrl}}"
         ng-bind="articleTitle"></a>
   <div class="article-description"
         ng-bind="articleContent.description"></div>
   <div class="article-created"
         ng-bind="articleContent.createdDate"></div>
+  <div class="article-id"
+       ng-bind="articleContent.id"></div>
 </div>

@@ -1,18 +1,20 @@
 <div class="article-list-view">
 
-  <div class="pagination-container">
-    <uib-pagination
-      ng-change="articleListCtrl.pageChanged()"
-      ng-model="articleListCtrl.currentPage"
-      total-items="articleListCtrl.totalItems"
-      items-per-page="articleListCtrl.itemsPerPage"
-      >
-    </uib-pagination>
-  </div> <!-- END pagination-container -->
+  <!--<div class="pagination-container">-->
+    <!--<uib-pagination-->
+      <!--ng-change="articleListCtrl.pageChanged()"-->
+      <!--ng-model="articleListCtrl.currentPage"-->
+      <!--total-items="articleListCtrl.totalItems"-->
+      <!--items-per-page="articleListCtrl.itemsPerPage"-->
+      <!-->
+    <!--</uib-pagination>-->
+  <!--</div> &lt;!&ndash; END pagination-container &ndash;&gt;-->
+
+  <h2>Article List View</h2>
 
   <div class="cm-article-list">
     <!-- START cm-article-meta -->
-    <div class="cm-article-meta" ng-repeat="article in articleListCtrl.data.content">
+    <div class="cm-article-meta" ng-repeat="article in articles">
       <div article-widget
            article-content="article"
            article-title="{{article.title}}">

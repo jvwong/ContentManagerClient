@@ -14,12 +14,16 @@
       },
       routing: {
         states: {
-          articles: 'articles',
-          articlesList: 'articles.list',
-          articlesCreate: 'articles.create'
+          articles        : 'articles',
+          articlesList    : 'articles.list',
+          articlesCreate  : 'articles.create',
+          articlesDetail  : 'articles.detail'
         },
         urls: {
-          articles: '/articles'
+          articles        : '/articles',
+          articlesList    : '',
+          articlesCreate  : '/create',
+          articlesDetail  : '/:articleId'
         }
       }
     })

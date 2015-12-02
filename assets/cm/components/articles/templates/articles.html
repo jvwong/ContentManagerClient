@@ -3,22 +3,21 @@
 </div> <!-- END cm-nav -->
 
 <div class="articles-container">
-  <div class="btn-group articles-nav">
-    <label class="btn btn-primary active"
-           ng-model="articleCtrl.radioModel"
-           uib-btn-radio="'Left'"
-           id="articles-list"
-           ui-sref="articles.list"
-           uncheckable>
-      &nbspList&nbsp&nbsp
-    </label>
-    <label class="btn btn-primary"
-           ng-model="articleCtrl.radioModel"
-           uib-btn-radio="'Right'"
-           ui-sref="articles.create"
-           uncheckable>
-      Create
-    </label>
+
+  <div class="articles-nav">
+    <div class="container">
+      <ul class="nav">
+        <li ng-class="{active: $state.includes('articles')}">
+          <a ui-sref="articles.list">Articles</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="logout">Logout</a>
+        </li>
+      </ul>
+      <!-- Here is a named ui-view. ui-views don't have to be named, but we'll populate this
+           one from various different child states and we want a name to help us target. -->
+      <p ui-view="hint" class="navbar-text pull-right"></p>
+    </div>
   </div><!-- END articles-nav -->
 
   <div ui-view></div>

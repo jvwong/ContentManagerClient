@@ -18,7 +18,7 @@
           '#',
           ARTICLES.routing.states.articles,
           $scope.articleContent.id
-        ].join('/').concat('/');
+        ].join('/');
       }
     };
   }]);

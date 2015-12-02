@@ -36,8 +36,8 @@ var jsFilesToInject = [
   , 'cm/js/utils/utils.js'
 
   // data
-  , 'cm/components/data/js/config/components.data.config.js'
   , 'cm/components/data/js/config/components.data.js'
+  , 'cm/components/data/js/config/components.data.config.js'
   , 'cm/components/data/js/services/data-loader-cache-service.js'
   , 'cm/components/data/js/services/data-loader-promise-service.js'
   , 'cm/components/data/js/services/url-service.js'
