@@ -4,6 +4,7 @@
 
   angular.module(cms.components.articles.name)
     .constant('ARTICLES', {
+      homeDir: "cm/components/articles/",
       pagination: {
         bootstrap_rest_map: {
           totalItems: "totalElements",

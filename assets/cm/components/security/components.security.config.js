@@ -4,6 +4,7 @@
 
   angular.module(cms.components.security.name)
   .constant('SECURITY', {
+    homeDir: "cm/components/security/",
     enums: {
       authorised: {
         authorised: 0,

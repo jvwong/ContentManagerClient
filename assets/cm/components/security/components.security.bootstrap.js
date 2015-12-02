@@ -8,21 +8,15 @@
   angular.module(cms.components.security.name)
     .run([
       '$rootScope',
-      '$templateRequest',
       '$state',
       'SECURITY',
       cms.components.security.services.AuthorizationService,
 
       function (
         $rootScope,
-        $templateRequest,
         $state,
         SECURITY,
         AuthorizationService) {
-
-        /* pages */
-        $templateRequest('cm/js/components/security/templates/login.html', true);
-        $templateRequest('cm/js/components/security/templates/register.html', true);
 
         /* START */
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {

@@ -7,7 +7,7 @@
       'ARTICLES',
       function (ARTICLES){
     return {
-      templateUrl: 'cm/js/components/articles/templates/article-widget.html',
+      templateUrl: ARTICLES.homeDir + 'templates/article-widget.html',
       restrict: 'A',
       scope: {
         articleContent: '=',

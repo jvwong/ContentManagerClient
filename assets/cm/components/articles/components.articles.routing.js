@@ -22,10 +22,10 @@
           .state(ARTICLES.routing.states.articles, {
             url: ARTICLES.routing.urls.articles,
             controller: 'cmArticleCtrl as articleCtrl',
-            templateUrl: 'cm/js/components/articles/templates/articles.html',
+            templateUrl: ARTICLES.homeDir + 'templates/articles.html',
             data: {
               css: [
-                'cm/js/components/articles/styles/articles.css'
+                ARTICLES.homeDir + 'styles/articles.css'
               ]
             },
             access: {
@@ -37,10 +37,10 @@
           })
           .state(ARTICLES.routing.states.articlesList, {
             controller: 'cmArticleListCtrl as articleListCtrl',
-            templateUrl: 'cm/js/components/articles/templates/article-list.html',
+            templateUrl: ARTICLES.homeDir + 'templates/article-list.html',
             data: {
               css: [
-                'cm/js/components/articles/styles/articles.css'
+                ARTICLES.homeDir + 'styles/articles.css'
               ]
             },
             access: {
@@ -52,10 +52,10 @@
           })
           .state(ARTICLES.routing.states.articlesCreate, {
             controller: 'cmArticleCreateCtrl as articleCreateCtrl',
-            templateUrl: 'cm/js/components/articles/templates/article-create.html',
+            templateUrl: ARTICLES.homeDir + 'templates/article-create.html',
             data: {
               css: [
-                'cm/js/components/articles/styles/articles.css'
+                ARTICLES.homeDir + 'styles/articles.css'
               ]
             },
             access: {

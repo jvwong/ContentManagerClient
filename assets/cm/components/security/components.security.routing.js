@@ -19,10 +19,10 @@
         $stateProvider
           .state('login', {
             url: SECURITY.routing.urls.login,
-            templateUrl: 'cm/js/components/security/templates/login.html',
+            templateUrl: SECURITY.homeDir + 'templates/login.html',
             data: {
               css: [
-                'cm/js/components/security/styles/security.css'
+                SECURITY.homeDir + 'styles/security.css'
               ]
             },
             access: {
@@ -34,10 +34,10 @@
           })
           .state('register', {
             url: SECURITY.routing.urls.register,
-            templateUrl: 'cm/js/components/security/templates/register.html',
+            templateUrl: SECURITY.homeDir + 'templates/register.html',
             data: {
               css: [
-                'cm/js/components/security/styles/security.css'
+                SECURITY.homeDir + 'styles/security.css'
               ]
             },
             access: {

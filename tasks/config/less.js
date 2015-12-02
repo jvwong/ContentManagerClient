@@ -19,8 +19,8 @@ module.exports = function(grunt) {
         compress: false
       },
       files: {
-        ".tmp/public/cm/js/components/articles/styles/articles.css": "./assets/cm/js/components/articles/styles/articles.less",
-        ".tmp/public/cm/js/components/security/styles/security.css": "./assets/cm/js/components/security/styles/security.less",
+        ".tmp/public/cm/components/articles/styles/articles.css": "./assets/cm/components/articles/styles/articles.less",
+        ".tmp/public/cm/components/security/styles/security.css": "./assets/cm/components/security/styles/security.less",
         ".tmp/public/cm/styles/base.css": "./assets/cm/styles/base.less",
         ".tmp/public/cm/styles/nav/nav.css": "./assets/cm/styles/nav/nav.less"
       }
