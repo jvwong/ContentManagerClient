@@ -74,7 +74,7 @@
         AuthenticationService.logout();
         self.authenticated = false;
         self.user = undefined;
-        $state.go(SECURITY.routing.states.login);
+        $state.go(SECURITY.routing.states.authLogin);
       }; /* END logout */
 
 

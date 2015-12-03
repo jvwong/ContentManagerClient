@@ -22,15 +22,17 @@
     },
     routing: {
       states: {
-        auth          : 'auth',
-        authLogin     : 'auth.login',
-        authRegister  : 'auth.register',
-        success       : 'articles.list'
+        auth            : 'auth',
+        authLogin       : 'auth.login',
+        authRegister    : 'auth.register',
+        success         : 'articles.list'
       },
       urls: {
-        auth          : '/auth',
-        authLogin     : '',
-        authRegister  : '/register'
+        auth            : '/auth',
+        authLogin       : '',
+        authRegister    : '/register',
+        authentication  : '/auth',
+        users           : '/users'
       }
     },
     roles: {
