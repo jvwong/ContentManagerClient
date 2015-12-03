@@ -1,0 +1,36 @@
+<!-- START form-auth -->
+<form class="form-auth"
+      name="loginForm"
+      ng-submit="ctrl.login(
+        loginForm.username.$modelValue,
+        loginForm.password.$modelValue)">
+  <div class="form-group">
+    <input autocapitalize="off"
+           ng-model="ctrl.loginForm.username"
+           ng-minlength="6"
+           type="text"
+           class="form-control"
+           name="username"
+           id="username"
+           placeholder="Username" required>
+  </div>
+  <div class="form-group">
+    <input autocapitalize="off"
+           ng-model="ctrl.loginForm.password"
+           ng-minlength="6"
+           type="password"
+           class="form-control"
+           name="password"
+           id="password"
+           placeholder="Password" required>
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Submit" class="btn btn-default">
+  </div>
+  <!-- START form-auth errors -->
+  <div ng-repeat="error in ctrl.formErrors">
+    <span class="error">{{error}}</span>
+  </div>
+  <!-- END form-auth errors -->
+</form><!-- END form-auth -->
+

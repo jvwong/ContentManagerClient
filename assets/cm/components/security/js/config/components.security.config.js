@@ -5,6 +5,9 @@
   angular.module(cms.components.security.name)
   .constant('SECURITY', {
     homeDir: "cm/components/security/",
+    templateDir: {
+      auth:  "cm/components/security/templates/"
+    },
     enums: {
       authorised: {
         authorised: 0,
@@ -17,29 +20,17 @@
         combinationRequired: 1
       }
     },
-    events: {
-      userLoggedIn: 'auth:user:loggedIn',
-      userLoggedOut: 'auth:user:loggedOut'
-    },
-    controllers: {
-      login: 'cmAuthCtrl'
-    },
-    services: {
-      authentication: 'AuthenticationService',
-      authorization: 'authorization'
-    },
     routing: {
       states: {
-        login: 'login',
-        register: 'register',
-        success: 'articles',
-        notAuthorised: 'not-authorised'
+        auth          : 'auth',
+        authLogin     : 'auth.login',
+        authRegister  : 'auth.register',
+        success       : 'articles.list'
       },
       urls: {
-        login: '/login',
-        register: '/register',
-        authentication: '/auth',
-        users: '/users'
+        auth          : '/auth',
+        authLogin     : '',
+        authRegister  : '/register'
       }
     },
     roles: {

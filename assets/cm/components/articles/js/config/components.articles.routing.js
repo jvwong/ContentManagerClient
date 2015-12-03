@@ -24,7 +24,7 @@
             url: ARTICLES.routing.urls.articles,
 
             controller: cms.components.articles.controllers.articles,
-            templateUrl: ARTICLES.homeDir + 'templates/articles.html',
+            templateUrl: ARTICLES.templateDir.articles + 'articles.html',
             data: {
               css: [
                 ARTICLES.homeDir + 'styles/articles.css'
@@ -61,7 +61,7 @@
             // template will be inserted into the ui-view within this state's
             // parent's template; so the ui-view within contacts.html. This is the
             // most important thing to remember about templates.
-            templateUrl: ARTICLES.homeDir + 'templates/article-list.html'
+            templateUrl: ARTICLES.templateDir.articles + 'articles.list.html'
           })
 
 
@@ -85,31 +85,30 @@
 
               // So this one is targeting the unnamed view within the parent state's template.
               '': {
-                templateUrl: 'app/contacts/contacts.detail.html',
-                controller: ['$scope', '$stateParams', 'utils',
-                  function (  $scope,   $stateParams,   utils) {
-                    $scope.contact = utils.findById($scope.contacts, $stateParams.contactId);
+                templateUrl: ARTICLES.templateDir.articles + 'articles.detail.html',
+                controller: ['$scope', '$stateParams',
+                  function (  $scope,   $stateParams ) {
                   }]
               },
 
-              // This one is targeting the ui-view="hint" within the unnamed root, aka index.html.
-              // This shows off how you could populate *any* view within *any* ancestor state.
-              'hint@': {
-                template: 'This is contacts.detail populating the "hint" ui-view'
-              },
-
-              // This one is targeting the ui-view="menuTip" within the parent state's template.
-              'menuTip': {
-                // templateProvider is the final method for supplying a template.
-                // There is: template, templateUrl, and templateProvider.
-                templateProvider: ['$stateParams',
-                  function (        $stateParams) {
-                    // This is just to demonstrate that $stateParams injection works for templateProvider.
-                    // $stateParams are the parameters for the new state we're transitioning to, even
-                    // though the global '$stateParams' has not been updated yet.
-                    return '<hr><small class="muted">Contact ID: ' + $stateParams.contactId + '</small>';
-                  }]
+              // This one is targeting the ui-view="hint" within the parent.
+              // To get the unnamed root, choose 'id@'
+              'hint': {
+                template: 'This is articles.detail view'
               }
+
+              //// This one is targeting the ui-view="menuTip" within the parent state's template.
+              //'menuTip': {
+              //  // templateProvider is the final method for supplying a template.
+              //  // There is: template, templateUrl, and templateProvider.
+              //  templateProvider: ['$stateParams',
+              //    function (        $stateParams) {
+              //      // This is just to demonstrate that $stateParams injection works for templateProvider.
+              //      // $stateParams are the parameters for the new state we're transitioning to, even
+              //      // though the global '$stateParams' has not been updated yet.
+              //      return '<hr><small class="muted">Contact ID: ' + $stateParams.contactId + '</small>';
+              //    }]
+              //}
             }
           })
 
