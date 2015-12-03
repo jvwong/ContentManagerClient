@@ -6,18 +6,16 @@
 
   <div class="articles-nav">
     <div class="container">
-      <ul class="nav">
+      <ul class="nav nav-pills nav-stacked">
         <li ng-class="{active: $state.includes('articles')}">
           <a ui-sref="articles.list">Articles</a>
         </li>
-        <li ui-sref-active="active">
-          <a ui-sref="logout">Logout</a>
+        <li ng-class="{active: $state.includes('pages')}">
+          <a ui-sref="pages">Pages</a>
         </li>
       </ul>
-      <!-- Here is a named ui-view. ui-views don't have to be named, but we'll populate this
-           one from various different child states and we want a name to help us target. -->
-      <p ui-view="hint" class="navbar-text pull-right"></p>
-    </div>
+      <p ui-view="hint" class="navbar-text pull-right">Some Hint</p>
+    </div><!-- END container -->
   </div><!-- END articles-nav -->
 
   <div ui-view></div>

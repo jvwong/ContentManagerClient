@@ -23,7 +23,7 @@
           articles        : '/articles',
           articlesList    : '',
           articlesCreate  : '/create',
-          articlesDetail  : '/:articleId'
+          articlesDetail  : '/{articleId:[a-z0-9]{24}}'
         }
       }
     })

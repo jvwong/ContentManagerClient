@@ -65,6 +65,55 @@
           })
 
 
+          ///////////////////////
+          // Articles > Detail //
+          ///////////////////////
+          .state(ARTICLES.routing.states.articlesDetail, {
+
+            url: ARTICLES.routing.urls.articlesDetail,
+
+            // If there is more than a single ui-view in the parent template, or you would
+            // like to target a ui-view from even higher up the state tree, you can use the
+            // views object to configure multiple views. Each view can get its own template,
+            // controller, and resolve data.
+
+            // View names can be relative or absolute. Relative view names do not use an '@'
+            // symbol. They always refer to views within this state's parent template.
+            // Absolute view names use a '@' symbol to distinguish the view and the state.
+            // So 'foo@bar' means the ui-view named 'foo' within the 'bar' state's template.
+            views: {
+
+              // So this one is targeting the unnamed view within the parent state's template.
+              '': {
+                templateUrl: 'app/contacts/contacts.detail.html',
+                controller: ['$scope', '$stateParams', 'utils',
+                  function (  $scope,   $stateParams,   utils) {
+                    $scope.contact = utils.findById($scope.contacts, $stateParams.contactId);
+                  }]
+              },
+
+              // This one is targeting the ui-view="hint" within the unnamed root, aka index.html.
+              // This shows off how you could populate *any* view within *any* ancestor state.
+              'hint@': {
+                template: 'This is contacts.detail populating the "hint" ui-view'
+              },
+
+              // This one is targeting the ui-view="menuTip" within the parent state's template.
+              'menuTip': {
+                // templateProvider is the final method for supplying a template.
+                // There is: template, templateUrl, and templateProvider.
+                templateProvider: ['$stateParams',
+                  function (        $stateParams) {
+                    // This is just to demonstrate that $stateParams injection works for templateProvider.
+                    // $stateParams are the parameters for the new state we're transitioning to, even
+                    // though the global '$stateParams' has not been updated yet.
+                    return '<hr><small class="muted">Contact ID: ' + $stateParams.contactId + '</small>';
+                  }]
+              }
+            }
+          })
+
+
       //    ///////////////////////
       //    // Articles > Create //
       //    ///////////////////////
@@ -85,25 +134,7 @@
       //      }
       //    })
       //
-      //    ///////////////////////
-      //    // Articles > Detail //
-      //    ///////////////////////
-      //    .state(ARTICLES.routing.states.articlesDetail, {
-      //      url: ARTICLES.routing.urls.articlesDetail,
-      //      controller: 'cmArticleDetailCtrl as articleDetailCtrl',
-      //      templateUrl: ARTICLES.homeDir + 'templates/article-detail.html',
-      //      data: {
-      //        css: [
-      //          ARTICLES.homeDir + 'styles/articles.css'
-      //        ]
-      //      },
-      //      access: {
-      //        isNotLoggedIn: false,
-      //        requiresLogin: true,
-      //        permissions: ["ROLE_CMSUSER", "ROLE_ADMIN"],
-      //        permissionType: SECURITY.enums.permissionCheckType.atLeastOne
-      //      }
-      //    })
+
         ;
       }]) /* END config */
   ;

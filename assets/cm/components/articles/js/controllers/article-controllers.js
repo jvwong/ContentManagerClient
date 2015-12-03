@@ -18,7 +18,7 @@
       rest_map = ARTICLES.pagination.bootstrap_rest_map;
       $scope.articles = article_list.data.content;
 
-      console.log(article_list);
+      //console.log(article_list);
 
       //// This should expose Spring Data Pageable elements
       //self.data = {};

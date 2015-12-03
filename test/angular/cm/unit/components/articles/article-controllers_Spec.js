@@ -17,70 +17,29 @@ describe('article-controller', function () {
   beforeEach(module('DataLoaderPromiseMock'));
   beforeEach(module('UrlServiceMock'));
   beforeEach(module('ArticleServiceMocks'));
+  beforeEach(module(function($provide) {
+    var article_list = {
+      config: {},
+      headers: function(){},
+      statusText: 200,
+      data: {
+        content: ["Hi"]
+      }
+    };
+    $provide.value('article_list', article_list);
+  }));
 
-  describe(cms.components.articles.controllers.article, function(){
-    beforeEach(inject(function($rootScope,
-                               $controller){
-      scope = $rootScope.$new();
-      ctrl = $controller(cms.components.articles.controllers.article, { $scope:scope });
-    }));
-
-    it('should have a self.radioModel attribute', inject(function($timeout){
-      expect(ctrl.radioModel).toBeFalsy();
-      $timeout.flush();
-      expect(ctrl.radioModel).toBeTruthy();
-    }));
-  });/* END cmArticleCtrl */
-
-  describe(cms.components.articles.controllers.articleList, function(){
-
+  describe(cms.components.articles.controllers.articles, function(){
     beforeEach(inject(function($rootScope,
                                $controller){
       scope = $rootScope;
-      ctrl = $controller(cms.components.articles.controllers.articleList, { $scope:scope });
+      ctrl = $controller(cms.components.articles.controllers.articles, { $scope:scope });
     }));
 
-    it('should have a self.articles attribute', function(){
-      // console.log(ctrl);
-      expect(ctrl.data).toBeDefined();
-      expect(ctrl.data).toEqual({});
+    it('should have a articles attribute', function(){
+      expect(ctrl).toBeDefined();
     });
-
-    it('should have a self.articles attribute', function(){
-      scope.$apply();
-      expect(ctrl.data).not.toEqual({});
-    });
-
-  });/* END cmArticleListCtrl */
-
-  describe(cms.components.articles.name.articlesCreate, function(){
-
-    describe('createArticle', function(){
-
-        beforeEach(inject(function($rootScope,
-                                   $controller,
-                                   $state){
-          scope = $rootScope;
-          ctrl = $controller('cmArticleCreateCtrl', { $scope:scope });
-          state = $state;
-          spyOn(ctrl, 'createArticle').and.callThrough();
-          spyOn($state, 'go').and.stub();
-        }));
-
-        it('should call createArticle', function(){
-          ctrl.createArticle("title", "description", "keywords");
-          scope.$apply();
-          expect(ctrl.createArticle).toHaveBeenCalled();
-        });
-
-        it('should set the data attribute', function(){
-          ctrl.createArticle("title", "description", "keywords");
-          scope.$apply();
-          expect(ctrl.data).toBeTruthy();
-        });
-      }); /* END success */
-
-  }); /* END cmArticleCreateCtrl */
+  });/* END cmArticleCtrl */
 
 }); /* END article-controller */
 
