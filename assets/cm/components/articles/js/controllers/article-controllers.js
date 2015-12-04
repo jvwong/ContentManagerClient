@@ -22,6 +22,8 @@
       self.totalItems = self.data[rest_map.totalItems];
       self.itemsPerPage = self.data[rest_map.itemsPerPage];
       self.currentPage = self.data[rest_map.currentPage] + 1;
+
+      //scoped variables
       $scope.articles = self.data.content;
 
       self.setPage = function (pageNo) {
@@ -36,9 +38,6 @@
             $scope.articles = self.data.content;
           });
       };
-
-      console.log(self);
-
     }])
 ;
 
