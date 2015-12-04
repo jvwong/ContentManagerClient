@@ -1,19 +1,16 @@
 <div class="cm-article-list-container">
 
-  <!--<div class="pagination-container">-->
-    <!--<uib-pagination-->
-      <!--ng-change="articleListCtrl.pageChanged()"-->
-      <!--ng-model="articleListCtrl.currentPage"-->
-      <!--total-items="articleListCtrl.totalItems"-->
-      <!--items-per-page="articleListCtrl.itemsPerPage"-->
-      <!-->
-    <!--</uib-pagination>-->
-  <!--</div> &lt;!&ndash; END pagination-container &ndash;&gt;-->
-
-  <h2>Article List</h2>
+  <div class="pagination-container">
+    <uib-pagination
+      ng-change="articleListCtrl.pageChanged()"
+      ng-model="articleListCtrl.currentPage"
+      total-items="articleListCtrl.totalItems"
+      items-per-page="articleListCtrl.itemsPerPage">
+     </uib-pagination>
+  </div> <!-- END pagination-container -->
 
   <div class="sidebar cm-article-list">
-    <ul class="nav nav-sidebar" ng-repeat="article in articles">
+    <ul class="nav nav-sidebar" ng-repeat="article in articleListCtrl.data.content">
       <li ui-sref-active="active">
         <a ng-bind="article.title"
            ui-sref="contacts.detail({articleId:article.id})">

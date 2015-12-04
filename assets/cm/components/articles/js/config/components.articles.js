@@ -8,7 +8,7 @@
       ArticleService  : 'ArticleService'
     },
     controllers: {
-      articles: 'cmArticleCtrl'
+      articlesList: 'cmArticleListCtrl'
     },
     directives: {
       articleWidget: 'articleWidget'
@@ -18,6 +18,7 @@
   angular.module(cms.components.articles.name, [
       'ui.router',
       'uiRouterStyles',
+      'ui.bootstrap',
       cms.components.data.name,
       cms.components.security.name
     ]);

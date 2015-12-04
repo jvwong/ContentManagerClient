@@ -22,8 +22,6 @@
 
             // Abstract state will prepend '/contacts' onto child urls
             url: ARTICLES.routing.urls.articles,
-
-            controller: cms.components.articles.controllers.articles,
             templateUrl: ARTICLES.templateDir.articles + 'articles.html',
             data: {
               css: [
@@ -60,7 +58,7 @@
               'sidebar': {
                 templateUrl: ARTICLES.templateDir.articles + 'articles.sidebar.html',
                 controller: ['$scope', '$stateParams', 'article_list',
-                  function (  $scope,   $stateParams,   article_list ) {
+                  function (  $scope,   $stateParams, article_list ) {
                     $scope.articles = article_list.data.content;
                   }]
               },
@@ -68,9 +66,8 @@
               // Unnamed parent ui-view
               '': {
                 templateUrl: ARTICLES.templateDir.articles + 'articles.list.html',
-                controller: ['$scope', '$stateParams',
-                  function (  $scope,   $stateParams ) {
-                  }]
+                controller: cms.components.articles.controllers.articlesList,
+                controllerAs: 'articleListCtrl'
               }
             },
             data: {
