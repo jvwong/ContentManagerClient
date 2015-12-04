@@ -28,18 +28,18 @@
             data: {
               css: [
                 SECURITY.homeDir + 'styles/security.css'
-              ]
+              ],
+              access: {
+                isNotLoggedIn: true,
+                requiresLogin: false,
+                permissions: [],
+                permissionType: undefined
+              }
             },
             // Use `resolve` to resolve any asynchronous controller dependencies
             // *before* the controller is instantiated. These are inherited
             // in children. Returns promise
             resolve: {
-            },
-            access: {
-              isNotLoggedIn: true,
-              requiresLogin: false,
-              permissions: [],
-              permissionType: undefined
             }
           })
 

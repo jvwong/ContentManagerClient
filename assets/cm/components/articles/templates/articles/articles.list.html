@@ -1,4 +1,4 @@
-<div class="article-list-view">
+<div class="cm-article-list-container">
 
   <!--<div class="pagination-container">-->
     <!--<uib-pagination-->
@@ -10,16 +10,16 @@
     <!--</uib-pagination>-->
   <!--</div> &lt;!&ndash; END pagination-container &ndash;&gt;-->
 
-  <h2>Article List View</h2>
+  <h2>Article List</h2>
 
-  <div class="cm-article-list">
-    <!-- START cm-article-meta -->
-    <div class="cm-article-meta" ng-repeat="article in articles">
-      <div article-widget
-           article-content="article"
-           article-title="{{article.title}}">
-      </div>
-    </div><!-- END cm-article-meta -->
+  <div class="sidebar cm-article-list">
+    <ul class="nav nav-sidebar" ng-repeat="article in articles">
+      <li ui-sref-active="active">
+        <a ng-bind="article.title"
+           ui-sref="contacts.detail({articleId:article.id})">
+        </a>
+      </li>
+    </ul>
   </div><!-- END article-list -->
 
 </div> <!-- END article-list-view -->

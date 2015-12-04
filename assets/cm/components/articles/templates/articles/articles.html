@@ -1,22 +1,23 @@
-<div class="cm-nav">
-  <div ng-include="'../cm/templates/nav/navbar.html'"></div>
-</div> <!-- END cm-nav -->
+<div class="cm-articles-container">
 
-<div class="articles-container">
+  <!-- START cm-navbar -->
+  <div class="cm-navbar">
+    <div ng-include="'../cm/templates/nav/navbar.html'"></div>
+  </div> <!-- END cm-navbar -->
 
-  <div class="articles-nav">
-    <div class="container">
-      <ul class="nav nav-pills nav-stacked">
-        <li ng-class="{active: $state.includes('articles')}">
-          <a ui-sref="articles.list">Articles</a>
-        </li>
-        <li ng-class="{active: $state.includes('pages')}">
-          <a ui-sref="pages">Pages</a>
-        </li>
-      </ul>
-      <p ui-view="hint" class="navbar-text pull-right">Some Hint</p>
-    </div><!-- END container -->
-  </div><!-- END articles-nav -->
+  <!-- START cm-articles-body -->
+  <div class="row cm-articles-status">
+    <div ui-view="status"></div>
+  </div>
 
-  <div ui-view></div>
+  <div class="row cm-articles-body">
+    <div class="cm-articles-sidebar col-xs-3">
+      <div ui-view="sidebar"></div>
+    </div><!-- END cm-articles-sidebar -->
+
+    <div class="cm-articles-content col-xs-9">
+        <div ui-view></div>
+    </div><!-- END cm-articles-content -->
+  </div><!-- END cm-articles-body -->
+
 </div><!-- END articles-container -->

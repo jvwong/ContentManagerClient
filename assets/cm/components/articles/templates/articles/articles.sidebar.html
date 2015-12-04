@@ -1,0 +1,22 @@
+<!-- START cm-articles-sidebar-container -->
+<div class="cm-articles-sidebar-container">
+  <!-- START cm-article-sidebar -->
+  <div class="sidebar cm-article-sidebar">
+
+    <!-- START nav-sidebar -->
+    <ul class="nav nav-sidebar">
+      <li ui-sref-active="active">
+        <a ui-sref="contacts.list">All Articles</a>
+      </li>
+    </ul><!-- END nav-sidebar -->
+    <!-- START nav-sidebar -->
+    <ul class="nav nav-sidebar" ng-repeat="article in articles">
+      <li ui-sref-active="active">
+        <a ng-bind="article.title"
+           ui-sref="contacts.detail({articleId:article.id})">
+        </a>
+      </li>
+    </ul><!-- END nav-sidebar -->
+
+  </div><!-- END cm-article-sidebar -->
+</div> <!-- END cm-articles-sidebar-container -->

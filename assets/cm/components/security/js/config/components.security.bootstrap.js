@@ -22,18 +22,18 @@
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
           var authorised;
 
-          if (toState.access !== undefined)
+          if (toState.data.access !== undefined)
           {
             authorised = AuthorizationService.authorize(
-              toState.access.requiresLogin,
-              toState.access.permissions,
-              toState.access.permissionCheckType,
-              toState.access.isNotLoggedIn);
+              toState.data.access.requiresLogin,
+              toState.data.access.permissions,
+              toState.data.access.permissionCheckType,
+              toState.data.access.isNotLoggedIn);
 
             if (authorised === SECURITY.enums.authorised.loginRequired)
             {
               event.preventDefault();
-              $state.go(SECURITY.routing.states.login, {}, { location: 'replace' });
+              $state.go(SECURITY.routing.states.authLogin, {}, { location: 'replace' });
             }
             else if (authorised === SECURITY.enums.authorised.notAuthorised ||
               authorised === SECURITY.enums.authorised.ignore)
