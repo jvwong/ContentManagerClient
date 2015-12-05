@@ -7,7 +7,7 @@
       function($stateProvider,   $urlRouterProvider,   SECURITY,   ARTICLES) {
 
         // For any unmatched url
-        $urlRouterProvider.otherwise(SECURITY.routing.states.authLogin);
+        $urlRouterProvider.otherwise(ARTICLES.routing.urls.articles);
 
         // Set up the states
         $stateProvider
@@ -23,11 +23,7 @@
             // Abstract state will prepend '/contacts' onto child urls
             url: ARTICLES.routing.urls.articles,
             templateUrl: ARTICLES.templateDir.articles + 'articles.html',
-            controller: ['$scope', '$stateParams', 'recent_list', 'article_list',
-              function (  $scope,   $stateParams,   recent_list,   article_list ) {
-                $scope.articles = article_list.data.content;
-                $scope.recent = recent_list.data.content;
-              }],
+            controller: cms.components.articles.controllers.articles,
             data: {
               css: [
                 ARTICLES.homeDir + 'styles/articles.css'
@@ -101,6 +97,35 @@
             resolve: {
               article_fetched: function($stateParams, ArticleService){
                 return ArticleService.findOne($stateParams.articleId);
+              }
+            }
+          })
+
+
+          //////////////////////////////
+          // Articles > Detail > Edit //
+          //////////////////////////////
+          .state(ARTICLES.routing.states.articlesDetailEdit, {
+
+            url: ARTICLES.routing.urls.articlesDetailEdit,
+
+            views: {
+
+              // Unnamed parent ui-view
+              '' : {
+                templateUrl: ARTICLES.templateDir.articles + 'articles.detail.edit.html',
+                controller: cms.components.articles.controllers.articlesDetailEdit
+              },
+
+              //Named parent ui-view="status" inside "articles"
+              'status@articles': {
+                controller: ['$scope', '$stateParams', 'article_fetched',
+                  function (  $scope,   $stateParams,   article_fetched ) {
+                    $scope.article = article_fetched.data;
+                  }],
+                template: '<hr><small class="muted">' +
+                                'Editing - <span ng-bind="article.title"></span>' +
+                              '</small>'
               }
             }
           })

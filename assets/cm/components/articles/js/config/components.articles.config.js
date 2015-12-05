@@ -17,16 +17,18 @@
       },
       routing: {
         states: {
-          articles        : 'articles',
-          articlesList    : 'articles.list',
-          articlesCreate  : 'articles.create',
-          articlesDetail  : 'articles.detail'
+          articles            : 'articles',
+          articlesList        : 'articles.list',
+          articlesCreate      : 'articles.create',
+          articlesDetail      : 'articles.detail',
+          articlesDetailEdit  : 'articles.detail.edit'
         },
         urls: {
-          articles        : '/articles',
-          articlesList    : '',
-          articlesCreate  : '/create',
-          articlesDetail  : '/{articleId:[a-z0-9]{24}}'
+          articles            : '/articles',
+          articlesList        : '',
+          articlesCreate      : '/create',
+          articlesDetail      : '/{articleId:[a-z0-9]{24}}',
+          articlesDetailEdit  : '/item/:itemId'
         }
       }
     })
