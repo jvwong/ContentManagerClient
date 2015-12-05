@@ -74,16 +74,6 @@
 
             views: {
 
-              // Named parent ui-view="sidebar"
-              'sidebar': {
-                templateUrl: ARTICLES.templateDir.articles + 'articles-sidebar.html',
-                controller: ['$scope', '$stateParams', 'recent_list', 'article_list',
-                  function (  $scope,   $stateParams,   recent_list,   article_list ) {
-                    $scope.articles = article_list.data.content;
-                    $scope.recent = recent_list.data.content;
-                  }]
-              },
-
               // Unnamed parent ui-view
               '': {
                 templateUrl: ARTICLES.templateDir.articles + 'articles.detail.html',
