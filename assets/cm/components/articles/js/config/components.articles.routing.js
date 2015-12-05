@@ -23,6 +23,11 @@
             // Abstract state will prepend '/contacts' onto child urls
             url: ARTICLES.routing.urls.articles,
             templateUrl: ARTICLES.templateDir.articles + 'articles.html',
+            controller: ['$scope', '$stateParams', 'recent_list', 'article_list',
+              function (  $scope,   $stateParams,   recent_list,   article_list ) {
+                $scope.articles = article_list.data.content;
+                $scope.recent = recent_list.data.content;
+              }],
             data: {
               css: [
                 ARTICLES.homeDir + 'styles/articles.css'
@@ -54,6 +59,18 @@
           .state(ARTICLES.routing.states.articlesList, {
 
             url: ARTICLES.routing.urls.articlesList,
+            templateUrl: ARTICLES.templateDir.articles + 'articles.list.html',
+            controller: cms.components.articles.controllers.articlesList,
+            controllerAs: 'articleListCtrl'
+          })
+
+
+          ///////////////////////
+          // Articles > Detail //
+          ///////////////////////
+          .state(ARTICLES.routing.states.articlesDetail, {
+
+            url: ARTICLES.routing.urls.articlesDetail,
 
             views: {
 
@@ -69,17 +86,35 @@
 
               // Unnamed parent ui-view
               '': {
-                templateUrl: ARTICLES.templateDir.articles + 'articles.list.html',
-                controller: cms.components.articles.controllers.articlesList,
-                controllerAs: 'articleListCtrl'
+                templateUrl: ARTICLES.templateDir.articles + 'articles.detail.html',
+                controller: cms.components.articles.controllers.articlesDetail,
+                controllerAs: 'articleDetailCtrl'
+              },
+
+              // Named parent ui-view="status"
+              'status': {
+                controller: cms.components.articles.controllers.articlesDetail,
+                controllerAs: 'articleDetailCtrl',
+                templateProvider: ['$stateParams',
+                  function (        $stateParams) {
+                    // This is just to demonstrate that $stateParams injection works for
+                    // templateProvider. $stateParams are the parameters for the new
+                    // state we're transitioning to, even though the global
+                    // '$stateParams' has not been updated yet.
+                    return '<hr><small class="muted">' +
+                                  'Viewing - <span ng-bind="articleDetailCtrl.article.title"></span>' +
+                               '</small>';
+                  }]
               }
             },
-            data: {
-              css: [
-                ARTICLES.homeDir + 'styles/articles.css'
-              ]
+            // Get the indicated article by ID
+            resolve: {
+              article_fetched: function($stateParams, ArticleService){
+                return ArticleService.findOne($stateParams.articleId);
+              }
             }
           })
+
         ;
       }]) /* END config */
   ;

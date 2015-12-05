@@ -1,4 +1,3 @@
-<div class="cm-article-list-container">
 
   <div class="pagination-container">
     <uib-pagination
@@ -13,10 +12,9 @@
     <ul class="nav nav-sidebar" ng-repeat="article in articleListCtrl.data.content">
       <li ui-sref-active="active">
         <a ng-bind="article.title"
-           ui-sref="contacts.detail({articleId:article.id})">
+           ui-sref="articles.detail({articleId:article.id})">
         </a>
       </li>
     </ul>
   </div><!-- END article-list -->
 
-</div> <!-- END article-list-view -->

@@ -4,12 +4,12 @@
 
   angular.module(cms.components.articles.name)
 
-  //////////////
-  // Articles //
-  //////////////
+  /////////////////////
+  // Articles > List //
+  /////////////////////
   .controller(cms.components.articles.controllers.articlesList,
-     [      '$scope', 'ARTICLES', 'article_list', cms.components.articles.services.ArticleService,
-    function($scope,   ARTICLES,   article_list,  ArticleService){
+     [      '$scope', 'ARTICLES', 'article_list', 'recent_list', cms.components.articles.services.ArticleService,
+    function($scope,   ARTICLES,   article_list,   recent_list,  ArticleService){
 
       var self,
         rest_map;
@@ -39,6 +39,19 @@
           });
       };
     }])
+
+
+    ///////////////////////
+    // Articles > Detail //
+    ///////////////////////
+    .controller(cms.components.articles.controllers.articlesDetail,
+    [         '$scope', '$stateParams', 'article_fetched',
+      function($scope,   $stateParams,   article_fetched   ){
+
+        var self;
+        self = this;
+        self.article = article_fetched.data;
+      }])
 ;
 
 }(angular, cms));

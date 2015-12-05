@@ -8,7 +8,8 @@
       ArticleService  : 'ArticleService'
     },
     controllers: {
-      articlesList: 'cmArticleListCtrl'
+      articlesList: 'cmArticleListCtrl',
+      articlesDetail: 'cmArticleDetailCtrl'
     },
     directives: {
       articleWidget: 'articleWidget'
