@@ -53,6 +53,65 @@
 
 
     ///////////////////////
+    // Articles > Create //
+    ///////////////////////
+    .controller(cms.components.articles.controllers.articlesCreate,
+    [         'ARTICLES', 'ArticleService', '$state', '$stateParams',
+      function(ARTICLES,   ArticleService,   $state,   $stateParams){
+
+        var self;
+        self = this;
+        self.data = {};
+        self.createInputs = {
+          title         : undefined,
+          description   : undefined,
+          keywords      : undefined
+        };
+        self.formErrors = [];
+
+        self.createArticle = function(title, description, keywords){
+
+          var data = {
+            title       : title,
+            description : description,
+            keywords    : keywords
+          };
+          ArticleService
+            .create(data)
+            .then(function(response){
+
+              //caution - data could be cached
+              if(response.status === 201){
+
+                angular.copy(response.data, self.data);
+
+                //change the location
+                $stateParams.articleId = self.data.id;
+                $state.go(ARTICLES.routing.states.articlesDetail, $stateParams, { reload: true });
+
+              } else {
+
+                if(response.status === 409) {
+                  self.formErrors = ['Article already exists'];
+                } else {
+                  self.formErrors = ['Could not create article'];
+                }
+                //go back to create form
+                $state.go(CM.states.articlesCreate);
+              }
+            },
+            function(errResponse){
+              // something went wrong here
+              //$state.go(SECURITY.states.register);
+              self.formErrors = ['Article creation failed'];
+              console.error('createArticle error');
+            });
+
+        }; /* END createArticle */
+      }]) /* END cmArticleCreateCtrl */
+
+
+    ///////////////////////
     // Articles > Detail //
     ///////////////////////
     .controller(cms.components.articles.controllers.articlesDetail,

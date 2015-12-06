@@ -10,6 +10,7 @@
     controllers: {
       articles                : 'cmArticleCtrl',
       articlesList            : 'cmArticleListCtrl',
+      articlesCreate          : 'cmArticleCreateCtrl',
       articlesDetail          : 'cmArticleDetailCtrl',
       articlesDetailEdit      : 'cmArticleDetailEditCtrl'
     },

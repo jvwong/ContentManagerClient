@@ -61,6 +61,18 @@
           })
 
 
+          ////////////////////////
+          // Articles > Create  //
+          ////////////////////////
+          .state(ARTICLES.routing.states.articlesCreate, {
+
+            url: ARTICLES.routing.urls.articlesCreate,
+            templateUrl: ARTICLES.templateDir.articles + 'articles.create.html',
+            controller: cms.components.articles.controllers.articlesCreate,
+            controllerAs: 'articleCreateCtrl'
+          })
+
+
           ///////////////////////
           // Articles > Detail //
           ///////////////////////
