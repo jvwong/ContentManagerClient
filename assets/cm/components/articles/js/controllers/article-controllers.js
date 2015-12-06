@@ -56,18 +56,24 @@
     // Articles > Detail //
     ///////////////////////
     .controller(cms.components.articles.controllers.articlesDetail,
-    [         '$scope', '$state', '$stateParams', 'article_fetched',
-      function($scope,   $state,   $stateParams,   article_fetched   ){
+    [         '$scope', '$state', '$stateParams', 'article_fetched', 'ARTICLES', cms.components.articles.services.ArticleService,
+      function($scope,   $state,   $stateParams,   article_fetched,   ARTICLES,  ArticleService  ){
 
         var self;
         self = this;
         self.article = article_fetched.data;
 
-        $scope.edit = function () {
-          // Here we show off go's ability to navigate to a relative state. Using '^' to go upwards
-          // and '.' to go down, you can navigate to any relative state (ancestor or descendant).
-          // Here we are going down to the child state 'edit' (full name of 'contacts.detail.item.edit')
-          $state.go('.edit', $stateParams);
+        self.remove = function(ID){
+          ArticleService
+            .remove(ID)
+            .then(function(response){
+              if(response.status === 204)
+              {
+                $state.go(ARTICLES.routing.states.articlesList,
+                  $stateParams,
+                  { reload: true });
+              }
+            });
         };
       }])
 
@@ -76,9 +82,43 @@
     // Articles > Detail > Edit //
     //////////////////////////////
     .controller(cms.components.articles.controllers.articlesDetailEdit,
-    [           '$scope', '$stateParams', 'article_fetched',
-      function ( $scope,   $stateParams,   article_fetched) {
-        $scope.item = article_fetched.data[$stateParams.itemId];
+    [           '$scope', '$state', '$stateParams', 'article_fetched', 'ARTICLES', cms.components.articles.services.ArticleService,
+      function ( $scope,   $state,   $stateParams,   article_fetched,   ARTICLES,  ArticleService) {
+        var self;
+        self = this;
+        self.formErrors = ['Update failed'];
+        self.articleItemForm = {};
+
+        self.article = article_fetched.data;
+        self.key = $stateParams.itemId;
+        self.item = self.article[$stateParams.itemId];
+
+        self.update = function(update_value){
+          var patch = {
+            op    : 'replace',
+            path  : '/' + self.key,
+            value : update_value
+          };
+
+          ArticleService
+            .update(self.article.id, [patch])
+            .then(function(response){
+              if(response.status === 200)
+              {
+                //Update the data
+                self.article = response.data;
+
+                $state.go(ARTICLES.routing.states.articlesDetailEdit,
+                  $stateParams,
+                  { reload: true });
+              }
+            });
+        };
+                //update.addProperty("op", update_operation);
+        //update.addProperty("path", update_path);
+        //update.addProperty("value", update_value);
+
+
       }])
 ;
 

@@ -95,9 +95,12 @@
             },
             // Get the indicated article by ID
             resolve: {
-              article_fetched: function($stateParams, ArticleService){
+              article_fetched: [
+                         '$stateParams', cms.components.articles.services.ArticleService,
+                function( $stateParams,  ArticleService){
+                  console.log('resolve');
                 return ArticleService.findOne($stateParams.articleId);
-              }
+              }]
             }
           })
 
@@ -114,7 +117,8 @@
               // Unnamed parent ui-view
               '' : {
                 templateUrl: ARTICLES.templateDir.articles + 'articles.detail.edit.html',
-                controller: cms.components.articles.controllers.articlesDetailEdit
+                controller: cms.components.articles.controllers.articlesDetailEdit,
+                controllerAs: 'editCtrl'
               },
 
               //Named parent ui-view="status" inside "articles"

@@ -64,5 +64,43 @@ describe('article-service', function () {
 
   }); /* END create */
 
+  describe('remove', function(){
+    it('should remove the given article', function(){
+      var fetched
+        , ID;
+
+      ID = "abs928374defffff";
+      articleService.remove(ID)
+        .then(function(response){
+          fetched = response;
+        });
+      expect(fetched).toBeUndefined();
+      rootScope.$apply();
+      expect(fetched.status).toEqual(200);
+    });
+
+  }); /* END remove */
+
+  describe('update', function(){
+    it('should update the given article', function(){
+      var fetched
+        , ID = "abs928374defffff"
+        , data = [{
+          op    : 'replace',
+          path  : '/somepath',
+          value : 'some update'
+        }];
+
+      articleService.update(ID, data)
+        .then(function(response){
+          fetched = response;
+        });
+      expect(fetched).toBeUndefined();
+      rootScope.$apply();
+      expect(fetched.status).toEqual(200);
+    });
+
+  }); /* END update */
+
 
 }); /* END authentication-service */

@@ -14,7 +14,9 @@
       var
         findAll,
         findOne,
-        create
+        create,
+        remove,
+        update
         ;
 
       /**
@@ -23,7 +25,7 @@
        * @returns {*}
        */
       function onSuccess(response) {
-        if(response.status){
+        if(response && response.status){
           return response;
         } else {
           return response;
@@ -67,10 +69,13 @@
        * @returns {*}
        */
       findOne = function(id){
-
-        var url = UrlService.apiUrl(ARTICLES.routing.urls.articles) + id + '/';
-        var promise = DataLoaderPromise
-          .getData(url, utils.transformRes)
+        var url,
+          promise,
+          doCache = false
+        ;
+        url = UrlService.apiUrl(ARTICLES.routing.urls.articles) + id + '/';
+        promise = DataLoaderPromise
+          .getData(url, utils.transformRes, doCache)
           .then(onSuccess, onFail);
 
         return promise;
@@ -95,11 +100,59 @@
         return promise;
       };
 
+      /**
+       * Delete an existing article
+       * @returns {*}
+       */
+      remove = function(ID){
+
+        var url, spec;
+        url = UrlService.apiUrl(ARTICLES.routing.urls.articles) + ID + '/';
+        spec = {
+          method: 'DELETE',
+          url: url
+        };
+
+        var promise = DataLoaderPromise
+          .requestData(spec)
+          .then(onSuccess, onFail);
+
+        return promise;
+      };
+
+
+      /**
+       * Update an existing article
+       * @param ID the string UUID
+       * @param data the array of json patch data
+       * @returns {*}
+       */
+      update = function(ID, data){
+
+        var url, spec;
+        url = UrlService.apiUrl(ARTICLES.routing.urls.articles) + ID + '/';
+        spec = {
+          method: 'PATCH',
+          url: url,
+          data: data,
+          transformResponse: utils.transformRes
+        };
+
+        var promise = DataLoaderPromise
+          .requestData(spec)
+          .then(onSuccess, onFail);
+
+        return promise;
+      };
+
+
 
       return {
         findAll : findAll,
         findOne : findOne,
-        create  : create
+        create  : create,
+        remove  : remove,
+        update  : update
       };
     }
   ]);

@@ -64,7 +64,6 @@ module.exports = function(config) {
 
       // articles
       , 'test/angular/cm/unit/components/articles/article-mocks.js'
-      , 'test/angular/cm/unit/components/articles/article-controllers_Spec.js'
       , 'test/angular/cm/unit/components/articles/article-service_Spec.js'
       , 'test/angular/cm/unit/components/articles/article-widget-directive_Spec.js'
 
