@@ -8,6 +8,7 @@
     'ui.router',
     'uiRouterStyles',
     'ui.bootstrap',
+    'angular-loading-bar',
     cms.components.data.name,
     cms.components.security.name,
     cms.components.articles.name

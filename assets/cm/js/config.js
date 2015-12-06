@@ -23,6 +23,11 @@
     $httpProvider.defaults.headers.post['Accept']= MIME_TYPE_JSON;
     $httpProvider.defaults.headers.post['Content-Type']= MIME_TYPE_JSON;
   }])
+
+  .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
+    cfpLoadingBarProvider.latencyThreshold = 100;
+  }])
   ;
 
 }(angular, cms));
