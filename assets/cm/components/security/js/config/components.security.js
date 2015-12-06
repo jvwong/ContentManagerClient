@@ -12,13 +12,17 @@
       TokenStorageService           : 'TokenStorageService'
     },
     controllers: {
-      auth: 'cmAuthCtrl'
+      auth                : 'cmAuthCtrl',
+      users               : 'cmUsersCtrl',
+      usersDetail         : 'cmUsersDetailCtrl',
+      usersDetailEdit     : 'cmUsersDetailEditCtrl'
     }
   };
 
   angular.module(cms.components.security.name, [
     'ui.router',
     'uiRouterStyles',
+    'toastr',
     cms.components.data.name
   ]);
 }(angular, cms));

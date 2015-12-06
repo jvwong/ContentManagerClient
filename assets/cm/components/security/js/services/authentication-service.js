@@ -20,7 +20,9 @@
         login,
         logout,
         register,
-        getCurrentLoginUser
+        getCurrentLoginUser,
+        remove,
+        update
       ;
 
       /**
@@ -40,11 +42,13 @@
         }
 
         return {
-          id: config.id,
-          username: config.username,
-          fullName: config.fullName,
-          createdDate: config.createdDate,
-          permissions: roles
+          id                : config.id,
+          username          : config.username,
+          email             : config.email,
+          fullName          : config.fullName,
+          createdDate       : config.createdDate,
+          lastModifiedDate  : config.lastModifiedDate,
+          permissions       : roles
         };
       } /* END createUser */
 
@@ -155,17 +159,65 @@
         AuthenticationStorageService.clear();
       };
 
+      remove = function(username){
+        var
+          url = UrlService.apiUrl(SECURITY.routing.urls.users) + username + '/',
+          spec = {
+            method: 'DELETE',
+            url: url
+          }
+          ;
+
+        var promise = DataLoaderPromise
+          .requestData(spec)
+          .then(function(response){
+            return response;
+          }, onFail);
+
+        return promise;
+
+      };
+
+      /**
+       * Update an existing user
+       * @param username the string username
+       * @param data the array of json patch data
+       * @returns {*}
+       */
+      update = function(username, data){
+
+        var url, spec;
+        url = UrlService.apiUrl(SECURITY.routing.urls.users) + username + '/';
+        spec = {
+          method: 'PATCH',
+          url: url,
+          data: data,
+          transformResponse: utils.transformRes
+        };
+
+        var promise = DataLoaderPromise
+          .requestData(spec)
+          .then(function(response){
+            return response;
+          }, onFail);
+
+        return promise;
+      };
+
       getCurrentLoginUser = function (){
         return currentUser;
       };
 
+
       initializeUser();
 
       return {
-          login   : login
-        , register: register
-        , logout  : logout
-        , getCurrentLoginUser: getCurrentLoginUser
+          login               : login
+        , register            : register
+        , logout              : logout
+        , getCurrentLoginUser : getCurrentLoginUser
+        , remove              : remove
+        , update              : update
       };
     }
   ]);

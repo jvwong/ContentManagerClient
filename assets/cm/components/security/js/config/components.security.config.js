@@ -6,7 +6,8 @@
   .constant('SECURITY', {
     homeDir: "cm/components/security/",
     templateDir: {
-      auth:  "cm/components/security/templates/"
+      auth:  "cm/components/security/templates/auth/",
+      users:  "cm/components/security/templates/users/"
     },
     enums: {
       authorised: {
@@ -25,14 +26,19 @@
         auth            : 'auth',
         authLogin       : 'auth.login',
         authRegister    : 'auth.register',
-        success         : 'articles.list'
+        success         : 'articles.list',
+        users           : 'users',
+        usersDetail     : 'users.detail',
+        usersDetailEdit : 'users.detail.edit'
       },
       urls: {
         auth            : '/auth',
         authLogin       : '',
         authRegister    : '/register',
         authentication  : '/auth',
-        users           : '/users'
+        users           : '/users',
+        usersDetail     : '/{username:[[a-z0-9_-]{5,20}}',
+        usersDetailEdit : '/item/:itemId'
       }
     },
     roles: {

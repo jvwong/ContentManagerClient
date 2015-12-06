@@ -57,6 +57,10 @@ var jsFilesToInject = [
   , 'cm/components/security/js/controllers/auth-controller.js'
   , 'cm/components/security/js/config/components.security.bootstrap.js'
 
+  //users
+  , 'cm/components/security/js/controllers/users-controllers.js'
+
+
   // articles
   , 'cm/components/articles/js/config/components.articles.js'
   , 'cm/components/articles/js/config/components.articles.routing.js'

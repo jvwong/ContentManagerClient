@@ -1,0 +1,19 @@
+<div class="cm-users-container">
+
+  <!-- START cm-navbar -->
+  <div class="cm-navbar">
+    <div ng-include="'../cm/templates/nav/navbar.html'"></div>
+  </div> <!-- END cm-navbar -->
+
+  <div class="row cm-users-body">
+    <div class="cm-users-content col-xs-9">
+      <div ui-view></div>
+    </div><!-- END cm-users-content -->
+  </div><!-- END cm-users-body -->
+
+  <!-- START cm-users-status -->
+  <div class="row cm-users-status">
+    <div ui-view="users"></div>
+  </div>
+
+</div><!-- END users-container -->

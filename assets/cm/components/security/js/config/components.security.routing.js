@@ -92,6 +92,85 @@
               }
             }
           })
+
+
+          ///////////
+          // Users //
+          ///////////
+          .state(SECURITY.routing.states.users, {
+            // If abstract, state can only be activated via children.
+            abstract: true,
+
+            // Abstract state will prepend '/contacts' onto child urls
+            url: SECURITY.routing.urls.users,
+            templateUrl: SECURITY.templateDir.users + 'users.html',
+            controller: cms.components.security.controllers.users,
+            data: {
+              css: [
+                SECURITY.homeDir + 'styles/security.css'
+              ],
+              access: {
+                isNotLoggedIn: false,
+                requiresLogin: true,
+                permissions: ["ROLE_CMSUSER", "ROLE_ADMIN"],
+                permissionType: SECURITY.enums.permissionCheckType.atLeastOne
+              }
+            },
+            // Use `resolve` to resolve any asynchronous controller dependencies
+            // *before* the controller is instantiated. These are inherited
+            // in children. Returns promise
+            resolve: {
+              user_fetched: [ '$stateParams', cms.components.security.services.AuthenticationStorageService,
+                function(      $stateParams,  AuthenticationStorageService){
+                  return AuthenticationStorageService.retrieve();
+                }]
+            }
+          })
+
+
+          ////////////////////
+          // Users > Detail //
+          ////////////////////
+          .state(SECURITY.routing.states.usersDetail, {
+
+            url: SECURITY.routing.urls.usersDetail,
+
+            views: {
+
+              // Unnamed parent ui-view
+              '': {
+                templateUrl: SECURITY.templateDir.users + 'users.detail.html',
+                controller: cms.components.security.controllers.usersDetail,
+                controllerAs: 'usersDetailCtrl'
+              }
+              //,
+              //// Named parent ui-view="status"
+              //'status': {
+              //  controller: cms.components.security.controllers.usersDetail,
+              //  controllerAs: 'usersDetailCtrl',
+              //  templateProvider: ['$stateParams',
+              //    function (        $stateParams) {
+              //      // This is just to demonstrate that $stateParams injection works for
+              //      // templateProvider. $stateParams are the parameters for the new
+              //      // state we're transitioning to, even though the global
+              //      // '$stateParams' has not been updated yet.
+              //      return '<hr><small class="muted">' +
+              //        'Viewing - <span ng-bind="articleDetailCtrl.article.title"></span>' +
+              //        '</small>';
+              //    }]
+              //}
+            },
+            // Get the indicated article by ID
+            resolve: {
+              //article_fetched: [
+              //  '$stateParams', cms.components.articles.services.ArticleService,
+              //  function( $stateParams,  ArticleService){
+              //    return ArticleService.findOne($stateParams.articleId);
+              //  }]
+            }
+          })
+
+
       }])
   ;
 }(angular, cms));

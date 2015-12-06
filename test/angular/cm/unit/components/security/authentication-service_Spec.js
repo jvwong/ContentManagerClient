@@ -104,4 +104,64 @@ describe('authentication-service', function () {
 
   }); /* END register */
 
+
+  describe('drop', function(){
+
+    var fetched;
+
+    beforeEach(inject(function(AuthenticationService,
+                               $rootScope){
+      authenticationService = AuthenticationService;
+      rootScope = $rootScope;
+    }));
+
+    beforeEach(function(){
+      spyOn(authenticationService, 'remove').and.callThrough();
+      authenticationService
+        .remove("username")
+        .then(function(response){
+          fetched = response;
+        });
+    });
+
+    it('should have removed the server data for user', function(){
+      expect(authenticationService.remove)
+        .toHaveBeenCalledWith("username");
+      rootScope.$apply();
+      expect(fetched).toBeDefined();
+      expect(fetched.data).toBeDefined();
+    });
+
+  }); /* END drop */
+
+
+  describe('update', function(){
+
+    var fetched;
+
+    beforeEach(inject(function(AuthenticationService,
+                               $rootScope){
+      authenticationService = AuthenticationService;
+      rootScope = $rootScope;
+    }));
+
+    beforeEach(function(){
+      spyOn(authenticationService, 'update').and.callThrough();
+      authenticationService
+        .update("username", [{email: "updated@email.com"}])
+        .then(function(response){
+          fetched = response;
+        });
+    });
+
+    it('should have removed the server data for user', function(){
+      expect(authenticationService.update)
+        .toHaveBeenCalledWith("username",[{email: "updated@email.com"}]);
+      rootScope.$apply();
+      expect(fetched).toBeDefined();
+      expect(fetched.data).toBeDefined();
+    });
+
+  }); /* END drop */
+
 }); /* END authentication-service */
