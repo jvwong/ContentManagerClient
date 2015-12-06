@@ -15,6 +15,7 @@ module.exports = function(config) {
       , 'assets/bower_components/angular-ui-router/release/angular-ui-router.js'
       , 'assets/bower_components/angular-ui-router-styles/ui-router-styles.js'
       , 'assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
+      , 'assets/bower_components/angular-toastr/dist/angular-toastr.js'
 
       , 'assets/cm/js/cms.js'
       , 'assets/cm/js/utils/utils.js'

@@ -83,18 +83,15 @@
 
       /**
        * Create a new article
+       * @param data object of data
        * @returns {*}
        */
-      create = function(title, description, keywords){
+      create = function(data){
 
         var url = UrlService.apiUrl(ARTICLES.routing.urls.articles);
 
         var promise = DataLoaderPromise
-          .postData(url, {
-            title: title,
-            description: description,
-            keywords: keywords
-          }, utils.transformRes)
+          .postData(url, data, utils.transformRes)
           .then(onSuccess, onFail);
 
         return promise;

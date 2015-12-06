@@ -22,6 +22,7 @@
       'ui.router',
       'uiRouterStyles',
       'ui.bootstrap',
+      'toastr',
       cms.components.data.name,
       cms.components.security.name
     ]);

@@ -16,7 +16,8 @@
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
   'cm/styles/**/*.css',
-  'bower_components/bootstrap/dist/css/bootstrap.min.css'
+  'bower_components/bootstrap/dist/css/bootstrap.min.css',
+  'bower_components/angular-toastr/dist/angular-toastr.css'
 ];
 
 
@@ -30,6 +31,7 @@ var jsFilesToInject = [
   , 'bower_components/angular-ui-router/release/angular-ui-router.js'
   , 'bower_components/angular-ui-router-styles/ui-router-styles.js'
   , 'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
+  , 'bower_components/angular-toastr/dist/angular-toastr.js'
 
   , 'cm/js/cms.js'
   , 'cm/js/utils/utils.js'

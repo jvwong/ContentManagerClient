@@ -52,8 +52,14 @@ describe('article-service', function () {
 
   describe('create', function(){
     it('should return the created article', function(){
-      var fetched;
-      articleService.create("title", "description", "keywords")
+      var fetched,
+        data;
+      data = {
+        title       : "title",
+        description : "description",
+        keywords    : "keywords"
+      };
+      articleService.create(data)
         .then(function(response){
           fetched = response;
         });

@@ -98,7 +98,6 @@
               article_fetched: [
                          '$stateParams', cms.components.articles.services.ArticleService,
                 function( $stateParams,  ArticleService){
-                  console.log('resolve');
                 return ArticleService.findOne($stateParams.articleId);
               }]
             }

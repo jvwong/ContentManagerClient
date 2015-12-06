@@ -11,15 +11,15 @@
       <h4 class="media-heading">
         <a ui-sref="articles.detail.edit({itemId: 'title'})"><span ng-bind="articleDetailCtrl.article.title">Media heading </span></a>
       </h4>
-      <div><span ng-bind="articleDetailCtrl.article.author"></span></div>
-      <div>Created: <span ng-bind="articleDetailCtrl.article.createdDate"></span></div>
-      <div>Updated: <span ng-bind="articleDetailCtrl.article.lastModifiedDate"></span></div>
-      <div>
+      <div class="media-body-element"><span ng-bind="articleDetailCtrl.article.author"></span></div>
+      <div class="media-body-element">
         <a ui-sref="articles.detail.edit({itemId: 'description'})"><span ng-bind="articleDetailCtrl.article.description"></span></a>
       </div>
-      <div>
+      <div class="media-body-element">
         <a ui-sref="articles.detail.edit({itemId: 'keywords'})"><span ng-bind="articleDetailCtrl.article.keywords"></span></a>
       </div>
+      <div><small class="muted"> Created: <span ng-bind="articleDetailCtrl.article.createdDate"></span></small></div>
+      <div><small class="muted"> Updated: <span ng-bind="articleDetailCtrl.article.lastModifiedDate"></span></small></div>
     </div><!-- END media -->
   </div><!-- END media-body -->
 

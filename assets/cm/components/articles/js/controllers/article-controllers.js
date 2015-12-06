@@ -56,8 +56,8 @@
     // Articles > Detail //
     ///////////////////////
     .controller(cms.components.articles.controllers.articlesDetail,
-    [         '$scope', '$state', '$stateParams', 'article_fetched', 'ARTICLES', cms.components.articles.services.ArticleService,
-      function($scope,   $state,   $stateParams,   article_fetched,   ARTICLES,  ArticleService  ){
+    [         '$scope', '$state', '$stateParams', 'article_fetched', 'ARTICLES', 'toastr', cms.components.articles.services.ArticleService,
+      function($scope,   $state,   $stateParams,   article_fetched,   ARTICLES,   toastr,  ArticleService  ){
 
         var self;
         self = this;
@@ -69,6 +69,7 @@
             .then(function(response){
               if(response.status === 204)
               {
+                toastr.info('Deletion successful', 'Info');
                 $state.go(ARTICLES.routing.states.articlesList,
                   $stateParams,
                   { reload: true });
