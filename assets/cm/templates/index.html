@@ -1,16 +1,18 @@
 <div class="cm-container">
 
-  <!-- START cm-navbar -->
-  <div class="cm-navbar"><div ng-include="'../cm/templates/nav/navbar.html'"></div></div>
+  <!-- START cm-header-->
+  <div id="cm-header" class="row">
+    <div id="nginclude-header" ng-include="'../cm/templates/nav/navbar.html'"></div>
+  </div><!-- END cm-header-->
 
-  <!-- START cm-articles-body  -->
-  <div class="row cm-body">
-    <div class="cm-content">
-      <div ui-view></div>
-    </div>
-  </div><!-- END cm-articles-body -->
+  <!-- START cm-content  -->
+  <div id="cm-content" class="row">
+    <div id="ui-view-content" ui-view></div>
+  </div><!-- END cm-content -->
 
-  <!-- START cm-status -->
-  <div class="row cm-status"><div ui-view="status"></div></div>
+  <!-- START cm-footer -->
+  <div id="cm-footer" class="row">
+    <div id="ui-view-footer" ui-view="footer"></div>
+  </div><!-- END cm-footer -->
 
 </div><!-- END articles-container -->

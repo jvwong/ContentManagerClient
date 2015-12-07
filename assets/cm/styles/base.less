@@ -2,22 +2,10 @@
  * base.less
  */
 
-body
+html, body
 {
-  padding-top: 50px;
-
-  .cm-body
-  {
-    padding-top: 2em;
-
-    .pagination-container
-    {
-      position: absolute;
-      top: 25em;
-
-    } /* END .pagination-container */
-
-  }/* END .cm-body */
+  margin: 0;
+  height: 100%;
 
   .error
   {
@@ -39,17 +27,42 @@ body
     }
   }
 
-  .cm-container{
+  #cm-body
+  {
+    height: 100%;
 
-    .cm-body{
-    }/* END cm-body */
+    #ui-view-body
+    {
+      height: 100%;
 
-    .cm-status{
-      position:absolute;
-      width: 80%;
-      bottom: 2em;
-    } /* END cm-status */
-  } /* END cm-container */
+      .cm-container
+      {
+        padding-top: 4em;
+        min-height: 100%;
+        position: relative;
+
+        #cm-header
+        {
+          padding: 1em;
+        }/* END cm-header */
+
+        #cm-content
+        {
+          padding-bottom:100px; /* Height of the footer element */
+        }/* END cm-body */
+
+        #cm-footer
+        {
+          position:absolute;
+          width: 100%;
+          height: 100px;
+          bottom: 0;
+          left: 2em;
+        } /* END cm-footer */
+      } /* END cm-container */
+    }/* END ui-view-body */
+
+  }/* END cm-body */
 
 } /* END body */
 

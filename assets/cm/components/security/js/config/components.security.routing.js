@@ -144,7 +144,7 @@
                 controllerAs: 'usersDetailCtrl'
               },
               // Named parent ui-view="status"
-              'status@index': {
+              'footer@index': {
                 controller: cms.components.security.controllers.usersDetail,
                 controllerAs: 'usersDetailCtrl',
                 templateProvider: ['$stateParams',
@@ -180,7 +180,7 @@
               },
 
               //Named parent ui-view="status" inside "articles"
-              'status@index': {
+              'footer@index': {
                 controller: ['$scope', '$stateParams', 'user_fetched',
                   function (  $scope,   $stateParams,   user_fetched ) {
                     $scope.user = user_fetched;
