@@ -101,7 +101,7 @@
                   self.formErrors = ['Could not create article'];
                 }
                 //go back to create form
-                $state.go(CM.states.articlesCreate);
+                $state.go('.');
               }
             },
             function(errResponse){
@@ -115,18 +115,24 @@
       }]) /* END cmArticleCreateCtrl */
 
 
-    ///////////////////////
-    // Articles > Detail //
-    ///////////////////////
-    .controller(cms.components.articles.controllers.articlesDetail,
-    [         '$scope', '$state', '$stateParams', 'article_fetched', 'ARTICLES', 'toastr', cms.components.articles.services.ArticleService,
-      function($scope,   $state,   $stateParams,   article_fetched,   ARTICLES,   toastr,  ArticleService  ){
-
+    //////////////////////////////
+    // Articles > Detail > Edit //
+    //////////////////////////////
+    .controller(cms.components.articles.controllers.articlesDetailEdit,
+    [           '$scope', '$state', '$stateParams', 'article_fetched', 'ARTICLES', 'toastr', cms.components.articles.services.ArticleService,
+      function ( $scope,   $state,   $stateParams,   article_fetched,   ARTICLES,   toastr,  ArticleService) {
         var self;
         self = this;
-        self.article = article_fetched.data;
+        self.formErrors = ['Update failed'];
+        self.articleItemForm = {};
 
-        self.remove = function(ID){
+
+        self.key = $stateParams.itemId;
+        self.item = article_fetched.data[$stateParams.itemId];
+
+        $scope.$parent.article = article_fetched.data;
+
+          self.remove = function(ID){
           ArticleService
             .remove(ID)
             .then(function(response){
@@ -139,23 +145,6 @@
               }
             });
         };
-      }])
-
-
-    //////////////////////////////
-    // Articles > Detail > Edit //
-    //////////////////////////////
-    .controller(cms.components.articles.controllers.articlesDetailEdit,
-    [           '$scope', '$state', '$stateParams', 'article_fetched', 'ARTICLES', cms.components.articles.services.ArticleService,
-      function ( $scope,   $state,   $stateParams,   article_fetched,   ARTICLES,  ArticleService) {
-        var self;
-        self = this;
-        self.formErrors = ['Update failed'];
-        self.articleItemForm = {};
-
-        self.article = article_fetched.data;
-        self.key = $stateParams.itemId;
-        self.item = self.article[$stateParams.itemId];
 
         self.update = function(update_value){
           var patch = {
@@ -165,19 +154,17 @@
           };
 
           ArticleService
-            .update(self.article.id, [patch])
+            .update(article_fetched.data.id, [patch])
             .then(function(response){
-              if(response.status === 200)
-              {
-                //Update the data
-                self.article = response.data;
-
-                $state.go(ARTICLES.routing.states.articlesDetailEdit,
-                  $stateParams,
-                  { reload: true });
-              }
-            });
+                if(response.status === 200)
+                {
+                  //Update the data
+                  $scope.$parent.article = response.data;
+                  //$state.go('^', $stateParams, { reload: true });
+                }
+              });
         };
+
       }])
 ;
 

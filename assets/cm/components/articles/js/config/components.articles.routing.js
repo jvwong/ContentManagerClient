@@ -85,13 +85,13 @@
               // Unnamed parent ui-view
               '': {
                 templateUrl: ARTICLES.templateDir.articles + 'articles.detail.html',
-                controller: cms.components.articles.controllers.articlesDetail,
+                controller: cms.components.articles.controllers.articlesDetailEdit,
                 controllerAs: 'articleDetailCtrl'
               },
 
               // Index ui-view="status"
               'footer@index': {
-                controller: cms.components.articles.controllers.articlesDetail,
+                controller: cms.components.articles.controllers.articlesDetailEdit,
                 controllerAs: 'articleDetailCtrl',
                 templateProvider: ['$stateParams',
                   function (        $stateParams) {
