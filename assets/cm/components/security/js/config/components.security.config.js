@@ -26,10 +26,10 @@
         auth            : 'auth',
         authLogin       : 'auth.login',
         authRegister    : 'auth.register',
-        success         : 'articles.list',
-        users           : 'users',
-        usersDetail     : 'users.detail',
-        usersDetailEdit : 'users.detail.edit'
+        success         : 'index.articles.list',
+        users           : 'index.users',
+        usersDetail     : 'index.users.detail',
+        usersDetailEdit : 'index.users.detail.edit'
       },
       urls: {
         auth            : '/auth',

@@ -89,8 +89,8 @@
                 controllerAs: 'articleDetailCtrl'
               },
 
-              // Named parent ui-view="status"
-              'status': {
+              // Index ui-view="status"
+              'status@index': {
                 controller: cms.components.articles.controllers.articlesDetail,
                 controllerAs: 'articleDetailCtrl',
                 templateProvider: ['$stateParams',
@@ -133,7 +133,7 @@
               },
 
               //Named parent ui-view="status" inside "articles"
-              'status@articles': {
+              'status@index': {
                 controller: ['$scope', '$stateParams', 'article_fetched',
                   function (  $scope,   $stateParams,   article_fetched ) {
                     $scope.article = article_fetched.data;

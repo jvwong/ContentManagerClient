@@ -12,6 +12,8 @@
       function (  $scope,   $stateParams,   recent_list,   article_list ) {
         $scope.articles = article_list.data.content;
         $scope.recent = recent_list.data.content;
+        //console.log('article_list', article_list);
+        //console.log('recent_list', recent_list);
       }])
 
 

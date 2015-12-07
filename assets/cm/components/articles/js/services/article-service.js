@@ -52,7 +52,7 @@
           doCache = false,
           page = pageNumber || "1";
 
-        url = UrlService.apiUrl(ARTICLES.routing.states.articles);
+        url = UrlService.apiUrl(ARTICLES.routing.urls.articles);
         url = UrlService.encodeParams(url, {
           page: page
         });

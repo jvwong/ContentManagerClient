@@ -17,6 +17,77 @@
     ]
   )
 
+  .constant('CMS', {
+    homeDir: "cm/",
+    templateDir: {
+      index: "cm/templates/"
+    },
+    routing: {
+      states: {
+        index : 'index',
+        home  : 'index.home'
+      },
+      urls: {
+        index : '',
+        home  : '/'
+      }
+    }
+  })
+
+  .config([ '$stateProvider', '$urlRouterProvider', 'SECURITY', 'CMS',
+    function($stateProvider,   $urlRouterProvider,   SECURITY,   CMS ) {
+
+      // For any unmatched url
+      $urlRouterProvider.otherwise(CMS.routing.urls.home);
+
+      // Set up the states
+      $stateProvider
+
+        ///////////////
+        //   Index   //
+        ///////////////
+        .state(CMS.routing.states.index, {
+
+          // If abstract, state can only be activated via children.
+          abstract: true,
+
+          // Abstract state will prepend '/contacts' onto child urls
+          url: CMS.routing.urls.index,
+          templateUrl: CMS.templateDir.index + 'index.html',
+          controller: ['$scope', '$stateParams',
+            function (  $scope,   $stateParams ) {
+            }],
+          data: {
+            access: {
+              isNotLoggedIn: false,
+              requiresLogin: true,
+              permissions: ["ROLE_CMSUSER", "ROLE_ADMIN"],
+              permissionType: SECURITY.enums.permissionCheckType.atLeastOne
+            }
+          },
+          // Use `resolve` to resolve any asynchronous controller dependencies
+          // *before* the controller is instantiated. These are inherited
+          // in children. Returns promise
+          resolve: {}
+        })
+
+
+        ////////////////////
+        // Index > Home   //
+        ////////////////////
+        .state(CMS.routing.states.home, {
+
+          url: CMS.routing.urls.home,
+          templateProvider: ['$stateParams',
+            function (        $stateParams) {
+              return '<span>home</span>';
+            }],
+            controller: ['$scope', '$stateParams',
+              function (  $scope,   $stateParams ) {
+              }]
+        })
+    }])
+
   .config(['$httpProvider', function($httpProvider){
     var MIME_TYPE_JSON = 'application/json;charset=UTF-8';
     $httpProvider.defaults.headers.common['Accept']= MIME_TYPE_JSON;

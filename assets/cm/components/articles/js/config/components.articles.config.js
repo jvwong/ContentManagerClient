@@ -17,11 +17,11 @@
       },
       routing: {
         states: {
-          articles            : 'articles',
-          articlesList        : 'articles.list',
-          articlesCreate      : 'articles.create',
-          articlesDetail      : 'articles.detail',
-          articlesDetailEdit  : 'articles.detail.edit'
+          articles            : 'index.articles',
+          articlesList        : 'index.articles.list',
+          articlesCreate      : 'index.articles.create',
+          articlesDetail      : 'index.articles.detail',
+          articlesDetailEdit  : 'index.articles.detail.edit'
         },
         urls: {
           articles            : '/articles',
