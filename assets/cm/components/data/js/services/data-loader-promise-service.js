@@ -36,7 +36,7 @@
          *  statusText – {string} – HTTP status text of the response.
          */
         getData: function(url, transformResp, doCache){
-          var caching = doCache === undefined ? true : doCache;
+          var caching = doCache === undefined ? false : doCache;
           var promise = $http({
             method: 'GET',
             url: url,

@@ -142,31 +142,54 @@
                 templateUrl: SECURITY.templateDir.users + 'users.detail.html',
                 controller: cms.components.security.controllers.usersDetail,
                 controllerAs: 'usersDetailCtrl'
+              },
+              // Named parent ui-view="status"
+              'status@index': {
+                controller: cms.components.security.controllers.usersDetail,
+                controllerAs: 'usersDetailCtrl',
+                templateProvider: ['$stateParams',
+                  function (        $stateParams) {
+                    // This is just to demonstrate that $stateParams injection works for
+                    // templateProvider. $stateParams are the parameters for the new
+                    // state we're transitioning to, even though the global
+                    // '$stateParams' has not been updated yet.
+                    return '<hr><small class="muted">' +
+                      'Viewing - <span ng-bind="usersDetailCtrl.user.username"></span>' +
+                      '</small>';
+                  }]
               }
-              //,
-              //// Named parent ui-view="status"
-              //'status': {
-              //  controller: cms.components.security.controllers.usersDetail,
-              //  controllerAs: 'usersDetailCtrl',
-              //  templateProvider: ['$stateParams',
-              //    function (        $stateParams) {
-              //      // This is just to demonstrate that $stateParams injection works for
-              //      // templateProvider. $stateParams are the parameters for the new
-              //      // state we're transitioning to, even though the global
-              //      // '$stateParams' has not been updated yet.
-              //      return '<hr><small class="muted">' +
-              //        'Viewing - <span ng-bind="articleDetailCtrl.article.title"></span>' +
-              //        '</small>';
-              //    }]
-              //}
             },
-            // Get the indicated article by ID
-            resolve: {
-              //article_fetched: [
-              //  '$stateParams', cms.components.articles.services.ArticleService,
-              //  function( $stateParams,  ArticleService){
-              //    return ArticleService.findOne($stateParams.articleId);
-              //  }]
+            resolve: {}
+          })
+
+
+          ///////////////////////////
+          // Users > Detail > Edit //
+          ///////////////////////////
+          .state(SECURITY.routing.states.usersDetailEdit, {
+
+            url: SECURITY.routing.urls.usersDetailEdit,
+
+            views: {
+
+              // Unnamed parent ui-view
+              '' : {
+                templateUrl: SECURITY.templateDir.users + 'users.detail.edit.html',
+                controller: cms.components.security.controllers.usersDetailEdit,
+                controllerAs: 'editCtrl'
+              },
+
+              //Named parent ui-view="status" inside "articles"
+              'status@index': {
+                controller: ['$scope', '$stateParams', 'user_fetched',
+                  function (  $scope,   $stateParams,   user_fetched ) {
+                    $scope.user = user_fetched;
+                  }],
+                template: '<hr>' +
+                          '<small class="muted">' +
+                            'Editing - <span ng-bind="user.username"></span>' +
+                          '</small>'
+              }
             }
           })
 

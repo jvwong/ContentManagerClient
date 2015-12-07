@@ -10,10 +10,12 @@
   .controller(cms.components.articles.controllers.articles,
     ['$scope', '$stateParams', 'recent_list', 'article_list',
       function (  $scope,   $stateParams,   recent_list,   article_list ) {
+        var self;
+        self = this;
+        $scope.letterLimit = 25;
+
         $scope.articles = article_list.data.content;
         $scope.recent = recent_list.data.content;
-        //console.log('article_list', article_list);
-        //console.log('recent_list', recent_list);
       }])
 
 
@@ -176,11 +178,6 @@
               }
             });
         };
-                //update.addProperty("op", update_operation);
-        //update.addProperty("path", update_path);
-        //update.addProperty("value", update_value);
-
-
       }])
 ;
 

@@ -31,7 +31,6 @@
               if(response.status === 204)
               {
                 toastr.info('Deletion successful', 'Info');
-                AuthenticationService.logout();
                 $state.go(SECURITY.routing.states.authLogin);
               }
             });
@@ -39,48 +38,46 @@
       }])
 
 
-    ////////////////////////////////
-    //// Articles > Detail > Edit //
-    ////////////////////////////////
-    //.controller(cms.components.articles.controllers.articlesDetailEdit,
-    //[           '$scope', '$state', '$stateParams', 'article_fetched', 'ARTICLES', cms.components.articles.services.ArticleService,
-    //  function ( $scope,   $state,   $stateParams,   article_fetched,   ARTICLES,  ArticleService) {
-    //    var self;
-    //    self = this;
-    //    self.formErrors = ['Update failed'];
-    //    self.articleItemForm = {};
-    //
-    //    self.article = article_fetched.data;
-    //    self.key = $stateParams.itemId;
-    //    self.item = self.article[$stateParams.itemId];
-    //
-    //    self.update = function(update_value){
-    //      var patch = {
-    //        op    : 'replace',
-    //        path  : '/' + self.key,
-    //        value : update_value
-    //      };
-    //
-    //      ArticleService
-    //        .update(self.article.id, [patch])
-    //        .then(function(response){
-    //          if(response.status === 200)
-    //          {
-    //            //Update the data
-    //            self.article = response.data;
-    //
-    //            $state.go(ARTICLES.routing.states.articlesDetailEdit,
-    //              $stateParams,
-    //              { reload: true });
-    //          }
-    //        });
-    //    };
-    //            //update.addProperty("op", update_operation);
-    //    //update.addProperty("path", update_path);
-    //    //update.addProperty("value", update_value);
-    //
-    //
-    //  }])
+    //////////////////////////////
+    //// Users > Detail > Edit  //
+    //////////////////////////////
+    .controller(cms.components.security.controllers.usersDetailEdit,
+    [           '$scope', '$state', '$stateParams', 'user_fetched', 'SECURITY', cms.components.security.services.AuthenticationService,
+      function ( $scope,   $state,   $stateParams,   user_fetched,   SECURITY,  AuthenticationService) {
+        var self;
+        self = this;
+        self.formErrors = [];
+        self.usersItemForm = {};
+
+        self.user = user_fetched;
+        self.key = $stateParams.itemId;
+        self.item = self.user[$stateParams.itemId];
+
+        self.update = function(update_value){
+          var patch = {
+            op    : 'replace',
+            path  : '/' + self.key,
+            value : update_value
+          };
+
+          AuthenticationService
+            .update(self.user.username, [patch])
+            .then(function(response){
+
+              if(response.status === 200)
+              {
+                //Update the data
+                self.user = response.data;
+                $state.go(SECURITY.routing.states.usersDetailEdit,
+                  $stateParams,
+                  { reload: true });
+              } else {
+                self.formErrors = ['Update failed'];
+              }
+            });
+        };
+
+      }])
 ;
 
 }(angular, cms));

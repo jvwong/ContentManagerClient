@@ -28,7 +28,9 @@
       <div class="panel-body">
         <ul class="nav nav-sidebar inner" ng-repeat="article in recent">
           <li ui-sref-active="active">
-            <a ng-bind="article.title" ui-sref="index.articles.detail({articleId:article.id})">
+            <a ui-sref="index.articles.detail({articleId:article.id})">
+              {{ article.title | limitTo: letterLimit }}
+              {{ article.title.length > letterLimit  ? '...' : ''}}
             </a>
           </li>
         </ul><!-- END nav-sidebar -->
