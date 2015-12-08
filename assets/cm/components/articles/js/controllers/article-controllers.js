@@ -8,14 +8,18 @@
   // Articles     //
   //////////////////
   .controller(cms.components.articles.controllers.articles,
-    ['$scope', '$stateParams', 'recent_list', 'article_list',
-      function (  $scope,   $stateParams,   recent_list,   article_list ) {
+    [            '$scope', '$stateParams', 'recent_list', cms.components.articles.services.ArticleService,
+      function (  $scope,   $stateParams,   recent_list,  ArticleService ) {
         var self;
         self = this;
         $scope.letterLimit = 25;
-
-        $scope.articles = article_list.data.content;
         $scope.recent = recent_list.data.content;
+
+        $scope.$watch(ArticleService.getRecent, function(oldValue, newValue){
+          if(newValue){
+            $scope.recent = ArticleService.getRecent();
+          }
+        }, true);
       }])
 
 
@@ -37,22 +41,26 @@
       self.totalItems = self.data[rest_map.totalItems];
       self.itemsPerPage = self.data[rest_map.itemsPerPage];
       self.currentPage = self.data[rest_map.currentPage] + 1;
+      ArticleService.setPage(self.currentPage);
 
       //scoped variables
       $scope.articles = self.data.content;
 
-      self.setPage = function (pageNo) {
-        self.currentPage = pageNo;
-      };
-
       self.pageChanged = function() {
         ArticleService
-          .findAll(self.currentPage)
+          .setArticles(self.currentPage)
           .then(function(response){
             angular.copy(response.data, self.data);
             $scope.articles = self.data.content;
+            ArticleService.setPage(self.currentPage);
           });
       };
+
+      $scope.$watch(ArticleService.getArticles, function(oldValue, newValue){
+        if(newValue){
+          $scope.articles = ArticleService.getArticles();
+        }
+      }, true);
     }])
 
 
@@ -119,8 +127,8 @@
     // Articles > Detail > Edit //
     //////////////////////////////
     .controller(cms.components.articles.controllers.articlesDetailEdit,
-    [           '$scope', '$state', '$stateParams', 'article_fetched', 'ARTICLES', 'toastr', cms.components.articles.services.ArticleService,
-      function ( $scope,   $state,   $stateParams,   article_fetched,   ARTICLES,   toastr,  ArticleService) {
+    [           '$rootScope', '$scope', '$state', '$stateParams', 'article_fetched', 'ARTICLES', 'toastr', cms.components.articles.services.ArticleService,
+      function ( $rootScope,   $scope,   $state,   $stateParams,   article_fetched,   ARTICLES,   toastr,  ArticleService) {
         var self;
         self = this;
         self.formErrors = ['Update failed'];
@@ -130,9 +138,10 @@
         self.key = $stateParams.itemId;
         self.item = article_fetched.data[$stateParams.itemId];
 
+        // Initialize data in the parent (Detail scope)
         $scope.$parent.article = article_fetched.data;
 
-          self.remove = function(ID){
+        self.remove = function(ID){
           ArticleService
             .remove(ID)
             .then(function(response){
@@ -158,9 +167,10 @@
             .then(function(response){
                 if(response.status === 200)
                 {
-                  //Update the data
+                  //Update the data in the parent (Detail scope)
                   $scope.$parent.article = response.data;
-                  //$state.go('^', $stateParams, { reload: true });
+                  ArticleService.setRecent();
+                  ArticleService.setArticles(ArticleService.getPage());
                 }
               });
         };

@@ -16,7 +16,10 @@
         findOne,
         create,
         remove,
-        update
+        update,
+        page = 1, getPage, setPage,
+        recent, getRecent, setRecent,
+        articles, getArticles, setArticles
         ;
 
       /**
@@ -142,14 +145,54 @@
         return promise;
       };
 
+      getRecent = function(){
+        return recent;
+      };
+
+      setRecent= function(){
+        var promise = findAll(1).then(function(response)
+        {
+          if(response.status === 200)
+          {
+            recent = response.data.content;
+            return response
+          }
+        });
+        return promise;
+      };
+
+      getArticles = function(){
+        return articles;
+      };
+
+      setArticles = function(pageNumber){
+        var promise = findAll(pageNumber).then(function(response)
+        {
+          if(response.status === 200)
+          {
+            articles = response.data.content;
+            return response
+          }
+        });
+        return promise;
+      };
+
+      getPage = function(){ return page; };
+      setPage = function(pageNumber){ page = pageNumber; };
 
 
       return {
-        findAll : findAll,
-        findOne : findOne,
-        create  : create,
-        remove  : remove,
-        update  : update
+        findAll     : findAll,
+        findOne     : findOne,
+        create      : create,
+        remove      : remove,
+        update      : update,
+        getRecent   : getRecent,
+        setRecent   : setRecent,
+        getArticles : getArticles,
+        setArticles : setArticles,
+        getPage     : getPage,
+        setPage     : setPage
       };
     }
   ]);

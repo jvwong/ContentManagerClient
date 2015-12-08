@@ -40,10 +40,10 @@
             // in children. Returns promise
             resolve: {
               article_list: function(ArticleService){
-                return ArticleService.findAll(null);
+                return ArticleService.setArticles(1);
               },
               recent_list: function(ArticleService){
-                return ArticleService.findAll(1);
+                return ArticleService.setRecent();
               }
             }
           })

@@ -109,4 +109,98 @@ describe('article-service', function () {
   }); /* END update */
 
 
+  describe('recent', function(){
+    var value = {
+      "id": "56660eb1e4b0f4b4f0797bbe",
+      "version": 0,
+      "createdDate": "2015-12-07T22:56:49.473Z",
+      "lastModifiedDate": "2015-12-07T22:56:49.473Z",
+      "author": "asdasdasd",
+      "updater": "asdasdasd",
+      "title": "this is some title for a regular cms user",
+      "description": "another description",
+      "keywords": "another keywods",
+      "pages": null
+    };
+    beforeEach(function(){
+      spyOn(articleService, 'getRecent').and.returnValue(value);
+    });
+
+    describe('getRecent', function(){
+
+      it('should update the given variable', function(){
+        var recent;
+        recent = articleService.getRecent();
+        expect(recent).toBeDefined();
+      });
+    });
+
+    describe('setRecent', function(){
+      it('should set the given variable', function(){
+        var recent;
+        articleService.setRecent();
+        expect(articleService.getRecent()).toEqual(value);
+      });
+    });
+
+  }); /* END recent */
+
+  describe('articles', function(){
+    var value = [{
+      "id": "56660eb1e4b0f4b4f0797bbe",
+      "version": 0,
+      "createdDate": "2015-12-07T22:56:49.473Z",
+      "lastModifiedDate": "2015-12-07T22:56:49.473Z",
+      "author": "asdasdasd",
+      "updater": "asdasdasd",
+      "title": "this is some title for a regular cms user",
+      "description": "another description",
+      "keywords": "another keywods",
+      "pages": null
+    }];
+    beforeEach(function(){
+      spyOn(articleService, 'getArticles').and.returnValue(value);
+    });
+
+    describe('getArticles', function(){
+      it('should update the given variable', function(){
+        var articles = [];
+        articles = articleService.getArticles();
+        expect(articles.length).toBeGreaterThan(0);
+      });
+    });
+
+    describe('setArticles', function(){
+      it('should set the given variable', function(){
+         var articles = [];
+        articleService.setArticles();
+        expect(articleService.getArticles()).toEqual(value);
+      });
+    });
+
+  }); /* END recent */
+
+  describe('page', function(){
+    var value = 2;
+
+    describe('getPage', function(){
+      it('should update the given variable', function(){
+        var page;
+        spyOn(articleService, 'getPage').and.returnValue(value);
+        page = articleService.getPage();
+        expect(page).toEqual(value);
+      });
+    });
+
+    //describe('setPage', function(){
+    //  it('should set the given variable', function(){
+    //    var page = 3;
+    //    articleService.setPage(3);
+    //    expect(articleService.getPage()).toEqual(page);
+    //  });
+    //});
+
+  }); /* END recent */
+
+
 }); /* END authentication-service */
