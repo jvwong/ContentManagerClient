@@ -8,23 +8,23 @@
     </div><!-- END media-left -->
     <div class="media-body">
       <h4 class="media-heading">
-        <a ui-sref="index.users.detail.edit({itemId: 'username'})"><span ng-bind="usersDetailCtrl.user.username">Media heading </span></a>
+        <a ui-sref="index.users.detail.edit({itemId: 'username'})"><span ng-bind="user.username">Media heading </span></a>
       </h4>
       <div class="media-body-element">
-        <a ui-sref="index.users.detail.edit({itemId: 'fullName'})"><span ng-bind="usersDetailCtrl.user.fullName"></span></a>
+        <a ui-sref="index.users.detail.edit({itemId: 'fullName'})"><span ng-bind="user.fullName"></span></a>
       </div>
       <div class="media-body-element">
-        <a ui-sref="index.users.detail.edit({itemId: 'email'})"><span ng-bind="usersDetailCtrl.user.email"></span></a>
+        <a ui-sref="index.users.detail.edit({itemId: 'email'})"><span ng-bind="user.email"></span></a>
       </div>
-      <div>Permissions: <span ng-bind="usersDetailCtrl.user.permissions"></span></div>
-      <div><small class="muted"> Created: <span ng-bind="usersDetailCtrl.user.createdDate"></span></small></div>
-      <div><small class="muted"> Updated: <span ng-bind="usersDetailCtrl.user.lastModifiedDate"></span></small></div>
+      <div>Permissions: <span ng-bind="user.permissions"></span></div>
+      <div><small class="muted"> Created: <span ng-bind="user.createdDate"></span></small></div>
+      <div><small class="muted"> Updated: <span ng-bind="user.lastModifiedDate"></span></small></div>
     </div><!-- END media -->
   </div><!-- END media-body -->
 
   <!-- Indicates a dangerous or potentially negative action -->
   <br />
-  <button ng-click="usersDetailCtrl.remove(usersDetailCtrl.user.username)"
+  <button ng-click="usersDetailCtrl.remove(user.username)"
           type="button"
           class="btn btn-danger">Remove</button>
 

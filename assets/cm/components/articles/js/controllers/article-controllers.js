@@ -131,9 +131,8 @@
       function ( $rootScope,   $scope,   $state,   $stateParams,   article_fetched,   ARTICLES,   toastr,  ArticleService) {
         var self;
         self = this;
-        self.formErrors = ['Update failed'];
+        self.formErrors = [];
         self.articleItemForm = {};
-
 
         self.key = $stateParams.itemId;
         self.item = article_fetched.data[$stateParams.itemId];
@@ -151,6 +150,11 @@
                 $state.go(ARTICLES.routing.states.articlesList,
                   $stateParams,
                   { reload: true });
+              }
+              else
+              {
+                toastr.error('Account deletion failed', 'Error');
+                self.formErrors = ['Remove account fail'];
               }
             });
         };
@@ -171,6 +175,11 @@
                   $scope.$parent.article = response.data;
                   ArticleService.setRecent();
                   ArticleService.setArticles(ArticleService.getPage());
+                }
+                else
+                {
+                  toastr.error('Account update failed', 'Error');
+                  self.formErrors = ['Update account fail'];
                 }
               });
         };

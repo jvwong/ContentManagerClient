@@ -13,71 +13,54 @@
       }])
 
 
-    ////////////////////
-    // Users > Detail //
-    ////////////////////
-    .controller(cms.components.security.controllers.usersDetail,
-    [         '$scope', '$state', '$stateParams', 'user_fetched', 'toastr', 'SECURITY', cms.components.security.services.AuthenticationService,
-      function($scope,   $state,   $stateParams,   user_fetched,   toastr,   SECURITY, AuthenticationService ){
+  //////////////////////////////
+  //// Users > Detail > Edit  //
+  //////////////////////////////
+  .controller(cms.components.security.controllers.usersDetailEdit,
+  [           '$scope', '$state', '$stateParams', 'user_fetched', 'SECURITY', cms.components.security.services.AuthenticationService,
+    function ( $scope,   $state,   $stateParams,   user_fetched,   SECURITY,  AuthenticationService) {
+      var self;
+      self = this;
+      self.formErrors = [];
+      self.usersItemForm = {};
 
-        var self;
-        self = this;
-        self.user = user_fetched;
+      self.key = $stateParams.itemId;
+      self.item = user_fetched[$stateParams.itemId];
+      $scope.user = user_fetched;
 
-        self.remove = function(username){
-          AuthenticationService
-            .remove(username)
-            .then(function(response){
-              if(response.status === 204)
-              {
-                toastr.info('Deletion successful', 'Info');
-                $state.go(SECURITY.routing.states.authLogin);
-              }
-            });
-        };
-      }])
+      self.remove = function(username){
+        AuthenticationService
+          .remove(username)
+          .then(function(response){
+            if(response.status === 204)
+            {
+              toastr.info('Deletion successful', 'Info');
+              $state.go(SECURITY.routing.states.authLogin);
+            }
+          });
+      };
 
-
-    //////////////////////////////
-    //// Users > Detail > Edit  //
-    //////////////////////////////
-    .controller(cms.components.security.controllers.usersDetailEdit,
-    [           '$scope', '$state', '$stateParams', 'user_fetched', 'SECURITY', cms.components.security.services.AuthenticationService,
-      function ( $scope,   $state,   $stateParams,   user_fetched,   SECURITY,  AuthenticationService) {
-        var self;
-        self = this;
-        self.formErrors = [];
-        self.usersItemForm = {};
-
-        self.user = user_fetched;
-        self.key = $stateParams.itemId;
-        self.item = self.user[$stateParams.itemId];
-
-        self.update = function(update_value){
-          var patch = {
-            op    : 'replace',
-            path  : '/' + self.key,
-            value : update_value
-          };
-
-          AuthenticationService
-            .update(self.user.username, [patch])
-            .then(function(response){
-
-              if(response.status === 200)
-              {
-                //Update the data
-                self.user = response.data;
-                $state.go(SECURITY.routing.states.usersDetailEdit,
-                  $stateParams,
-                  { reload: true });
-              } else {
-                self.formErrors = ['Update failed'];
-              }
-            });
+      self.update = function(update_value){
+        var patch = {
+          op    : 'replace',
+          path  : '/' + self.key,
+          value : update_value
         };
 
-      }])
+        AuthenticationService
+          .update(user_fetched.username, [patch])
+          .then(function(response){
+            if(response.status === 200)
+            {
+              //Update the data
+              $scope.$parent.user = AuthenticationService.getCurrentLoginUser();
+            } else {
+              self.formErrors = ['Update failed'];
+            }
+          });
+      };
+
+    }])
 ;
 
 }(angular, cms));

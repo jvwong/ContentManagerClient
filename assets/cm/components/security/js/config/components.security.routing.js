@@ -140,12 +140,12 @@
               // Unnamed parent ui-view
               '': {
                 templateUrl: SECURITY.templateDir.users + 'users.detail.html',
-                controller: cms.components.security.controllers.usersDetail,
+                controller: cms.components.security.controllers.usersDetailEdit,
                 controllerAs: 'usersDetailCtrl'
               },
               // Named parent ui-view="status"
               'footer@index': {
-                controller: cms.components.security.controllers.usersDetail,
+                controller: cms.components.security.controllers.usersDetailEdit,
                 controllerAs: 'usersDetailCtrl',
                 templateProvider: ['$stateParams',
                   function (        $stateParams) {

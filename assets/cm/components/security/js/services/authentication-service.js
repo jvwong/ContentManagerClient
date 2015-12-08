@@ -198,11 +198,7 @@
 
         var promise = DataLoaderPromise
           .requestData(spec)
-          .then(function(response){
-            currentUser = createUser(response.data);
-            AuthenticationStorageService.store(currentUser);
-            return response;
-          }, onFail);
+          .then(onSuccess, onFail);
 
         return promise;
       };
