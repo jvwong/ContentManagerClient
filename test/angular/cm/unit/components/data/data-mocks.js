@@ -33,7 +33,7 @@
 
         requestData: function(spec){
           var deferred = $q.defer();
-          deferred.resolve({status: 200, data: 'ok'});
+          deferred.resolve({status: 200, data: 'ok', headers: function(){}});
           return deferred.promise;
         }
 

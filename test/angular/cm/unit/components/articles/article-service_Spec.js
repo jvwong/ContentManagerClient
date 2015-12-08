@@ -146,27 +146,95 @@ describe('article-service', function () {
   }); /* END recent */
 
   describe('articles', function(){
-    var value = [{
-      "id": "56660eb1e4b0f4b4f0797bbe",
-      "version": 0,
-      "createdDate": "2015-12-07T22:56:49.473Z",
-      "lastModifiedDate": "2015-12-07T22:56:49.473Z",
-      "author": "asdasdasd",
-      "updater": "asdasdasd",
-      "title": "this is some title for a regular cms user",
-      "description": "another description",
-      "keywords": "another keywods",
-      "pages": null
-    }];
+    var value = {
+      "content": [
+        {
+          "id": "566746a5e4b0174e24784336",
+          "version": 0,
+          "createdDate": "2015-12-08T21:07:49.765Z",
+          "lastModifiedDate": "2015-12-08T21:07:49.765Z",
+          "author": "asdasdasd",
+          "updater": "asdasdasd",
+          "title": "asdasdazxc",
+          "description": "zxczxczx",
+          "keywords": "aasdasdsa",
+          "pages": null
+        },
+        {
+          "id": "56674699e4b0174e24784335",
+          "version": 0,
+          "createdDate": "2015-12-08T21:07:37.803Z",
+          "lastModifiedDate": "2015-12-08T21:07:37.803Z",
+          "author": "asdasdasd",
+          "updater": "asdasdasd",
+          "title": "asdasdasd",
+          "description": "sdfsdfsdfw",
+          "keywords": "werwer",
+          "pages": null
+        },
+        {
+          "id": "56671625e4b0174e24784333",
+          "version": 0,
+          "createdDate": "2015-12-08T17:40:53.808Z",
+          "lastModifiedDate": "2015-12-08T17:40:53.808Z",
+          "author": "asdasdasd",
+          "updater": "asdasdasd",
+          "title": "service charge",
+          "description": "service charge",
+          "keywords": "service charge",
+          "pages": null
+        },
+        {
+          "id": "566715ace4b0174e24784332",
+          "version": 0,
+          "createdDate": "2015-12-08T17:38:52.316Z",
+          "lastModifiedDate": "2015-12-08T17:38:52.316Z",
+          "author": "asdasdasd",
+          "updater": "asdasdasd",
+          "title": "some bloat",
+          "description": "another bloated description",
+          "keywords": "key",
+          "pages": null
+        },
+        {
+          "id": "5665d7e5e4b0f4b4f0797bb7",
+          "version": 14,
+          "createdDate": "2015-12-07T19:03:01.109Z",
+          "lastModifiedDate": "2015-12-08T17:37:58.760Z",
+          "author": "asdasdasd",
+          "updater": "asdasdasd",
+          "title": "Sixty five cents",
+          "description": "another description",
+          "keywords": "another keywods",
+          "pages": null
+        }
+      ],
+      "last": false,
+      "totalPages": 3,
+      "totalElements": 12,
+      "sort": [
+        {
+          "direction": "DESC",
+          "property": "lastModifiedDate",
+          "ignoreCase": false,
+          "nullHandling": "NATIVE",
+          "ascending": false
+        }
+      ],
+      "numberOfElements": 5,
+      "first": true,
+      "size": 5,
+      "number": 0
+    };
     beforeEach(function(){
       spyOn(articleService, 'getArticles').and.returnValue(value);
     });
 
     describe('getArticles', function(){
       it('should update the given variable', function(){
-        var articles = [];
+        var articles = {};
         articles = articleService.getArticles();
-        expect(articles.length).toBeGreaterThan(0);
+        expect(articles.content.length).toBeGreaterThan(0);
       });
     });
 
@@ -192,13 +260,46 @@ describe('article-service', function () {
       });
     });
 
-    //describe('setPage', function(){
-    //  it('should set the given variable', function(){
-    //    var page = 3;
-    //    articleService.setPage(3);
-    //    expect(articleService.getPage()).toEqual(page);
-    //  });
-    //});
+    describe('setPage', function(){
+      it('should set the given variable', function(){
+        var page = 3;
+        articleService.setPage(3);
+        expect(articleService.getPage()).toEqual(page);
+      });
+    });
+
+  }); /* END recent */
+
+  describe('current', function(){
+    var value = {
+      "id": "56660eb1e4b0f4b4f0797bbe",
+      "version": 0,
+      "createdDate": "2015-12-07T22:56:49.473Z",
+      "lastModifiedDate": "2015-12-07T22:56:49.473Z",
+      "author": "asdasdasd",
+      "updater": "asdasdasd",
+      "title": "this is some title for a regular cms user",
+      "description": "another description",
+      "keywords": "another keywods",
+      "pages": null
+    };
+
+    describe('getCurrent', function(){
+      it('should update the given variable', function(){
+        var current;
+        spyOn(articleService, 'getCurrent').and.returnValue(value);
+        current = articleService.getCurrent();
+        expect(current).toEqual(value);
+      });
+    });
+
+    describe('setCurrent', function(){
+      it('should set the given variable', function(){
+        spyOn(articleService, 'getCurrent').and.returnValue(value);
+        articleService.setCurrent("123456");
+        expect(articleService.getCurrent()).toEqual(value);
+      });
+    });
 
   }); /* END recent */
 

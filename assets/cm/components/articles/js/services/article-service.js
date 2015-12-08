@@ -19,7 +19,9 @@
         update,
         page = 1, getPage, setPage,
         recent, getRecent, setRecent,
-        articles, getArticles, setArticles
+        articles, getArticles, setArticles,
+        current, getCurrent, setCurrent,
+        refresh
         ;
 
       /**
@@ -170,7 +172,7 @@
         {
           if(response.status === 200)
           {
-            articles = response.data.content;
+            articles = response.data;
             return response
           }
         });
@@ -179,6 +181,31 @@
 
       getPage = function(){ return page; };
       setPage = function(pageNumber){ page = pageNumber; };
+
+      getCurrent = function(){
+        return current;
+      };
+
+      setCurrent = function(ID){
+        var promise = findOne(ID).then(function(response)
+        {
+          if(response.status === 200)
+          {
+            current = response.data;
+            return response
+          }
+        });
+        return promise;
+      };
+
+
+      refresh = function(ID){
+        if(ID){
+          setCurrent(ID);
+        }
+        setRecent();
+        setArticles(getPage());
+      };
 
 
       return {
@@ -192,7 +219,10 @@
         getArticles : getArticles,
         setArticles : setArticles,
         getPage     : getPage,
-        setPage     : setPage
+        setPage     : setPage,
+        getCurrent  : getCurrent,
+        setCurrent  : setCurrent,
+        refresh     : refresh
       };
     }
   ]);

@@ -56,9 +56,14 @@
           });
       };
 
-      $scope.$watch(ArticleService.getArticles, function(oldValue, newValue){
+      $scope.$watch(ArticleService.getArticles, function(newValue, oldValue){
         if(newValue){
-          $scope.articles = ArticleService.getArticles();
+          var data = ArticleService.getArticles();
+          self.data = data;
+          self.totalItems = self.data[rest_map.totalItems];
+          self.itemsPerPage = self.data[rest_map.itemsPerPage];
+          self.currentPage = self.data[rest_map.currentPage] + 1;
+          $scope.articles = data.content;
         }
       }, true);
     }])
@@ -98,8 +103,12 @@
                 angular.copy(response.data, self.data);
 
                 //change the location
-                $stateParams.articleId = self.data.id;
-                $state.go(ARTICLES.routing.states.articlesDetail, $stateParams, { reload: true });
+                $stateParams.articleId = response.data.id;
+                ArticleService.refresh(response.data.id);
+                $state.go(ARTICLES.routing.states.articlesDetail,
+                  $stateParams,
+                  { reload: false });
+
 
               } else {
 
@@ -138,7 +147,7 @@
         self.item = article_fetched.data[$stateParams.itemId];
 
         // Initialize data in the parent (Detail scope)
-        $scope.$parent.article = article_fetched.data;
+        $scope.article = ArticleService.getCurrent();
 
         self.remove = function(ID){
           ArticleService
@@ -147,9 +156,9 @@
               if(response.status === 204)
               {
                 toastr.info('Deletion successful', 'Info');
+                ArticleService.refresh();
                 $state.go(ARTICLES.routing.states.articlesList,
-                  $stateParams,
-                  { reload: true });
+                  $stateParams, { reload: false });
               }
               else
               {
@@ -171,10 +180,8 @@
             .then(function(response){
                 if(response.status === 200)
                 {
-                  //Update the data in the parent (Detail scope)
-                  $scope.$parent.article = response.data;
-                  ArticleService.setRecent();
-                  ArticleService.setArticles(ArticleService.getPage());
+                  //Update the data
+                  ArticleService.refresh(response.data.id);
                 }
                 else
                 {
@@ -183,6 +190,12 @@
                 }
               });
         };
+
+        $scope.$watch(ArticleService.getCurrent, function(oldValue, newValue){
+          if(newValue){
+            $scope.article = ArticleService.getCurrent();
+          }
+        }, true);
 
       }])
 ;

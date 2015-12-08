@@ -110,7 +110,7 @@
               article_fetched: [
                          '$stateParams', cms.components.articles.services.ArticleService,
                 function( $stateParams,  ArticleService){
-                return ArticleService.findOne($stateParams.articleId);
+                return ArticleService.setCurrent($stateParams.articleId);
               }]
             }
           })
