@@ -63,6 +63,7 @@
           self.totalItems = self.data[rest_map.totalItems];
           self.itemsPerPage = self.data[rest_map.itemsPerPage];
           self.currentPage = self.data[rest_map.currentPage] + 1;
+          ArticleService.setPage(self.currentPage);
           $scope.articles = data.content;
         }
       }, true);

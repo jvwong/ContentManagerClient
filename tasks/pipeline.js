@@ -34,6 +34,7 @@ var jsFilesToInject = [
   , 'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
   , 'bower_components/angular-toastr/dist/angular-toastr.js'
   , 'bower_components/angular-loading-bar/build/loading-bar.min.js'
+  , 'bower_components/ng-file-upload/ng-file-upload.min.js'
 
   , 'cm/js/cms.js'
   , 'cm/js/utils/utils.js'
@@ -44,6 +45,7 @@ var jsFilesToInject = [
   , 'cm/components/data/js/services/data-loader-cache-service.js'
   , 'cm/components/data/js/services/data-loader-promise-service.js'
   , 'cm/components/data/js/services/url-service.js'
+
 
   // security
   , 'cm/components/security/js/config/components.security.js'

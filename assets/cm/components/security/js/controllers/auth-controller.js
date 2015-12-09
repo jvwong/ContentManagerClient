@@ -7,11 +7,13 @@
     '$scope',
     'SECURITY',
     '$state',
+    'Upload',
     cms.components.security.services.AuthenticationStorageService,
     cms.components.security.services.AuthenticationService,
     function($scope,
              SECURITY,
              $state,
+             Upload,
              AuthenticationStorageService,
              AuthenticationService) {
 
@@ -29,8 +31,7 @@
         password  : undefined,
         password2 : undefined,
         fullName  : undefined,
-        email     : undefined,
-        role      : undefined
+        email     : undefined
       };
       self.formErrors = [];
 
@@ -77,17 +78,15 @@
         $state.go(SECURITY.routing.states.authLogin);
       }; /* END logout */
 
+      self.register = function(username, password, passwordConfirm, fullName, email, image){
 
-      self.register = function(username, password, password2,
-                               fullName, email){
-
-        if(password !== password2){
+        if(password !== passwordConfirm){
           self.formErrors = ['Password mismatch'];
           return;
         }
 
         AuthenticationService
-          .register(username, password, fullName, email)
+          .register(username, password, passwordConfirm, fullName, email, image)
           .then(function(response){
 
             //caution - data could be cached

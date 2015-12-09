@@ -11,5 +11,8 @@
     }
   };
 
-  angular.module(cms.components.data.name, []);
+  angular.module(cms.components.data.name,
+    [
+      'ngFileUpload'
+    ]);
 }(angular, cms));

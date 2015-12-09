@@ -163,10 +163,18 @@
         return promise;
       };
 
+      /**
+       * Retrieve the local variable for articles data
+       * @returns {*}
+       */
       getArticles = function(){
         return articles;
       };
 
+      /**
+       * Ping the api for the articles list sorted by created
+       * @returns {*}
+       */
       setArticles = function(pageNumber){
         var promise = findAll(pageNumber).then(function(response)
         {
@@ -182,10 +190,20 @@
       getPage = function(){ return page; };
       setPage = function(pageNumber){ page = pageNumber; };
 
+      /**
+       * Retrieve the local variable for the most recent
+       * modified
+       * @returns {*}
+       */
       getCurrent = function(){
         return current;
       };
 
+      /**
+       * Ping the api for the list sorted by lastModified
+       * @param ID
+       * @returns {*}
+       */
       setCurrent = function(ID){
         var promise = findOne(ID).then(function(response)
         {
@@ -199,6 +217,11 @@
       };
 
 
+      /**
+       * Convenience method for setting the recent, articles list,
+       * and current article stored locally
+       * @param ID
+       */
       refresh = function(ID){
         if(ID){
           setCurrent(ID);

@@ -113,10 +113,38 @@
         return promise;
       };
 
-      register = function(username, password, fullName, email){
+      register = function(username, password, passwordConfirm, fullName, email, image){
         var
-          url = UrlService.apiUrl(SECURITY.routing.urls.users),
-          role = SECURITY.roles.defaultValue;
+          spec,
+          data,
+          url = UrlService.apiUrl(SECURITY.routing.urls.users);
+        data = {
+
+        };
+        var fd = new FormData();
+        fd.append('username', username);
+        fd.append('password', password);
+        fd.append('passwordConfirm', passwordConfirm);
+        fd.append('fullName', fullName);
+        fd.append('email', email);
+        fd.append('image', image);
+
+        //IMPORTANT!!! You might think this should be set to 'multipart/form-data'
+        // but this is not true because when we are sending up files the request
+        // needs to include a 'boundary' parameter which identifies the boundary
+        // name between parts in this multi-part request and setting the Content-type
+        // manually will not set this boundary parameter. For whatever reason,
+        // setting the Content-type to 'false' will force the request to automatically
+        // populate the headers properly including the boundary parameter.
+        spec = {
+          url : url,
+          method: 'POST',
+          data: fd,
+          headers: {
+            'Content-Type': undefined
+          },
+          transformResponse: utils.transformRes
+        };
         /**
          * The response object has these properties:
          *  data – {string|Object} – The response body transformed with the transform functions.
@@ -125,15 +153,8 @@
          *  config – {Object} – The configuration object that was used to generate the request.
          *  statusText – {string} – HTTP status text of the response.
          */
-
         var promise = DataLoaderPromise
-          .postData(url, {
-            username: username,
-            password: password,
-            fullName: fullName,
-            email   : email,
-            role    : role
-          }, utils.transformRes)
+          .requestData(spec)
           .then(function(response){
             //console.log(response);
 
