@@ -23,6 +23,8 @@
     'ui.router',
     'uiRouterStyles',
     'toastr',
+    'ngFileUpload',
+    'ngImgCrop',
     cms.components.data.name
   ]);
 }(angular, cms));

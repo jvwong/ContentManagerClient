@@ -78,7 +78,7 @@
         $state.go(SECURITY.routing.states.authLogin);
       }; /* END logout */
 
-      self.register = function(username, password, passwordConfirm, fullName, email, image){
+      self.register = function(username, password, passwordConfirm, fullName, email){
 
         if(password !== passwordConfirm){
           self.formErrors = ['Password mismatch'];
@@ -86,7 +86,7 @@
         }
 
         AuthenticationService
-          .register(username, password, passwordConfirm, fullName, email, image)
+          .register(username, password, passwordConfirm, fullName, email)
           .then(function(response){
 
             //caution - data could be cached

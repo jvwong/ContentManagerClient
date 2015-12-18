@@ -1,21 +1,67 @@
 <hr>
-<!-- START  form-article-item -->
-<form class="form-users-item"
-      name="usersItemForm"
-      ng-submit="editCtrl.update(usersItemForm.item.$modelValue)">
-  <div class="form-group">
-    <input
-      ng-model="editCtrl.item"
-      type="text"
-      class="form-control"
-      name="item"/>
-  </div>
-  <div class="form-group">
-    <input type="submit" value="Update" class="btn btn-default">
-  </div>
-  <!-- START form-auth errors -->
-  <div ng-repeat="error in editCtrl.formErrors">
-    <span class="error">{{error}}</span>
-  </div>
-  <!-- END form-auth errors -->
-</form><!-- END form-article-item -->
+
+<div class="user-detail-edit-switch-container"
+     ng-switch on="editCtrl.key">
+
+  <!-- START ng-switch-avatar -->
+  <div class="edit-switch" ng-switch-when="avatar">
+    <form name="avatarForm"
+          ng-submit="editCtrl.setAvatar(croppedDataUrl)">
+      <button ngf-select="editCtrl.onFileSelect($file, $invalidFiles)"
+              ngf-multiple="false"
+              ng-model="picFile"
+              ngf-accept="'image/*'"
+              ngf-pattern="'image/*'"
+              ngf-max-size="2MB"
+              accept="image/*">
+        Select Picture</button>
+      <div ngf-drop="editCtrl.onFileSelect($file, $invalidFiles)"
+           ngf-multiple="false"
+           ng-model="picFile"
+           ngf-max-size="2MB"
+           ngf-pattern="'image/*'"
+           class="cropArea">
+        <img-crop image="picFile  | ngfDataUrl"
+                  result-image="croppedDataUrl"
+                  ng-init="croppedDataUrl=''">
+        </img-crop>
+      </div>
+      <div>
+        <img ng-src="{{croppedDataUrl}}" />
+      </div>
+      <button>Submit</button>
+      <!-- START form errors -->
+      <div ng-repeat="error in editCtrl.formErrors">
+        <span class="error">{{error}}</span>
+      </div>
+      <!-- END form errors -->
+      <div class="result">
+        <span ng-show="editCtrl.result">Upload Successful</span>
+      </div>
+    </form>
+  </div><!-- START ng-switch-avatar -->
+
+  <!-- START ng-switch-default -->
+  <div class="edit-switch" ng-switch-default>
+    <!-- START  form-article-item -->
+    <form class="form-users-item"
+          name="usersItemForm"
+          ng-submit="editCtrl.update(usersItemForm.item.$modelValue)">
+      <div class="form-group">
+        <input
+          ng-model="editCtrl.item"
+          type="text"
+          class="form-control"
+          name="item"/>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Update" class="btn btn-default">
+      </div>
+      <!-- START form errors -->
+      <div ng-repeat="error in editCtrl.formErrors">
+        <span class="error">{{error}}</span>
+      </div>
+      <!-- END form errors -->
+    </form><!-- END form-article-item -->
+  </div><!-- END ng-switch-default -->
+</div>

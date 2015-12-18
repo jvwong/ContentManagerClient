@@ -22,7 +22,9 @@
         register,
         getCurrentLoginUser,
         remove,
-        update
+        update,
+        getUser,
+        setAvatar
       ;
 
       /**
@@ -48,6 +50,7 @@
           fullName          : config.fullName,
           createdDate       : config.createdDate,
           lastModifiedDate  : config.lastModifiedDate,
+          avatar            : config.avatar,
           permissions       : roles
         };
       } /* END createUser */
@@ -113,38 +116,18 @@
         return promise;
       };
 
-      register = function(username, password, passwordConfirm, fullName, email, image){
+      register = function(username, password, passwordConfirm, fullName, email){
         var
           spec,
-          data,
+          data = {},
           url = UrlService.apiUrl(SECURITY.routing.urls.users);
-        data = {
 
-        };
-        var fd = new FormData();
-        fd.append('username', username);
-        fd.append('password', password);
-        fd.append('passwordConfirm', passwordConfirm);
-        fd.append('fullName', fullName);
-        fd.append('email', email);
-        fd.append('image', image);
+        data.username = username;
+        data.password = password;
+        data.passwordConfirm = passwordConfirm;
+        data.fullName = fullName;
+        data.email = email;
 
-        //IMPORTANT!!! You might think this should be set to 'multipart/form-data'
-        // but this is not true because when we are sending up files the request
-        // needs to include a 'boundary' parameter which identifies the boundary
-        // name between parts in this multi-part request and setting the Content-type
-        // manually will not set this boundary parameter. For whatever reason,
-        // setting the Content-type to 'false' will force the request to automatically
-        // populate the headers properly including the boundary parameter.
-        spec = {
-          url : url,
-          method: 'POST',
-          data: fd,
-          headers: {
-            'Content-Type': undefined
-          },
-          transformResponse: utils.transformRes
-        };
         /**
          * The response object has these properties:
          *  data – {string|Object} – The response body transformed with the transform functions.
@@ -154,9 +137,8 @@
          *  statusText – {string} – HTTP status text of the response.
          */
         var promise = DataLoaderPromise
-          .requestData(spec)
+          .postData(url, data, utils.transformRes)
           .then(function(response){
-            //console.log(response);
 
             if(response.status !== 201){
               return response;
@@ -228,6 +210,87 @@
         return currentUser;
       };
 
+      setAvatar = function(username, avatar){
+        var
+          spec,
+          url = UrlService.apiUrl(SECURITY.routing.urls.users)
+            .concat(username)
+            .concat('/avatar/');
+
+        var fd = new FormData();
+        fd.append('avatar', avatar);
+
+        //IMPORTANT!!! You might think this should be set to 'multipart/form-data'
+        // but this is not true because when we are sending up files the request
+        // needs to include a 'boundary' parameter which identifies the boundary
+        // name between parts in this multi-part request and setting the Content-type
+        // manually will not set this boundary parameter. For whatever reason,
+        // setting the Content-type to 'false' will force the request to automatically
+        // populate the headers properly including the boundary parameter.
+        spec = {
+          url : url,
+          method: 'POST',
+          data: fd,
+          headers: {
+            'Content-Type': undefined
+          },
+          transformResponse: utils.transformRes
+        };
+        /**
+         * The response object has these properties:
+         *  data – {string|Object} – The response body transformed with the transform functions.
+         *  status – {number} – HTTP status code of the response.
+         *  headers – {function([headerName])} – Header getter function.
+         *  config – {Object} – The configuration object that was used to generate the request.
+         *  statusText – {string} – HTTP status text of the response.
+         */
+        var promise = DataLoaderPromise
+          .requestData(spec)
+          .then(function onSuccess(response) {
+
+            if(response.status === 202){
+              //should update the user -- might not be ready on S3
+              return getUser();
+            } else {
+              return response;
+            }
+
+          }, onFail);
+
+        return promise;
+
+      };
+
+      /**
+       * Get the current logged in user
+       */
+      getUser = function()
+      {
+        var
+          url = UrlService.apiUrl(SECURITY.routing.urls.users)
+            .concat('current/');
+        /**
+         * The response object has these properties:
+         *  data – {string|Object} – The response body transformed with the transform functions.
+         *  status – {number} – HTTP status code of the response.
+         *  headers – {function([headerName])} – Header getter function.
+         *  config – {Object} – The configuration object that was used to generate the request.
+         *  statusText – {string} – HTTP status text of the response.
+         */
+        var promise = DataLoaderPromise
+          .getData(url, utils.transformRes)
+          .then(function onSuccess(response) {
+            if(response.status === 200){
+              currentUser = createUser(response.data);
+              AuthenticationStorageService.store(currentUser);
+              return response;
+            } else {
+              return response;
+            }
+
+          }, onFail);
+        return promise;
+      };
 
       initializeUser();
 
@@ -238,6 +301,8 @@
         , getCurrentLoginUser : getCurrentLoginUser
         , remove              : remove
         , update              : update
+        , setAvatar           : setAvatar
+        , getUser             : getUser
       };
     }
   ]);

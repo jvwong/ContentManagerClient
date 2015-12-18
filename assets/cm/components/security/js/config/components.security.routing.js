@@ -101,7 +101,7 @@
             // If abstract, state can only be activated via children.
             abstract: true,
 
-            // Abstract state will prepend '/contacts' onto child urls
+            // Abstract state will prepend '/users' onto child urls
             url: SECURITY.routing.urls.users,
             templateUrl: SECURITY.templateDir.users + 'users.html',
             controller: cms.components.security.controllers.users,
@@ -120,9 +120,9 @@
             // *before* the controller is instantiated. These are inherited
             // in children. Returns promise
             resolve: {
-              user_fetched: [ '$stateParams', cms.components.security.services.AuthenticationStorageService,
-                function(      $stateParams,  AuthenticationStorageService){
-                  return AuthenticationStorageService.retrieve();
+              user_fetched: [ '$stateParams', cms.components.security.services.AuthenticationService,
+                function(      $stateParams,  AuthenticationService){
+                  return AuthenticationService.getUser();
                 }]
             }
           })
@@ -145,8 +145,6 @@
               },
               // Named parent ui-view="status"
               'footer@index': {
-                controller: cms.components.security.controllers.usersDetailEdit,
-                controllerAs: 'usersDetailCtrl',
                 templateProvider: ['$stateParams',
                   function (        $stateParams) {
                     // This is just to demonstrate that $stateParams injection works for
@@ -154,7 +152,7 @@
                     // state we're transitioning to, even though the global
                     // '$stateParams' has not been updated yet.
                     return '<hr><small class="muted">' +
-                      'Viewing - <span ng-bind="usersDetailCtrl.user.username"></span>' +
+                      'Viewing - <span ng-bind="user.username"></span>' +
                       '</small>';
                   }]
               }
@@ -192,7 +190,6 @@
               }
             }
           })
-
 
       }])
   ;

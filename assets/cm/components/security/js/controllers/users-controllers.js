@@ -17,16 +17,65 @@
   //// Users > Detail > Edit  //
   //////////////////////////////
   .controller(cms.components.security.controllers.usersDetailEdit,
-  [           '$scope', '$state', '$stateParams', 'user_fetched', 'SECURITY', cms.components.security.services.AuthenticationService,
-    function ( $scope,   $state,   $stateParams,   user_fetched,   SECURITY,  AuthenticationService) {
-      var self;
+  [           '$scope', '$state', '$stateParams', 'user_fetched', 'Upload', 'SECURITY', cms.components.security.services.AuthenticationService,
+    function ( $scope,   $state,   $stateParams,   user_fetched,   Upload, SECURITY,  AuthenticationService) {
+      var self,
+        userdata = {};
       self = this;
+
+      if(user_fetched && user_fetched.hasOwnProperty('data'))
+      {
+        angular.copy(user_fetched.data, userdata);
+      }
+
       self.formErrors = [];
       self.usersItemForm = {};
 
       self.key = $stateParams.itemId;
-      self.item = user_fetched[$stateParams.itemId];
-      $scope.user = user_fetched;
+      self.item = userdata[$stateParams.itemId];
+
+      // scoped variables
+      $scope.user = userdata;
+
+      // ngImgCrop
+      self.result = '';
+      self.file = null;
+
+      self.setAvatar = function(croppedDataUrl)
+      {
+        // Convert 'Blob' to 'File'
+        var blob = Upload.dataUrltoBlob(croppedDataUrl);
+        blob.name = self.file.name;
+        blob.lastModifiedDate = self.file.lastModifiedDate;
+        blob.lastModified = self.file.lastModified;
+
+        AuthenticationService
+          .setAvatar(userdata.username, blob)
+          .then(function(response){
+            if(response.status === 200)
+            {
+              //console.log(response);
+              $scope.$parent.user = AuthenticationService.getCurrentLoginUser();
+            }
+          });
+      };
+
+      self.onFileSelect = function(file, invalidFiles) {
+        if(invalidFiles.length)
+        {
+          var error,
+            errorParam;
+          error = invalidFiles[0].$error;
+          errorParam = invalidFiles[0].$errorParam;
+          self.formErrors = ["Invalid file " + error + " type " + errorParam];
+          return;
+        }
+
+        if(file)
+        {
+          self.file = file;
+        }
+      };
 
       self.remove = function(username){
         AuthenticationService
@@ -48,7 +97,7 @@
         };
 
         AuthenticationService
-          .update(user_fetched.username, [patch])
+          .update(userdata.username, [patch])
           .then(function(response){
             if(response.status === 200)
             {

@@ -18,7 +18,8 @@ var cssFilesToInject = [
   'cm/styles/**/*.css',
   'bower_components/bootstrap/dist/css/bootstrap.min.css',
   'bower_components/angular-toastr/dist/angular-toastr.css',
-  'bower_components/angular-loading-bar/build/loading-bar.min.css'
+  'bower_components/angular-loading-bar/build/loading-bar.min.css',
+  'bower_components/ng-img-crop/compile/unminified/ng-img-crop.css'
 ];
 
 
@@ -35,6 +36,7 @@ var jsFilesToInject = [
   , 'bower_components/angular-toastr/dist/angular-toastr.js'
   , 'bower_components/angular-loading-bar/build/loading-bar.min.js'
   , 'bower_components/ng-file-upload/ng-file-upload.min.js'
+  , 'bower_components/ng-img-crop/compile/unminified/ng-img-crop.js'
 
   , 'cm/js/cms.js'
   , 'cm/js/utils/utils.js'

@@ -6,8 +6,7 @@
         password,
         passwordConfirm,
         fullName,
-        email,
-        image)">
+        email)">
   <div class="form-group">
     <input autocapitalize="off"
            ng-model="username"
@@ -55,24 +54,6 @@
            name="fullName"
            id="fullName"
            placeholder="Full Name">
-  </div>
-  <div class="form-group">
-    <input type="file"
-           ngf-select
-           ng-model="image"
-           name="file"
-           accept="image/*"
-           ngf-max-size="2MB">
-    <!--<img ng-show="registerForm.file.$valid"-->
-         <!--ngf-thumbnail="picFile"-->
-         <!--class="thumb">-->
-    <!--<button ng-click="picFile = null"-->
-            <!--ng-show="picFile">Remove</button>-->
-    <!--<br>-->
-    <!--<button ng-disabled="!registerForm.$valid"-->
-            <!--ng-click="ctrl.uploadPic(picFile)">-->
-      <!--Submit-->
-    <!--</button>-->
   </div>
   <div class="form-group">
     <input type="submit" value="Submit" class="btn btn-default">
