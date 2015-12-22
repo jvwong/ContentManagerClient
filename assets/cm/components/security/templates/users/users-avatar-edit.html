@@ -1,1 +1,45 @@
+ <!--partial-->
+<form name="avatarForm"
+      ng-submit="editCtrl.setAvatar(croppedDataUrl)">
+  <button
+    type="button" class="btn btn-primary"
+    ngf-select="editCtrl.onFileSelect($file, $invalidFiles)"
+    ngf-multiple="false"
+    ng-model="editCtrl.picFile"
+    ngf-accept="'image/*'"
+    ngf-pattern="'image/*'"
+    ngf-max-size="2MB"
+    accept="image/*">
+    Select Picture
+  </button>
+  <button
+    type="submit"
+    class="btn btn-success"
+    ng-show="editCtrl.file">
+    Submit
+  </button>
+  <div ngf-drop="editCtrl.onFileSelect($file, $invalidFiles)"
+       ngf-multiple="false"
+       ng-model="editCtrl.picFile"
+       ngf-max-size="2MB"
+       ngf-pattern="'image/*'"
+       class="cropArea">
+    <img-crop image="editCtrl.picFile  | ngfDataUrl"
+              area-type="square"
+              result-image="croppedDataUrl"
+              ng-init="croppedDataUrl=''">
+    </img-crop>
+  </div>
+  <div>
+    <img ng-src="{{croppedDataUrl}}" />
+  </div>
 
+  <!-- START form errors -->
+  <div ng-repeat="error in editCtrl.formErrors">
+    <span class="error">{{error}}</span>
+  </div>
+  <!-- END form errors -->
+  <div class="result">
+    <span ng-show="editCtrl.result">Upload Successful</span>
+  </div>
+</form>

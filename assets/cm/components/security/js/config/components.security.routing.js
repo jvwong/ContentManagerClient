@@ -115,13 +115,13 @@
                 permissions: ["ROLE_CMSUSER", "ROLE_ADMIN"],
                 permissionType: SECURITY.enums.permissionCheckType.atLeastOne
               }
-            },
+            }
             // Use `resolve` to resolve any asynchronous controller dependencies
             // *before* the controller is instantiated. These are inherited
             // in children. Returns promise
-            resolve: {
-              user_fetched: [ '$stateParams', cms.components.security.services.AuthenticationService,
-                function(      $stateParams,  AuthenticationService){
+            , resolve: {
+              user_fetched: [ cms.components.security.services.AuthenticationService,
+                function(     AuthenticationService){
                   return AuthenticationService.getUser();
                 }]
             }
@@ -140,11 +140,15 @@
               // Unnamed parent ui-view
               '': {
                 templateUrl: SECURITY.templateDir.users + 'users.detail.html',
-                controller: cms.components.security.controllers.usersDetailEdit,
+                controller: cms.components.security.controllers.usersDetail,
                 controllerAs: 'usersDetailCtrl'
               },
               // Named parent ui-view="status"
               'footer@index': {
+                controller: ['$scope', 'user_fetched',
+                  function (  $scope,   user_fetched ) {
+                    $scope.user = user_fetched.data;
+                  }],
                 templateProvider: ['$stateParams',
                   function (        $stateParams) {
                     // This is just to demonstrate that $stateParams injection works for
@@ -181,7 +185,7 @@
               'footer@index': {
                 controller: ['$scope', '$stateParams', 'user_fetched',
                   function (  $scope,   $stateParams,   user_fetched ) {
-                    $scope.user = user_fetched;
+                    $scope.user = user_fetched.data;
                   }],
                 template: '<hr>' +
                           '<small class="muted">' +
@@ -189,6 +193,44 @@
                           '</small>'
               }
             }
+          })
+
+          /////////////////////
+          // Users > Account //
+          /////////////////////
+
+          //TODO this isn't working - sidebar
+          .state(SECURITY.routing.states.usersAccount, {
+
+            url: SECURITY.routing.urls.usersAccount,
+
+            views: {
+
+              // Unnamed parent ui-view
+              '': {
+                templateUrl: SECURITY.templateDir.users + 'users.account.html',
+                controller: cms.components.security.controllers.usersAccount,
+                controllerAs: 'usersAccountCtrl'
+              },
+              // Named parent ui-view="status"
+              'footer@index': {
+                controller: ['$scope', 'user_fetched',
+                  function (  $scope,   user_fetched ) {
+                    $scope.user = user_fetched.data;
+                  }],
+                templateProvider: ['$stateParams',
+                  function (        $stateParams) {
+                    // This is just to demonstrate that $stateParams injection works for
+                    // templateProvider. $stateParams are the parameters for the new
+                    // state we're transitioning to, even though the global
+                    // '$stateParams' has not been updated yet.
+                    return '<hr><small class="muted">' +
+                      'Account for - <span ng-bind="user.username"></span>' +
+                      '</small>';
+                  }]
+              }
+            },
+            resolve: {}
           })
 
       }])

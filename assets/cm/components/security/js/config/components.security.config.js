@@ -29,7 +29,8 @@
         success         : 'index.articles.list',
         users           : 'index.users',
         usersDetail     : 'index.users.detail',
-        usersDetailEdit : 'index.users.detail.edit'
+        usersDetailEdit : 'index.users.detail.edit',
+        usersAccount    : 'index.users.account'
       },
       urls: {
         auth            : '/auth',
@@ -38,7 +39,8 @@
         authentication  : '/auth',
         users           : '/users',
         usersDetail     : '/{username:[[a-z0-9_-]{5,20}}',
-        usersDetailEdit : '/item/:itemId'
+        usersDetailEdit : '/item/:itemId',
+        usersAccount    : '/account'
       }
     },
     roles: {
