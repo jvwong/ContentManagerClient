@@ -15,7 +15,8 @@
       auth                : 'cmAuthCtrl',
       users               : 'cmUsersCtrl',
       usersDetail         : 'cmUsersDetailCtrl',
-      usersDetailEdit     : 'cmUsersDetailEditCtrl'
+      usersDetailEdit     : 'cmUsersDetailEditCtrl',
+      usersAccount        : 'cmUsersAccountCtrl'
     }
   };
 

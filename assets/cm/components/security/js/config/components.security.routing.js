@@ -195,39 +195,21 @@
             }
           })
 
+
           /////////////////////
           // Users > Account //
           /////////////////////
 
-          //TODO this isn't working - sidebar
           .state(SECURITY.routing.states.usersAccount, {
 
             url: SECURITY.routing.urls.usersAccount,
 
             views: {
-
               // Unnamed parent ui-view
-              '': {
-                templateUrl: SECURITY.templateDir.users + 'users.account.html',
+              '@index.users': {
+                templateUrl: SECURITY.templateDir.users + 'users.detail.account.html',
                 controller: cms.components.security.controllers.usersAccount,
                 controllerAs: 'usersAccountCtrl'
-              },
-              // Named parent ui-view="status"
-              'footer@index': {
-                controller: ['$scope', 'user_fetched',
-                  function (  $scope,   user_fetched ) {
-                    $scope.user = user_fetched.data;
-                  }],
-                templateProvider: ['$stateParams',
-                  function (        $stateParams) {
-                    // This is just to demonstrate that $stateParams injection works for
-                    // templateProvider. $stateParams are the parameters for the new
-                    // state we're transitioning to, even though the global
-                    // '$stateParams' has not been updated yet.
-                    return '<hr><small class="muted">' +
-                      'Account for - <span ng-bind="user.username"></span>' +
-                      '</small>';
-                  }]
               }
             },
             resolve: {}

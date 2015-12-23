@@ -30,7 +30,7 @@
         users           : 'index.users',
         usersDetail     : 'index.users.detail',
         usersDetailEdit : 'index.users.detail.edit',
-        usersAccount    : 'index.users.account'
+        usersAccount    : 'index.users.detail.account'
       },
       urls: {
         auth            : '/auth',

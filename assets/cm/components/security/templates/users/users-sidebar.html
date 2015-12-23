@@ -1,9 +1,9 @@
 <!-- START nav-sidebar -->
-<ul class="nav nav-sidebar">
-  <li ui-sref-active="active">
-    <a ui-sref="index.users.detail">Details</a>
+<ul class="nav nav-sidebar" ng-controller="cmAuthCtrl as ctrl">
+  <li ng-class="{ active: $state.includes('index.users.detail') }">
+    <a ui-sref="index.users.detail({username: ctrl.user.username})">Details</a>
   </li>
   <li ui-sref-active="active">
-    <a ui-sref="index.users.account">Account</a>
+    <a ui-sref="index.users.detail.account">Account</a>
   </li>
 </ul><!-- END nav-sidebar -->
